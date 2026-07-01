@@ -11,14 +11,14 @@ Statisk ettsides-nettsted uten byggetrinn — publiseres direkte på Netlify.
 ```
 index.html      Innhold og struktur (semantisk, med JSON-LD + Open Graph)
 styles.css      Design (Cormorant Garamond + Inter, slate/kobber-palett)
-script.js       Scroll-reveal, sticky header og mobilmeny
-assets/         SVG-illustrasjoner og favicon
+script.js       Scroll-reveal, sticky header, mobilmeny og prosjekt-tidslinje
+assets/         Prosjektfoto (JPG), drivved-logo, favicon
 netlify.toml    Publiserer rotmappen som den er
 ```
 
 ### Seksjoner
-Hero · Intro · Nøkkeltall · Erfaring (tidslinje) · Prosess · Nåværende retning ·
-Materialer · Sitat · Kontakt (Netlify-skjema) · Footer
+Hero · Intro · Nøkkeltall · Prosess · Prosjekter (scroll-drevet tidslinje) ·
+Nåværende retning · Materialer · Drivved-logo · Kontakt (Netlify-skjema) · Footer
 
 ## Lokal visning
 
