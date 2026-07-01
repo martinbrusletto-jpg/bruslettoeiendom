@@ -1,0 +1,9 @@
+# Netlify CLI build cache / local state
+.netlify/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+
+# Screenshot helper (aldri commit)
+_shot.html
