@@ -34,6 +34,23 @@ updateTl();
 window.addEventListener('scroll', updateTl, { passive: true });
 window.addEventListener('resize', updateTl);
 
+// Apple-style hero: parallax background + fading scroll cue
+const heroBg = document.querySelector('.hero-bg');
+const scrollCue = document.querySelector('.scroll-cue');
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+if (heroBg && !reduceMotion) {
+  const onHeroScroll = () => {
+    const y = window.scrollY;
+    if (y <= window.innerHeight) {
+      const scale = (1.06 + Math.min(y, 700) / 700 * 0.07).toFixed(4);
+      heroBg.style.transform = 'translate3d(0,' + (y * 0.35).toFixed(1) + 'px,0) scale(' + scale + ')';
+    }
+    if (scrollCue) scrollCue.style.opacity = y > 60 ? '0' : '';
+  };
+  onHeroScroll();
+  window.addEventListener('scroll', onHeroScroll, { passive: true });
+}
+
 // Solid header after scrolling past the hero
 const nav = document.getElementById('siteNav');
 const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 40);
