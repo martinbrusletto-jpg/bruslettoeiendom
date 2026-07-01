@@ -4,23 +4,60 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Brusletto Eiendom — Carved Luxury</title>
-  <meta name="description" content="Konseptside for Brusletto Eiendom — norsk skifer, drivved, bronse og presis boligkunst." />
+  <meta name="description" content="Brusletto Eiendom utvikler eksklusive boliger i Oslo, på fjellet og ved sjøen. Norsk skifer, drivved, bronse og presis boligkunst siden 1984." />
+  <meta name="theme-color" content="#121a1f" />
+  <link rel="canonical" href="https://bruslettoeiendom.no/" />
+
+  <!-- Open Graph / social -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Brusletto Eiendom" />
+  <meta property="og:title" content="Brusletto Eiendom — Carved Luxury" />
+  <meta property="og:description" content="Eksklusive boliger med varig ro, presise detaljer og forankring i Oslos beste bomiljøer." />
+  <meta property="og:locale" content="nb_NO" />
+  <meta property="og:image" content="https://bruslettoeiendom.no/assets/skifer-logo.svg" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "RealEstateAgent",
+    "name": "Brusletto Eiendom AS",
+    "description": "Utvikler av eksklusive boliger i Oslo, på fjellet og ved sjøen siden 1984.",
+    "url": "https://bruslettoeiendom.no/",
+    "email": "mb@reserva.as",
+    "telephone": "+4748258401",
+    "foundingDate": "1984",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Helleveien 8F",
+      "postalCode": "0376",
+      "addressLocality": "Oslo",
+      "addressCountry": "NO"
+    }
+  }
+  </script>
 </head>
 <body>
-  <header class="nav">
+  <header class="nav" id="siteNav">
     <a class="brand" href="#top" aria-label="Brusletto Eiendom hjem">
       <span class="mark">BE</span><span>BRUSLETTO<br>EIENDOM</span>
     </a>
-    <nav>
+    <nav id="primaryNav">
       <a href="#erfaring">Erfaring</a>
+      <a href="#prosess">Prosess</a>
       <a href="#prosjekter">Prosjekter</a>
       <a href="#materialer">Materialer</a>
       <a href="#kontakt">Kontakt</a>
     </nav>
+    <button class="nav-toggle" id="navToggle" aria-label="Åpne meny" aria-expanded="false" aria-controls="primaryNav">
+      <span></span><span></span><span></span>
+    </button>
   </header>
 
   <main id="top">
@@ -41,6 +78,13 @@
       <p>Ikke flest mulig kvadratmeter. Ikke mest mulig støy. Bare gjennomarbeidede hjem der arkitektur, håndverk og materialvalg får tid til å virke.</p>
     </section>
 
+    <section class="stats reveal" aria-label="Nøkkeltall">
+      <div><strong>40+</strong><span>år med boligutvikling</span></div>
+      <div><strong>80+</strong><span>ferdigstilte boliger</span></div>
+      <div><strong>3</strong><span>landskap — by, fjell, sjø</span></div>
+      <div><strong>1984</strong><span>etablert i Oslo</span></div>
+    </section>
+
     <section id="erfaring" class="timeline">
       <div class="section-head reveal">
         <p class="eyebrow">Vår erfaring</p>
@@ -54,6 +98,35 @@
         <article class="project-card reveal"><span>2004</span><h3>Haakon den godes vei 12 A–B</h3><p>14 leiligheter på Vinderen.</p></article>
         <article class="project-card reveal"><span>1990</span><h3>Øvre Ullern Terrasse 5</h3><p>21 terrasseleiligheter på Ullern.</p></article>
       </div>
+    </section>
+
+    <section id="prosess" class="process">
+      <div class="section-head reveal">
+        <p class="eyebrow">Slik arbeider vi</p>
+        <h2>Fra tomt til ferdig hjem — i fire kontrollerte trinn.</h2>
+      </div>
+      <ol class="process-grid reveal">
+        <li>
+          <span class="step">01</span>
+          <h3>Sted</h3>
+          <p>Vi leser tomten før vi tegner. Lys, terreng, utsikt og nabolag avgjør hva bygget skal være.</p>
+        </li>
+        <li>
+          <span class="step">02</span>
+          <h3>Arkitektur</h3>
+          <p>Tett samarbeid med arkitekter der hver plan prøves mot hverdagen som faktisk skal leves i den.</p>
+        </li>
+        <li>
+          <span class="step">03</span>
+          <h3>Materialitet</h3>
+          <p>Skifer, drivved, bronse og stål velges for hvordan de eldes — ikke for hvordan de ser ut på tegning.</p>
+        </li>
+        <li>
+          <span class="step">04</span>
+          <h3>Håndverk</h3>
+          <p>Utførelsen kontrolleres i detalj. En bolig fra Brusletto skal tåle nærkontakt, ikke bare avstand.</p>
+        </li>
+      </ol>
     </section>
 
     <section id="prosjekter" class="feature reveal">
@@ -88,18 +161,37 @@
     </section>
 
     <section id="kontakt" class="contact reveal">
-      <div>
+      <div class="contact-intro">
         <p class="eyebrow">Kontakt</p>
         <h2>Brusletto Eiendom AS</h2>
         <p>Helleveien 8F · 0376 Oslo · Norge</p>
+        <div class="contact-card">
+          <a href="tel:+4748258401">+47 482 58 401</a>
+          <a href="mailto:mb@reserva.as">mb@reserva.as</a>
+          <span>Org. nummer 879 152 682</span>
+        </div>
       </div>
-      <div class="contact-card">
-        <a href="tel:+4748258401">+47 482 58 401</a>
-        <a href="mailto:mb@reserva.as">mb@reserva.as</a>
-        <span>Org. nummer 879 152 682</span>
-      </div>
+      <form class="contact-form" name="kontakt" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+        <input type="hidden" name="form-name" value="kontakt" />
+        <p class="hidden-field"><label>Ikke fyll ut: <input name="bot-field" /></label></p>
+        <label>Navn
+          <input type="text" name="navn" autocomplete="name" required />
+        </label>
+        <label>E-post
+          <input type="email" name="epost" autocomplete="email" required />
+        </label>
+        <label>Melding
+          <textarea name="melding" rows="4" placeholder="Fortell kort om prosjektet eller henvendelsen."></textarea>
+        </label>
+        <button type="submit" class="button light">Send henvendelse</button>
+      </form>
     </section>
   </main>
+
+  <footer class="site-footer">
+    <span class="brand"><span class="mark">BE</span> BRUSLETTO EIENDOM</span>
+    <span>© 1984–2026 Brusletto Eiendom AS · Oslo</span>
+  </footer>
 
   <script src="script.js"></script>
 </body>
