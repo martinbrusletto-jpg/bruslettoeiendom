@@ -1,3 +1,57 @@
+// «Snekret i 1984»: hero-bildet snekres sammen av seks bord ved lasting.
+// Bygges kun med JS og hoppes over ved prefers-reduced-motion —
+// da står det ferdige bildet der som før.
+const heroSection = document.querySelector('.hero');
+const buildReduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+if (heroSection && !buildReduceMotion) {
+  const BOARDS = 6;
+  heroSection.classList.add('assembling');
+  const build = document.createElement('div');
+  build.className = 'hero-build';
+  build.setAttribute('aria-hidden', 'true');
+  let landed = 0;
+  const finish = () => {
+    if (!build.isConnected || build.classList.contains('done')) return;
+    build.classList.add('done');
+    setTimeout(() => build.remove(), 1100);
+  };
+  for (let i = 0; i < BOARDS; i++) {
+    const board = document.createElement('div');
+    board.className = 'board ' + (i % 2 ? 'from-right' : 'from-left');
+    board.style.setProperty('--i', i);
+    const img = document.createElement('div');
+    img.className = 'board-img';
+    img.style.setProperty('--i', i);
+    board.appendChild(img);
+    build.appendChild(board);
+    board.addEventListener('animationend', () => {
+      // Hammerslag: nagler inn, liten risting og sagflis langs skjøten
+      board.classList.add('landed');
+      build.classList.remove('thud');
+      void build.offsetWidth;
+      build.classList.add('thud');
+      const seamY = Math.min(((i + 1) / BOARDS) * 100, 97);
+      for (let d = 0; d < 7; d++) {
+        const dust = document.createElement('span');
+        dust.className = 'dust';
+        dust.style.left = (6 + Math.random() * 88) + '%';
+        dust.style.top = 'calc(' + seamY + '% - 6px)';
+        dust.style.setProperty('--dx', (Math.random() * 64 - 32).toFixed(0) + 'px');
+        dust.style.setProperty('--dy', '-' + (18 + Math.random() * 52).toFixed(0) + 'px');
+        dust.addEventListener('animationend', () => dust.remove());
+        build.appendChild(dust);
+      }
+      if (++landed === BOARDS) setTimeout(finish, 650);
+    }, { once: true });
+  }
+  const buildYear = document.createElement('div');
+  buildYear.className = 'build-year';
+  buildYear.textContent = '1984';
+  build.appendChild(buildYear);
+  heroSection.appendChild(build);
+  setTimeout(finish, 6000); // sikkerhetsnett om animasjonene aldri fullfører
+}
+
 // Scroll reveal
 const observer = new IntersectionObserver((entries) => {
   entries.forEach((entry) => {
