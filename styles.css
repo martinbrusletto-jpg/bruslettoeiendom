@@ -105,6 +105,16 @@
 .contact-form textarea{resize:vertical}
 .button.light{background:#fff;color:var(--ink);border:1px solid #fff;cursor:pointer;justify-self:start}
 .hidden-field{position:absolute;left:-9999px}
+/* Eksklusiv kontaktinfo */
+.contact h2{font-size:clamp(32px,3.8vw,58px);margin:14px 0 0;line-height:1.02}
+.contact-lead{margin:24px 0 0;max-width:430px;font-size:16px;line-height:1.7;color:rgba(255,255,255,.7)}
+.contact-details{margin:40px 0 0;max-width:460px;border-top:1px solid rgba(255,255,255,.13)}
+.contact-details a,.contact-details div{display:flex;justify-content:space-between;align-items:baseline;gap:24px;padding:17px 0;border-bottom:1px solid rgba(255,255,255,.13)}
+.contact-details em{font-style:normal;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:rgba(244,239,231,.5)}
+.contact-details span{font-family:'Cormorant Garamond',serif;font-size:22px;color:#f4efe7}
+.contact-details a{transition:padding-left .35s ease}
+.contact-details a:hover{padding-left:8px}
+.contact-org{margin:28px 0 0;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.4)}
 
 /* --- Footer --- */
 .site-footer{background:#0d1418;color:rgba(255,255,255,.6);padding:34px 8vw;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;font-size:13px;letter-spacing:.06em}
