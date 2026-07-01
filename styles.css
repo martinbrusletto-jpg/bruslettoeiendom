@@ -35,6 +35,7 @@
 .work figcaption h3{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:26px;margin:0 0 4px}
 .work figcaption span{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.78)}
 .work.tall{aspect-ratio:auto;grid-row:span 2}
+.work.wide{grid-column:1/-1;aspect-ratio:21/9}
 
 /* --- Contact form --- */
 .contact{align-items:start}
