@@ -23,12 +23,19 @@ tlItems.forEach((el) => tlObserver.observe(el));
 
 const tl = document.getElementById('tl');
 const tlFill = document.getElementById('tlFill');
+const scrubber = document.getElementById('tlScrubber');
+const scrubberDot = document.getElementById('tlScrubberDot');
 const updateTl = () => {
   if (!tl || !tlFill) return;
   const rect = tl.getBoundingClientRect();
   const progressed = window.innerHeight * 0.5 - rect.top;
   const pct = Math.max(0, Math.min(1, progressed / rect.height));
   tlFill.style.height = (pct * 100).toFixed(2) + '%';
+  if (scrubberDot) scrubberDot.style.top = (pct * 100).toFixed(1) + '%';
+  if (scrubber) {
+    const inView = rect.top < window.innerHeight * 0.55 && rect.bottom > window.innerHeight * 0.45;
+    scrubber.classList.toggle('show', inView);
+  }
 };
 updateTl();
 window.addEventListener('scroll', updateTl, { passive: true });
@@ -56,6 +63,21 @@ const nav = document.getElementById('siteNav');
 const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 40);
 onScroll();
 window.addEventListener('scroll', onScroll, { passive: true });
+
+// Aman-style sale notice: gentle fade-in, dismissible, remembered
+const notice = document.getElementById('saleNotice');
+if (notice) {
+  let dismissed = false;
+  try { dismissed = localStorage.getItem('bnoticeDismissed') === '1'; } catch (e) {}
+  if (!dismissed) {
+    setTimeout(() => notice.classList.add('show'), 2200);
+    const close = document.getElementById('noticeClose');
+    if (close) close.addEventListener('click', () => {
+      notice.classList.remove('show');
+      try { localStorage.setItem('bnoticeDismissed', '1'); } catch (e) {}
+    });
+  }
+}
 
 // Mobile menu toggle
 const toggle = document.getElementById('navToggle');

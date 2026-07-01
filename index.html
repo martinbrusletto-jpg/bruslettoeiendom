@@ -100,17 +100,28 @@
         <p class="eyebrow">Utvalgte prosjekter</p>
         <h2>Fire tiår, én bolig av gangen.</h2>
       </div>
+      <div class="tl-scrubber" id="tlScrubber" aria-hidden="true">
+        <span class="tl-scrubber-year">2027</span>
+        <span class="tl-scrubber-track"><span class="tl-scrubber-dot" id="tlScrubberDot"></span></span>
+        <span class="tl-scrubber-year">1990</span>
+      </div>
       <div class="tl" id="tl">
         <div class="tl-line"><div class="tl-line-fill" id="tlFill"></div></div>
 
-        <article class="tl-item">
-          <div class="tl-media"><img src="assets/varden-8.jpg" alt="Varden 8 på Kvitfjell" loading="lazy" width="1600" height="854" /></div>
-          <div class="tl-body"><span class="tl-year">2027</span><h3>Varden 8</h3><span class="tl-sub">Fjellhytte · Kvitfjell</span></div>
+        <article class="tl-item for-sale">
+          <a class="tl-media" href="https://varden8.netlify.app" target="_blank" rel="noopener">
+            <img src="assets/varden-8.jpg" alt="Varden 8 på Kvitfjell" loading="lazy" width="1600" height="854" />
+            <span class="tl-flag">Til salgs</span>
+          </a>
+          <div class="tl-body"><span class="tl-year">2027</span><h3>Varden 8</h3><span class="tl-sub">Fjellhytte · Kvitfjell</span><a class="tl-cta" href="https://varden8.netlify.app" target="_blank" rel="noopener">Se prosjektsiden ↗</a></div>
         </article>
 
-        <article class="tl-item">
-          <div class="tl-media"><img src="assets/heyerdahlsvei-8b.jpg" alt="Heyerdahls vei 8B på Slemdal" loading="lazy" width="1448" height="1086" /></div>
-          <div class="tl-body"><span class="tl-year">2023</span><h3>Heyerdahls vei 8B</h3><span class="tl-sub">Enebolig · Slemdal</span></div>
+        <article class="tl-item for-sale">
+          <a class="tl-media" href="https://heyerdahls-vei-8b.netlify.app" target="_blank" rel="noopener">
+            <img src="assets/heyerdahlsvei-8b.jpg" alt="Heyerdahls vei 8B på Slemdal" loading="lazy" width="1448" height="1086" />
+            <span class="tl-flag">Til salgs</span>
+          </a>
+          <div class="tl-body"><span class="tl-year">2023</span><h3>Heyerdahls vei 8B</h3><span class="tl-sub">Enebolig · Slemdal</span><a class="tl-cta" href="https://heyerdahls-vei-8b.netlify.app" target="_blank" rel="noopener">Se prosjektsiden ↗</a></div>
         </article>
 
         <article class="tl-item">
@@ -247,6 +258,16 @@
     <span class="brand"><span class="mark">BE</span> BRUSLETTO EIENDOM</span>
     <span>© 1984–2026 Brusletto Eiendom AS · Oslo</span>
   </footer>
+
+  <aside class="notice" id="saleNotice" aria-label="Prosjekter til salgs">
+    <button class="notice-close" id="noticeClose" aria-label="Lukk">✕</button>
+    <p class="notice-label">Til salgs</p>
+    <p class="notice-lead">To prosjekter er nå tilgjengelige — hvert med sin egen visningsside.</p>
+    <div class="notice-links">
+      <a href="https://heyerdahls-vei-8b.netlify.app" target="_blank" rel="noopener"><span>Heyerdahls vei 8B</span><em>Slemdal</em></a>
+      <a href="https://varden8.netlify.app" target="_blank" rel="noopener"><span>Varden 8</span><em>Kvitfjell</em></a>
+    </div>
+  </aside>
 
   <script src="script.js"></script>
 </body>
