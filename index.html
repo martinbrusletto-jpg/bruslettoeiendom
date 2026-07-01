@@ -45,19 +45,22 @@
 </head>
 <body>
   <header class="nav" id="siteNav">
-    <a class="brand" href="#top" aria-label="Brusletto Eiendom hjem">
-      <span class="mark">BE</span><span>BRUSLETTO<br>EIENDOM</span>
-    </a>
-    <nav id="primaryNav">
-      <a href="#prosjekter">Prosjekter</a>
-      <a href="#prosess">Prosess</a>
-      <a href="#materialer">Materialer</a>
-      <a href="#kontakt">Kontakt</a>
-    </nav>
-    <button class="nav-toggle" id="navToggle" aria-label="Åpne meny" aria-expanded="false" aria-controls="primaryNav">
-      <span></span><span></span><span></span>
+    <button class="nav-menu-btn" id="navToggle" aria-label="Åpne meny" aria-expanded="false" aria-controls="primaryNav">
+      <span class="nav-burger"><i></i><i></i></span>
+      <span class="nav-label">Meny</span>
     </button>
+    <a class="brand" href="#top" aria-label="Brusletto Eiendom hjem">Brusletto Eiendom</a>
+    <div class="nav-actions">
+      <a class="nav-sale" href="#prosjekter">Til salgs</a>
+      <a class="nav-cta" href="#kontakt">Ta kontakt</a>
+    </div>
   </header>
+  <nav id="primaryNav" class="nav-menu">
+    <a href="#prosjekter">Prosjekter</a>
+    <a href="#prosess">Prosess</a>
+    <a href="#materialer">Materialer</a>
+    <a href="#kontakt">Kontakt</a>
+  </nav>
 
   <main id="top">
     <section class="hero">

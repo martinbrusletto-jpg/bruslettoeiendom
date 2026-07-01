@@ -86,10 +86,14 @@ if (notice) {
 // Mobile menu toggle
 const toggle = document.getElementById('navToggle');
 const menu = document.getElementById('primaryNav');
+const navLabel = toggle.querySelector('.nav-label');
 const setOpen = (open) => {
   nav.classList.toggle('open', open);
+  menu.classList.toggle('open', open);
   toggle.setAttribute('aria-expanded', String(open));
   toggle.setAttribute('aria-label', open ? 'Lukk meny' : 'Åpne meny');
+  if (navLabel) navLabel.textContent = open ? 'Lukk' : 'Meny';
 };
 toggle.addEventListener('click', () => setOpen(!nav.classList.contains('open')));
 menu.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => setOpen(false)));
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setOpen(false); });
