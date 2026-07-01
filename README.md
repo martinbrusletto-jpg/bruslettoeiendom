@@ -10,11 +10,16 @@ Statisk ettsides-nettsted uten byggetrinn — publiseres direkte på Netlify.
 
 ```
 index.html      Innhold og struktur (semantisk, med JSON-LD + Open Graph)
+takk.html       Bekreftelsesside etter innsendt kontaktskjema
+404.html        Egen feilside i samme profil
 styles.css      Design (Cormorant Garamond + Inter, slate/kobber-palett)
 script.js       Scroll-reveal, sticky header, mobilmeny og prosjekt-tidslinje
 assets/         Prosjektfoto (JPG), drivved-logo, favicon
 netlify.toml    Publiserer rotmappen som den er
 ```
+
+Scroll-animasjonene er koblet til en `js`-klasse på `<html>` — uten JavaScript
+(eller med `prefers-reduced-motion`) vises alt innhold direkte.
 
 ### Seksjoner
 Hero · Intro · Nøkkeltall · Prosess · Prosjekter (scroll-drevet tidslinje) ·

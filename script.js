@@ -68,18 +68,31 @@ const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 40);
 onScroll();
 window.addEventListener('scroll', onScroll, { passive: true });
 
-// Aman-style sale notice: gentle fade-in, dismissible, remembered
+// Aman-style sale notice: gentle fade-in, dismissible, remembered for the visit.
+// It retires by itself when the visitor reaches the project timeline —
+// the two "Til salgs" flags take over from there.
 const notice = document.getElementById('saleNotice');
 if (notice) {
   let dismissed = false;
-  try { dismissed = localStorage.getItem('bnoticeDismissed') === '1'; } catch (e) {}
+  try { dismissed = sessionStorage.getItem('bnoticeDismissed') === '1'; } catch (e) {}
+  const dismiss = () => {
+    notice.classList.remove('show');
+    try { sessionStorage.setItem('bnoticeDismissed', '1'); } catch (e) {}
+  };
   if (!dismissed) {
     setTimeout(() => notice.classList.add('show'), 2200);
     const close = document.getElementById('noticeClose');
-    if (close) close.addEventListener('click', () => {
-      notice.classList.remove('show');
-      try { localStorage.setItem('bnoticeDismissed', '1'); } catch (e) {}
-    });
+    if (close) close.addEventListener('click', dismiss);
+    const works = document.getElementById('prosjekter');
+    if (works && 'IntersectionObserver' in window) {
+      const noticeObserver = new IntersectionObserver((entries) => {
+        if (entries.some((e) => e.isIntersecting)) {
+          dismiss();
+          noticeObserver.disconnect();
+        }
+      }, { rootMargin: '0px 0px -30% 0px' });
+      noticeObserver.observe(works);
+    }
   }
 }
 
@@ -88,11 +101,18 @@ const toggle = document.getElementById('navToggle');
 const menu = document.getElementById('primaryNav');
 const navLabel = toggle.querySelector('.nav-label');
 const setOpen = (open) => {
+  const wasOpen = nav.classList.contains('open');
   nav.classList.toggle('open', open);
   menu.classList.toggle('open', open);
   toggle.setAttribute('aria-expanded', String(open));
   toggle.setAttribute('aria-label', open ? 'Lukk meny' : 'Åpne meny');
   if (navLabel) navLabel.textContent = open ? 'Lukk' : 'Meny';
+  if (open) {
+    const first = menu.querySelector('a');
+    if (first) first.focus();
+  } else if (wasOpen) {
+    toggle.focus();
+  }
 };
 toggle.addEventListener('click', () => setOpen(!nav.classList.contains('open')));
 menu.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => setOpen(false)));
