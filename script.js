@@ -1,55 +1,81 @@
 // «Snekret i 1984»: hero-bildet snekres sammen av seks bord ved lasting.
 // Bygges kun med JS og hoppes over ved prefers-reduced-motion —
 // da står det ferdige bildet der som før.
+//
+// Bordene må ikke begynne å smelle sammen før selve fotografiet er
+// lastet ferdig — ellers "bygges" det bare mørke/tomme flater på
+// tregere mobilnett, og bildet dukker opp etterpå uten noen effekt.
 const heroSection = document.querySelector('.hero');
 const buildReduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 if (heroSection && !buildReduceMotion) {
-  const BOARDS = 6;
-  heroSection.classList.add('assembling');
-  const build = document.createElement('div');
-  build.className = 'hero-build';
-  build.setAttribute('aria-hidden', 'true');
-  let landed = 0;
-  const finish = () => {
-    if (!build.isConnected || build.classList.contains('done')) return;
-    build.classList.add('done');
-    setTimeout(() => build.remove(), 1100);
+  const HERO_IMG_URL = 'assets/hero-engraved.jpg';
+  const HERO_LOAD_TIMEOUT = 7000; // gi opp montasjen om bildet bruker for lang tid (treigt mobilnett)
+
+  const runBuild = () => {
+    const BOARDS = 6;
+    heroSection.classList.add('assembling');
+    const build = document.createElement('div');
+    build.className = 'hero-build';
+    build.setAttribute('aria-hidden', 'true');
+    let landed = 0;
+    const finish = () => {
+      if (!build.isConnected || build.classList.contains('done')) return;
+      build.classList.add('done');
+      setTimeout(() => build.remove(), 1100);
+    };
+    for (let i = 0; i < BOARDS; i++) {
+      const board = document.createElement('div');
+      board.className = 'board ' + (i % 2 ? 'from-right' : 'from-left');
+      board.style.setProperty('--i', i);
+      const img = document.createElement('div');
+      img.className = 'board-img';
+      img.style.setProperty('--i', i);
+      board.appendChild(img);
+      build.appendChild(board);
+      board.addEventListener('animationend', () => {
+        // Hammerslag: nagler inn, liten risting og sagflis langs skjøten
+        board.classList.add('landed');
+        build.classList.remove('thud');
+        void build.offsetWidth;
+        build.classList.add('thud');
+        const seamY = Math.min(((i + 1) / BOARDS) * 100, 97);
+        for (let d = 0; d < 7; d++) {
+          const dust = document.createElement('span');
+          dust.className = 'dust';
+          dust.style.left = (6 + Math.random() * 88) + '%';
+          dust.style.top = 'calc(' + seamY + '% - 6px)';
+          dust.style.setProperty('--dx', (Math.random() * 64 - 32).toFixed(0) + 'px');
+          dust.style.setProperty('--dy', '-' + (18 + Math.random() * 52).toFixed(0) + 'px');
+          dust.addEventListener('animationend', () => dust.remove());
+          build.appendChild(dust);
+        }
+        if (++landed === BOARDS) setTimeout(finish, 650);
+      }, { once: true });
+    }
+    const buildYear = document.createElement('div');
+    buildYear.className = 'build-year';
+    buildYear.textContent = '1984';
+    build.appendChild(buildYear);
+    heroSection.appendChild(build);
+    setTimeout(finish, 6000); // sikkerhetsnett om animasjonene aldri fullfører
   };
-  for (let i = 0; i < BOARDS; i++) {
-    const board = document.createElement('div');
-    board.className = 'board ' + (i % 2 ? 'from-right' : 'from-left');
-    board.style.setProperty('--i', i);
-    const img = document.createElement('div');
-    img.className = 'board-img';
-    img.style.setProperty('--i', i);
-    board.appendChild(img);
-    build.appendChild(board);
-    board.addEventListener('animationend', () => {
-      // Hammerslag: nagler inn, liten risting og sagflis langs skjøten
-      board.classList.add('landed');
-      build.classList.remove('thud');
-      void build.offsetWidth;
-      build.classList.add('thud');
-      const seamY = Math.min(((i + 1) / BOARDS) * 100, 97);
-      for (let d = 0; d < 7; d++) {
-        const dust = document.createElement('span');
-        dust.className = 'dust';
-        dust.style.left = (6 + Math.random() * 88) + '%';
-        dust.style.top = 'calc(' + seamY + '% - 6px)';
-        dust.style.setProperty('--dx', (Math.random() * 64 - 32).toFixed(0) + 'px');
-        dust.style.setProperty('--dy', '-' + (18 + Math.random() * 52).toFixed(0) + 'px');
-        dust.addEventListener('animationend', () => dust.remove());
-        build.appendChild(dust);
-      }
-      if (++landed === BOARDS) setTimeout(finish, 650);
-    }, { once: true });
-  }
-  const buildYear = document.createElement('div');
-  buildYear.className = 'build-year';
-  buildYear.textContent = '1984';
-  build.appendChild(buildYear);
-  heroSection.appendChild(build);
-  setTimeout(finish, 6000); // sikkerhetsnett om animasjonene aldri fullfører
+
+  // Vent til bildet faktisk er lastet (typisk umiddelbart, takket være
+  // preload-lenken i <head>) — men gi opp montasjen om det tar for lang
+  // tid, slik at siden bare viser bildet rett frem i stedet for å bygge
+  // tomme flater.
+  const heroImg = new Image();
+  let started = false;
+  const start = () => {
+    if (started) return;
+    started = true;
+    runBuild();
+  };
+  const giveUp = setTimeout(() => { started = true; }, HERO_LOAD_TIMEOUT);
+  heroImg.addEventListener('load', () => { clearTimeout(giveUp); start(); });
+  heroImg.addEventListener('error', () => clearTimeout(giveUp));
+  heroImg.src = HERO_IMG_URL;
+  if (heroImg.complete) start();
 }
 
 // Scroll reveal
