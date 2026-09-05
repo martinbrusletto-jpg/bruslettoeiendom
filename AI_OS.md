@@ -141,9 +141,11 @@ Ved konflikt gjelder nyere, eksplisitt tilbakemelding foran eldre regler. Dersom
 
 Dette systemet skal bli bedre gjennom faktisk bruk, ikke ved å vokse ukontrollert.
 
+**Aktør:** Se `LEARNING_LOOP.md`. Ukenlig synk og midt-i-arbeidet logging kjøres av Martin Ai — ikke bare beskrives her.
+
 Ukentlig prosess:
-1. Se etter nye korrigeringer, før/etter-endringer, positive referanser, eksplisitte «jeg liker dette»-signaler, valg mellom alternativer og godkjente leveranser.
-2. Logg tydelige korreksjoner og smakssignaler i `CORRECTIONS.md`.
+1. Se etter nye korrigeringer, før/etter-endringer, positive referanser, eksplisitte «jeg liker dette»-signaler, valg mellom alternativer og godkjente leveranser (Notion + chat).
+2. Logg tydelige korreksjoner og smakssignaler i Notion, deretter `CORRECTIONS.md`.
 3. Oppdater relevante filer i `references/` når et mønster blir tydelig.
 4. Oppdater bare varige regler i `AI_OS.md` når mønsteret er robust eller eksplisitt globalt.
 5. Flytt konkrete positive og negative eksempler til riktig referansefil.
