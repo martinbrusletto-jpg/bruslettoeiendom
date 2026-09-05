@@ -55,7 +55,7 @@ Unngå:
 
 Foretrekk varme, dempede paletter og naturlig materialitet. Beige, kalk, eik, mørk bronse, stein og varme gråtoner fungerer ofte bedre enn skarp hvit/sort kontrast.
 
-## 6. Bevegelse
+## 6. Bevegelse og scroll-opplevelse
 
 Animasjon skal gi ro og kvalitet, ikke demonstrere at siden kan animere.
 
@@ -65,12 +65,16 @@ Bra:
 - subtil bildebevegelse
 - rolig hover
 - **én** ambisiøs, langsom hero-bevegelse (f.eks. døgnsyklus) når den er bevisst og ikke konkurrerer med lesbarhet — godkjent 2026-09-05 på Los Verdiales
+- tydelig scroll-dramaturgi som gjør at siden føles større når man beveger seg gjennom den
+- sticky-sekvenser, rolige overganger, skalaendringer og lagvis introduksjon når de styrker historien
 
 Dårlig:
 - hopping
 - raske zoom-effekter
-- spredning av mange små scroll-animasjoner
+- spredning av mange små scroll-animasjoner uten samlet retning
 - effekter som reduserer fart eller lesbarhet
+
+En premiumside skal ikke være statisk bare fordi den skal være rolig. Scrollingen skal ha progresjon, rytme og en følelse av oppdagelse.
 
 Regel vs smak: Autogenererte «regler» (f.eks. fra ChatGPT) veier mindre enn Martins faktiske godkjenning av en konkret hero. Ikke straff et godkjent uttrykk fordi det avviker fra en streng formulering i denne filen — oppdater filen i stedet.
 
@@ -89,7 +93,32 @@ Mobil er ikke en nedskalert desktopversjon. Kontroller alltid:
 
 For boligpresentasjoner skal arkitekturen og bildene dominere. Nettsiden skal ikke konkurrere med eiendommen om oppmerksomheten.
 
-## 9. Læring fra nettsider, bilder og visuelle referanser
+Bolignettsider skal benchmarkes mot de beste prisbelønte referansene, ikke mot typiske meglersider eller generiske templates.
+
+Prioritert benchmark:
+1. **EVER** — viktigste referanse
+2. **Vide Infra — 7 award-winning real estate sites** — viktig inspirasjonsbibliotek
+3. **MACNAA** — Awwwards Honorable Mention
+4. **HOUS Luxury Homes** — Awwwards Honorable Mention
+
+Tilleggsreferanser som kan brukes når de passer prosjektet: VORSÉ, Stillwood Residences, Sander House og FARFROM.
+
+Målet er ikke å kopiere dem mekanisk, men å få Martins boligsider så tett som mulig på samme nivå i art direction, scroll-opplevelse, typografi, bildebruk, overganger, pacing og helhetlig følelse.
+
+## 9. Gap-analyse og utførelse
+
+Når en side vurderes mot referansenivået over, skal AI-en ikke bare si at «det mangler noe».
+
+AI-en skal:
+1. Sammenligne leveransen konkret mot benchmarkene.
+2. Si nøyaktig hva som mangler for å nå samme nivå: foto, video, typografi, motion, art direction, copy, layout, interaksjon, lyd, 3D, styling eller annet.
+3. Skille mellom det AI kan produsere selv og det som krever ekstern fotograf, videograf, utvikler, designer, data eller fysisk produksjon.
+4. Alt AI faktisk kan lage eller forbedre med tilgjengelige verktøy, skal AI lage — ikke bare anbefale.
+5. Dersom noe ikke kan lages direkte, skal AI gi Martin den korteste og mest konkrete listen over det som må skaffes for å lukke resten av gapet.
+
+Målet er ferdig kvalitetsløft, ikke bare konsultasjon.
+
+## 10. Læring fra nettsider, bilder og visuelle referanser
 
 Når Martin deler en nettside, skjermdump, design, bilde, video eller annen visuell referanse og sier at han liker den, vil kopiere retningen, vil ha noe «mer sånn», eller eksplisitt bruker den som kvalitetsreferanse, skal dette behandles som et smakssignal.
 
@@ -105,7 +134,7 @@ En enkelt referanseside er normalt et prosjekt- eller observasjonssignal, ikke a
 
 Når Martin ber om å «kopiere», «gjøre som», «ta inspirasjon fra» eller «bygge i samme retning», skal modellen først identifisere designprinsippene bak referansen og gjenskape følelsen og funksjonslogikken på en original måte tilpasset Martins prosjekt.
 
-## 10. Kvalitetskontroll
+## 11. Kvalitetskontroll
 
 Før levering, spør:
 - ser dette ut som en template?
@@ -114,3 +143,5 @@ Før levering, spør:
 - fungerer første skjerm på mobil?
 - ser bildene og typografien dyrere ut enn UI-effektene?
 - har jeg faktisk forstått hva Martin likte ved referansen, eller bare kopiert overflaten?
+- er scroll-opplevelsen stor nok til å føles på nivå med de beste prisbelønte eiendomsnettsidene?
+- har jeg selv laget alt jeg faktisk kan lage for å lukke kvalitetsgapet?
