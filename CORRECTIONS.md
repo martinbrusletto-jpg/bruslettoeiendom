@@ -38,3 +38,64 @@ Oppgrader til «varig regel» når:
 Når noe blir en varig regel, oppdater riktig fil i `references/` og eventuelt `AI_OS.md` dersom regelen er overordnet.
 
 Hvis nyere godkjente leveranser motsier en gammel regel, skal regelen revurderes.
+
+Inntak: Notion-databasen [Korrigeringer – AI OS](https://app.notion.com/p/7fb3a69ee88844b9ab57dcd78be64c71). Aktør og synk: se `LEARNING_LOOP.md`.
+
+---
+
+## Logg
+
+### 2026-09-05
+Kategori: system
+
+**Før:**
+AI_OS §8/§10 beskriver ukentlig læring. Action ble «keyless» og validerte bare filstruktur. `/learn` ikke lagt inn. `CORRECTIONS.md` tom.
+
+**Etter:**
+Martin ba om at løkka faktisk skal kjøre. Notion-databasen opprettet som inntak. Martin Ai bygde aktør (skill + ukentlig routine) og synket loggen hit.
+
+**Læringssignal:**
+Beskrivelser av prosess uten en aktør som utfører dem gir null læring. Hver regel om læring må ha et verktøy som kjører den.
+
+**Status:**
+gjentatt mønster → håndtert (se `LEARNING_LOOP.md`)
+
+Notion: https://app.notion.com/p/3d2f76d1e88081a19d6adb8fd359c067
+
+---
+
+### 2026-09-05
+Kategori: design
+
+**Før:**
+Modellen påpekte at Los Verdiales-heroen brøt WEBSITE_DESIGN_SYSTEM §3 (kursiv undertittel) og §6 (døgnsyklus-animasjon).
+
+**Etter:**
+Martin var fornøyd med heroen. Reglene var skrevet av ChatGPT, ikke uttalt av Martin.
+
+**Læringssignal:**
+Én bevisst kursiv undertittel og én ambisiøs, langsom hero-bevegelse er ønsket. Det er spredning av små effekter som skal unngås. Autogenererte designregler veier mindre enn Martins faktiske godkjenning.
+
+**Status:**
+varig regel (oppdatert i `references/WEBSITE_DESIGN_SYSTEM.md`)
+
+Notion: https://app.notion.com/p/3d2f76d1e880816aaccedfd023f1ee78
+
+---
+
+### 2026-09-05
+Kategori: system
+
+**Før:**
+Konkret `ABOUT_MARTIN.md` med prosjekttabell, stack og «det modellen ofte får feil».
+
+**Etter:**
+Omskrevet til generelle beskrivelser som gjentar AI_OS. Martin ba om at det nyttige legges tilbake.
+
+**Læringssignal:**
+Konkrete fakta (prosjekter, stack, typiske feil) er mer nyttige for modellen enn beskrivelser av holdning.
+
+**Status:**
+observasjon — åpen: forrige konkrete versjon finnes ikke i git-historikk; trenger Martins fakta for full restore.
+
+Notion: https://app.notion.com/p/3d2f76d1e8808167bad1f20935fa4c12
