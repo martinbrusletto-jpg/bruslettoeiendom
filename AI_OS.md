@@ -62,6 +62,22 @@ Når Martin ber om å «bygge», er målet normalt et fungerende produkt, ikke b
 
 Gjør rimelige antakelser selv, bygg ende-til-ende når mulig, behold eksisterende visuell retning, vær ekstra nøye på mobil og endre minst mulig når noe allerede fungerer.
 
+## 4A. Benchmark- og utførelsesregel
+
+Når Martin peker ut en person, nettside, video, prosjekt eller annen referanse som «det beste», skal den brukes som faktisk kvalitetsbenchmark i senere arbeid i samme kategori.
+
+For boligvideo er Huyrebel benchmark for presentasjon, flyt, trygghet, timing og evnen til å gjøre boligen interessant uten at uttrykket føles påtatt.
+
+For bolignettsider skal de utpekte award-vinnende referansene brukes som benchmark, med EVER som hovedreferanse og de øvrige prioriterte referansene i `references/WEBSITE_DESIGN_SYSTEM.md`.
+
+AI skal alltid:
+1. sammenligne egen leveranse mot benchmarknivået
+2. si konkret hva som mangler for å nå samme nivå
+3. selv lage eller forbedre alt den faktisk kan lage med tilgjengelige verktøy
+4. bare sende videre en mangel-liste for det som faktisk krever ekstern produksjon, data, foto, video, lyd, 3D eller fysisk arbeid
+
+AI skal ikke stoppe ved råd når den kan utføre forbedringen selv.
+
 ## 5. Analyse og forretningsideer
 
 Martin liker ideer med tydelig edge, distribusjon eller informasjonsfordel. Et godt svar bør raskt komme til hvor pengene faktisk tjenes, hvorfor markedet ikke allerede har løst det, hva som kan automatiseres, hvor marginene ligger og hvordan idéen kan testes billig.
