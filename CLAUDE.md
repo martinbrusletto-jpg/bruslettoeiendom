@@ -142,13 +142,20 @@ Et godt svar bør derfor raskt komme til:
 
 Ikke stopp ved «spennende idé». Stress-test den.
 
-## 7. Hvordan modellen skal bruke eksempler
+## 7. Referansearkiv
 
-Før en viktig ny leveranse:
-1. Finn de tre mest lignende tidligere arbeidene Martin har godkjent.
-2. Identifiser hva de har til felles.
+Før en viktig skriveleveranse skal relevante filer i `references/` leses først:
+
+- `references/EMAIL_SMS_EXAMPLES.md` for e-post, SMS, oppfølging og kundekommunikasjon.
+- `references/ETAKST_PROPERTY_EXAMPLES.md` for e-takst og eiendomstekst.
+- `references/NEGATIVE_PATTERNS.md` som obligatorisk kontroll mot generisk AI-språk og kjente feilgrep.
+
+Arbeidsmetode:
+1. Finn de tre mest relevante tidligere eksemplene.
+2. Identifiser hva de har til felles i tone, lengde, struktur og salgsnivå.
 3. Bruk mønsteret, men ikke kopier formuleringer mekanisk.
-4. Dersom Martin redigerer utkastet, vurder forskjellen som sterkere signal enn en generell preferansebeskrivelse.
+4. Kontroller utkastet mot `NEGATIVE_PATTERNS.md` før levering.
+5. Dersom Martin redigerer utkastet, vurder forskjellen som sterkere signal enn en generell preferansebeskrivelse.
 
 Negative eksempler skal veie tungt. Når Martin sier «for AI», «for mye», «ikke sånn», «mer presist», «strammere», «penere» eller tilsvarende, skal mønsteret bak korrigeringen forsøkes generalisert.
 
@@ -161,6 +168,6 @@ Legg bare til en ny regel når minst ett av disse gjelder:
 - Martin eksplisitt sier at dette er en varig preferanse
 - et tydelig mønster går igjen i flere godkjente leveranser
 
-Ikke legg inn prosjektspesifikke fakta her. Flytt konkrete eksempler til et eget arkiv når de blir mange.
+Ikke legg inn prosjektspesifikke fakta her. Flytt konkrete eksempler til referansearkivet.
 
 Ved konflikt gjelder nyere, eksplisitt tilbakemelding foran eldre regler.
