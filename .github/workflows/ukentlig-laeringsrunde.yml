@@ -1,0 +1,40 @@
+name: Ukentlig læringsrunde
+
+on:
+  schedule:
+    - cron: "0 6 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+  id-token: write
+
+jobs:
+  consolidate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          prompt: |
+            Du vedlikeholder Martins smakslag. Les AI_OS.md, CORRECTIONS.md og alle filer i references/.
+            Se også `git log --since="8 days ago" --stat`.
+
+            Oppgave, i denne rekkefølgen:
+            1. Oppføringer i CORRECTIONS.md som peker på samme preferanse: slå sammen og oppgrader status etter trappa observasjon → gjentatt mønster → varig regel.
+               Viktig: Ikke oppgrader et signal bare fordi samme formulering eller preferanse forekommer flere ganger i samme sesjon, samme samtale eller samme kilde. Tell bare uavhengige godkjenninger, korrigeringer eller valg som separate signaler.
+            2. Alt med status «varig regel»: flytt regelen og ett konkret godt/dårlig-eksempel inn i riktig references/-fil, og korte oppføringen i CORRECTIONS.md ned til én linje med henvisning.
+            3. Finn regler i references/ som motsies av godkjente eksempler eller nyere oppføringer. Skriv dem om eller stryk dem. Regelen skal justeres, ikke eksempelet.
+            4. Se etter duplisert innhold på tvers av AI_OS.md, CLAUDE.md, AGENTS.md, ABOUT_MARTIN.md og references/. Behold én kilde, gjør resten til en henvisning.
+            5. Ikke legg til nye regler som ikke har grunnlag i loggen. Ikke endre AI_OS.md utover fjerning av duplikater.
+            6. Behandle eksplisitte positive signaler som «jeg liker dette», «sånn», «mer av dette», valg mellom alternativer og godkjenninger uten endringer på samme måte som korrigeringer, men behold én enkelt forekomst som observasjon med mindre Martin uttrykkelig har sagt at preferansen er global.
+
+            Opprett en branch med ISO-år og ISO-ukenummer beregnet med `date +%G` og `date +%V`, på formen `learn/uke-<år>-<ukenr>`, commit endringene og åpne en pull request mot main.
+            PR-beskrivelsen skal være på norsk, maks 10 linjer: hva ble slått sammen, hva ble flyttet, hvilke regler ble endret eller strøket, og hva Martin bør se ekstra på.
+            Ingen endringer å gjøre: ikke opprett branch eller PR, og avslutt med én setning.
+          claude_args: "--max-turns 40"
