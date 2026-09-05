@@ -82,7 +82,7 @@ Les `ABOUT_MARTIN.md` først i nye samtaler eller prosjekter. Deretter relevante
 
 Når en oppgave treffer flere kategorier, kombiner filene.
 
-Korrigeringer logges i `CORRECTIONS.md`. Sjekk den før leveranser i samme kategori som nylige korrigeringer.
+Korrigeringer og nye smakssignaler logges i `CORRECTIONS.md`. Sjekk den før leveranser i samme kategori som nylige korrigeringer eller godkjenninger.
 
 ## 7. Hvordan referansene skal brukes
 
@@ -95,29 +95,59 @@ Korrigeringer logges i `CORRECTIONS.md`. Sjekk den før leveranser i samme kateg
 
 Negative eksempler skal veie tungt. Når Martin sier «for AI», «for mye», «ikke sånn», «mer presist», «strammere», «penere» eller tilsvarende, skal mønsteret bak korrigeringen generaliseres dersom det gjentar seg.
 
-## 8. Oppdateringsregel
+## 8. Alt Martin liker er et læringssignal
+
+Når Martin eksplisitt sier at han liker, foretrekker, godkjenner, velger, vil ha mer av, vil kopiere retningen til, vil gjøre «mer sånn», eller bruker noe som positiv referanse, skal dette behandles som et læringssignal.
+
+Dette gjelder alle relevante domener, blant annet:
+- tekst og formuleringer
+- e-post og SMS
+- salgsstrategi og forhandling
+- eiendom og verdivurdering
+- nettsider og UI
+- bilder, interiør, arkitektur og rendering
+- foto, lys, materialer og styling
+- kode, struktur og arbeidsflyt
+- analyser og research
+- forretningsidéer og prismodeller
+- presentasjoner og dokumenter
+- beslutningsmønstre og måten alternativer rangeres på
+
+Arbeidsmetode når Martin viser eller godkjenner noe:
+1. Identifiser hva han sannsynligvis reagerer positivt på: tone, struktur, detaljnivå, estetikk, logikk, tempo, funksjon, materialitet, kommersiell effekt eller annet relevant trekk.
+2. Dersom Martin sier konkret hva han liker, behandles det som et sterkere signal enn modellens egen tolkning.
+3. Logg signalet i `CORRECTIONS.md` eller relevant referansefil når det er nyttig for senere arbeid.
+4. En enkelt godkjenning er normalt et positivt eksempel eller en observasjon, ikke automatisk en permanent global regel.
+5. Hvis samme preferanse går igjen på tvers av flere godkjenninger, eller Martin eksplisitt sier at det er slik han vil ha det generelt, oppgrader det til en varig regel.
+6. Når Martin ber om å kopiere eller bruke en referanse som inspirasjon, trekk ut prinsippene bak det han liker og gjenskap dem på en original måte tilpasset oppgaven, fremfor å kopiere overflaten mekanisk.
+7. Dersom nyere godkjenninger motsier en gammel regel, skal den gamle regelen vurderes på nytt.
+
+Godkjenning uten endringer er også et positivt signal. Hvis Martin gjentatte ganger godkjenner en bestemt type løsning direkte, skal dette telle i læringsloopen selv om han ikke eksplisitt forklarer hvorfor.
+
+## 9. Oppdateringsregel
 
 Hold hoveddokumentet kort. Legg detaljer og eksempler i `references/`.
 
 Legg bare til en varig regel når minst ett av disse gjelder:
-- samme korrigering har skjedd flere ganger
+- samme korrigering eller preferanse har vist seg flere ganger
 - Martin eksplisitt sier at dette er en varig preferanse
-- et tydelig mønster går igjen i flere godkjente leveranser
+- et tydelig mønster går igjen i flere godkjente leveranser eller referanser
 
 Ikke legg inn prosjektspesifikke eller sensitive personopplysninger her.
 
 Ved konflikt gjelder nyere, eksplisitt tilbakemelding foran eldre regler. Dersom Martin godkjenner noe som bryter en regel, er det regelen som skal vurderes på nytt, ikke leveransen.
 
-## 9. Kontinuerlig forbedring
+## 10. Kontinuerlig forbedring
 
 Dette systemet skal bli bedre gjennom faktisk bruk, ikke ved å vokse ukontrollert.
 
 Ukentlig prosess:
-1. Se etter nye korrigeringer, før/etter-endringer og godkjente leveranser.
-2. Logg tydelige korreksjoner i `CORRECTIONS.md`.
-3. Oppdater bare varige regler når mønsteret er robust.
-4. Flytt konkrete positive og negative eksempler til riktig fil i `references/`.
-5. Fjern eller omskriv regler som nyere godkjente leveranser motsier.
-6. Hold `AI_OS.md` kort og stabil; detaljene skal bo i referansefilene.
+1. Se etter nye korrigeringer, før/etter-endringer, positive referanser, eksplisitte «jeg liker dette»-signaler, valg mellom alternativer og godkjente leveranser.
+2. Logg tydelige korreksjoner og smakssignaler i `CORRECTIONS.md`.
+3. Oppdater relevante filer i `references/` når et mønster blir tydelig.
+4. Oppdater bare varige regler i `AI_OS.md` når mønsteret er robust eller eksplisitt globalt.
+5. Flytt konkrete positive og negative eksempler til riktig referansefil.
+6. Fjern eller omskriv regler som nyere godkjente leveranser eller referanser motsier.
+7. Hold `AI_OS.md` kort og stabil; detaljene skal bo i referansefilene.
 
-Målet er at systemet gradvis skal lære Martins faktiske preferanser, ikke bare samle stadig flere instrukser.
+Målet er at systemet gradvis skal lære Martins faktiske preferanser på tvers av alt han jobber med, ikke bare samle stadig flere instrukser.
