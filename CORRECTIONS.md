@@ -113,3 +113,17 @@ Martin presiserte at tilbud som hovedregel sendes som vedlegg, med mindre han ut
 Ved tilbudsmailer skal e-posten bygge verdi og posisjonere Martin, mens detaljert prisoppsett normalt ligger i vedlegget.
 
 **Status:** observasjon — eksplisitt positiv godkjenning av korrigert versjon
+
+---
+
+### 2026-09-05 · design/nettside · Scroll skal gi større opplevelse
+**Før:**
+Boligsiden hadde rolig redaksjonell retning, store bilder og diskrete animasjoner, men opplevdes hovedsakelig som en serie pene, statiske seksjoner.
+
+**Etter:**
+Martin vurderte siden som karakter 4 og presiserte at den manglet effekter og en større opplevelse når man scroller.
+
+**Signal:**
+Premium nettsider skal ikke bare være visuelt pene; scrollingen bør ha dramaturgi, bevegelse og tydelig progresjon som gjør at siden føles større og mer opplevelsesrik uten å bli masete.
+
+**Status:** observasjon
