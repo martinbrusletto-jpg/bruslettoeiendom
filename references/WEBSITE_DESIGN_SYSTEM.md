@@ -29,9 +29,12 @@ Typografi skal være enkel, presis og eksklusiv.
 
 Unngå:
 - for mange fontvekter
-- tilfeldige kursiver
+- tilfeldige kursiver spredt rundt i UI
 - ord med ulik farge bare for å skape effekt
 - overdrevne displayfonter
+
+Tillatt unntak (godkjent 2026-09-05, Los Verdiales):
+- **én** bevisst kursiv undertittel i heroen, når den er del av den visuelle signaturen — ikke som generelt stilgrep.
 
 ## 4. Layout
 
@@ -61,12 +64,15 @@ Bra:
 - langsom parallax når det passer
 - subtil bildebevegelse
 - rolig hover
+- **én** ambisiøs, langsom hero-bevegelse (f.eks. døgnsyklus) når den er bevisst og ikke konkurrerer med lesbarhet — godkjent 2026-09-05 på Los Verdiales
 
 Dårlig:
 - hopping
 - raske zoom-effekter
-- for mange scroll-animasjoner
+- spredning av mange små scroll-animasjoner
 - effekter som reduserer fart eller lesbarhet
+
+Regel vs smak: Autogenererte «regler» (f.eks. fra ChatGPT) veier mindre enn Martins faktiske godkjenning av en konkret hero. Ikke straff et godkjent uttrykk fordi det avviker fra en streng formulering i denne filen — oppdater filen i stedet.
 
 ## 7. Mobil
 
