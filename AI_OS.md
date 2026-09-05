@@ -141,7 +141,7 @@ Ved konflikt gjelder nyere, eksplisitt tilbakemelding foran eldre regler. Dersom
 
 Dette systemet skal bli bedre gjennom faktisk bruk, ikke ved å vokse ukontrollert.
 
-**Aktør:** Se `LEARNING_LOOP.md`. Ukenlig synk og midt-i-arbeidet logging kjøres av Martin Ai — ikke bare beskrives her.
+**Aktør:** Se `LEARNING_LOOP.md`. Ukentlig synk og midt-i-arbeidet logging kjøres av Martin Ai — ikke bare beskrives her.
 
 Ukentlig prosess:
 1. Se etter nye korrigeringer, før/etter-endringer, positive referanser, eksplisitte «jeg liker dette»-signaler, valg mellom alternativer og godkjente leveranser (Notion + chat).
