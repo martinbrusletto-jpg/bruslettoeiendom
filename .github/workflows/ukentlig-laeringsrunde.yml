@@ -1,4 +1,4 @@
-name: Ukentlig læringsrunde
+name: Ukentlig AI OS-kontroll
 
 on:
   schedule:
@@ -6,35 +6,81 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
-  pull-requests: write
-  id-token: write
+  contents: read
 
 jobs:
-  consolidate:
+  validate:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - uses: anthropics/claude-code-action@v1
-        with:
-          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
-          prompt: |
-            Du vedlikeholder Martins smakslag. Les AI_OS.md, CORRECTIONS.md og alle filer i references/.
-            Se også `git log --since="8 days ago" --stat`.
+      - name: Kontroller AI OS-struktur
+        shell: bash
+        run: |
+          set -euo pipefail
 
-            Oppgave, i denne rekkefølgen:
-            1. Oppføringer i CORRECTIONS.md som peker på samme preferanse: slå sammen og oppgrader status etter trappa observasjon → gjentatt mønster → varig regel.
-               Viktig: Ikke oppgrader et signal bare fordi samme formulering eller preferanse forekommer flere ganger i samme sesjon, samme samtale eller samme kilde. Tell bare uavhengige godkjenninger, korrigeringer eller valg som separate signaler.
-            2. Alt med status «varig regel»: flytt regelen og ett konkret godt/dårlig-eksempel inn i riktig references/-fil, og korte oppføringen i CORRECTIONS.md ned til én linje med henvisning.
-            3. Finn regler i references/ som motsies av godkjente eksempler eller nyere oppføringer. Skriv dem om eller stryk dem. Regelen skal justeres, ikke eksempelet.
-            4. Se etter duplisert innhold på tvers av AI_OS.md, CLAUDE.md, AGENTS.md, ABOUT_MARTIN.md og references/. Behold én kilde, gjør resten til en henvisning.
-            5. Ikke legg til nye regler som ikke har grunnlag i loggen. Ikke endre AI_OS.md utover fjerning av duplikater.
-            6. Behandle eksplisitte positive signaler som «jeg liker dette», «sånn», «mer av dette», valg mellom alternativer og godkjenninger uten endringer på samme måte som korrigeringer, men behold én enkelt forekomst som observasjon med mindre Martin uttrykkelig har sagt at preferansen er global.
+          required_files=(
+            "AI_OS.md"
+            "ABOUT_MARTIN.md"
+            "CORRECTIONS.md"
+            "CLAUDE.md"
+            "AGENTS.md"
+            "references/EMAIL_SMS_EXAMPLES.md"
+            "references/ETAKST_PROPERTY_EXAMPLES.md"
+            "references/NEGATIVE_PATTERNS.md"
+            "references/REAL_ESTATE_METHOD.md"
+            "references/NEGOTIATION_AND_SALES.md"
+            "references/ANALYSIS_STYLE.md"
+            "references/WEBSITE_DESIGN_SYSTEM.md"
+            "references/DECISION_PATTERNS.md"
+          )
 
-            Opprett en branch med ISO-år og ISO-ukenummer beregnet med `date +%G` og `date +%V`, på formen `learn/uke-<år>-<ukenr>`, commit endringene og åpne en pull request mot main.
-            PR-beskrivelsen skal være på norsk, maks 10 linjer: hva ble slått sammen, hva ble flyttet, hvilke regler ble endret eller strøket, og hva Martin bør se ekstra på.
-            Ingen endringer å gjøre: ikke opprett branch eller PR, og avslutt med én setning.
-          claude_args: "--max-turns 40"
+          missing=0
+          for file in "${required_files[@]}"; do
+            if [[ ! -f "$file" ]]; then
+              echo "::error::Mangler $file"
+              missing=1
+            fi
+          done
+
+          if [[ "$missing" -ne 0 ]]; then
+            exit 1
+          fi
+
+          grep -q 'AI_OS.md' CLAUDE.md || {
+            echo "::error::CLAUDE.md peker ikke til AI_OS.md"
+            exit 1
+          }
+
+          grep -q 'AI_OS.md' AGENTS.md || {
+            echo "::error::AGENTS.md peker ikke til AI_OS.md"
+            exit 1
+          }
+
+          echo "AI OS-strukturen er intakt."
+
+      - name: Vis ukens endringer
+        shell: bash
+        run: |
+          echo "## Endringer siste 8 dager" >> "$GITHUB_STEP_SUMMARY"
+          echo '```text' >> "$GITHUB_STEP_SUMMARY"
+          git log --since="8 days ago" --stat --oneline >> "$GITHUB_STEP_SUMMARY" || true
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Oppsummer læringsloggen
+        shell: bash
+        run: |
+          observations=$(grep -Eic 'Status:\*\* observasjon|Status: observasjon' CORRECTIONS.md || true)
+          repeated=$(grep -Eic 'Status:\*\* gjentatt mønster|Status: gjentatt mønster' CORRECTIONS.md || true)
+          permanent=$(grep -Eic 'Status:\*\* varig regel|Status: varig regel' CORRECTIONS.md || true)
+
+          {
+            echo "## Læringsstatus"
+            echo "- Observasjoner: $observations"
+            echo "- Gjentatte mønstre: $repeated"
+            echo "- Varige regler: $permanent"
+            echo ""
+            echo "Selve læringen og oppdateringen av filene håndteres av Martins separate ukentlige AI-læringsloop. Denne workflowen gjør kun struktur- og integritetskontroll og krever ingen API-nøkkel."
+          } >> "$GITHUB_STEP_SUMMARY"
