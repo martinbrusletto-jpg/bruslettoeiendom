@@ -107,9 +107,9 @@ Notion: https://app.notion.com/p/3d2f76d1e8808167bad1f20935fa4c12
 Modellen la hele pristilbudet inn i e-posten med kostnadsposter og totalestimat, og avsluttet med å tilby å sende et formelt tilbud.
 
 **Etter:**
-Martin presiserte at tilbud som hovedregel sendes som vedlegg, med mindre han uttrykkelig ber om at det skal stå i e-posten. Selve e-posten skal tydeligere fremheve de sterke elementene i tilbudet og tørre å selge dem inn.
+Martin presiserte at tilbud som hovedregel sendes som vedlegg, med mindre han uttrykkelig ber om at det skal stå i e-posten. Den reviderte e-posten som bygget verdi rundt honorar, presentasjon, foto og posisjonering ble eksplisitt godkjent med karakter 5.
 
 **Signal:**
 Ved tilbudsmailer skal e-posten bygge verdi og posisjonere Martin, mens detaljert prisoppsett normalt ligger i vedlegget.
 
-**Status:** observasjon
+**Status:** observasjon — eksplisitt positiv godkjenning av korrigert versjon
