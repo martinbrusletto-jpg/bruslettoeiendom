@@ -127,3 +127,45 @@ Martin vurderte siden som karakter 4 og presiserte at den manglet effekter og en
 Premium nettsider skal ikke bare være visuelt pene; scrollingen bør ha dramaturgi, bevegelse og tydelig progresjon som gjør at siden føles større og mer opplevelsesrik uten å bli masete.
 
 **Status:** observasjon
+
+---
+
+### 2026-09-05 · boligvideo · Huyrebel som presentasjonsbenchmark
+**Før:**
+Ingen eksplisitt fast referanse for nivået på boligvideo og muntlig presentasjon var logget.
+
+**Etter:**
+Martin sa at Huyrebel er den beste på boligvideo og presenterer boliger ekstremt godt.
+
+**Signal:**
+Ved boligvideo skal Huyrebel brukes som kvalitetsbenchmark for presentasjon, flyt, trygghet, timing og evnen til å gjøre boligen interessant uten at det føles påtatt.
+
+**Status:** varig regel — eksplisitt global preferanse
+
+---
+
+### 2026-09-05 · design/nettside · Award-vinnende boligsider som benchmark
+**Før:**
+Nettsideregler var formulert generelt rundt rolig premiumdesign, store bilder og redaksjonell stil.
+
+**Etter:**
+Martin sa at de award-vinnende bolig-/eiendomsnettsidene funnet tidligere samme dag er det beste nivået, med EVER som viktigste referanse, deretter Vide Infra sin samling, MACNAA og HOUS Luxury Homes. Nye boligsider skal komme så tett på dette kvalitetsnivået som mulig.
+
+**Signal:**
+Bolignettsider skal benchmarkes mot de beste prisbelønte referansene, ikke mot typiske meglersider eller generiske templates.
+
+**Status:** varig regel — eksplisitt global preferanse
+
+---
+
+### 2026-09-05 · system/produksjon · AI skal lukke kvalitetsgapet selv
+**Før:**
+AI kunne beskrive hva som manglet for å nå referansenivået uten nødvendigvis å produsere alle elementene den faktisk kunne lage.
+
+**Etter:**
+Martin presiserte at AI skal si konkret hva som mangler for å nå benchmarknivået, og selv lage alt den faktisk kan lage.
+
+**Signal:**
+Ved kvalitetsgap skal AI både gjøre gap-analysen og utføre alle forbedringer den har verktøy og kapasitet til, i stedet for å stoppe ved anbefalinger.
+
+**Status:** varig regel — eksplisitt global preferanse
