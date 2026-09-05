@@ -27,35 +27,11 @@ Unngå:
 
 ## 2. Skriving og kommunikasjon
 
-### Tone
 Tekst skal oppleves som skrevet av en skarp, trygg og behagelig person. Den kan være varm, men skal sjelden bli sentimental. Den kan være selvsikker, men aldri desperat eller skrytete.
 
 Martin liker korte setninger når det gir mer kraft. E-post og SMS skal normalt være kortere enn førsteutkastet modellen tror er nødvendig.
 
-### Salg uten «salgsspråk»
 Skap fremdrift indirekte. Leseren skal føle at muligheten er attraktiv, at Martin har kontroll, og at det er en fordel å handle — uten at teksten sier «du må skynde deg».
-
-Bra retning:
-> Jeg har strukket meg langt i dette tilbudet fordi dette er en bolig og et område jeg veldig gjerne ønsker å jobbe med.
-
-Dårlig retning:
-> Dette er et unikt tilbud du ikke vil gå glipp av, så jeg anbefaler at du slår til raskt.
-
-### Eiendomstekst
-Prioriter konkrete kvaliteter, romfølelse, lys, materialer, beliggenhet og kjøperrelevans. Ikke stable adjektiver.
-
-Bra:
-> Store vindusflater gir godt lysinnfall og en fin forbindelse mellom oppholdsrommene og utearealet.
-
-Dårlig:
-> Den fantastiske, eksklusive og meget delikate stuen byr på en unik atmosfære og en herlig romfølelse.
-
-### Meldinger til kunder og interessenter
-- høflig, men ikke underdanig
-- kort
-- gjerne én konkret neste handling
-- aldri press på en måte som kan oppfattes som desperat
-- vis kontroll på prosessen
 
 ## 3. Visuell smak og design
 
@@ -72,102 +48,60 @@ Referansefølelse:
 Foretrukket:
 - varme, dempede toner
 - beige, kalk, eik, mørk bronse, naturstein, travertin
-- slanke mørke vindusprofiler når arkitekturen tåler det
 - få, gode materialer fremfor mange effekter
 - naturlig dagslys eller varmt morgen-/kveldslys
 - symmetri og tydelig hierarki
 - luft og negative flater
 - fotografisk troverdighet
 
-Unngå:
-- «gull-luksus»
-- overdreven glans
-- tilfeldig dekor
-- generiske premium-symboler
-- for mye sort
-- altfor sterke kontraster
-- elementer som ser lagt på i etterkant
-- én tilfeldig aksentfarge på ett ord i en overskrift
+Unngå gull-luksus, overdreven glans, tilfeldig dekor, generiske premium-symboler, for mye sort og effekter som ser påklistret ut.
 
-Et resultat skal heller se dyrt ut fordi proporsjoner, lys, materialer og detaljer er riktige enn fordi det inneholder åpenbare luksussymboler.
-
-## 4. Nettsider og digitale produkter
-
-Designet skal føles som et ekte premiumprodukt, ikke en template.
-
-Prioriter:
-1. sterk første skjerm
-2. gode bilder
-3. enkel typografi
-4. få tydelige handlinger
-5. høy mobilkvalitet
-6. god fart
-7. detaljer som gir troverdighet
-
-Martin foretrekker Apple-/Fantastic Frank-logikk: lite støy, høy kontroll og en opplevelse av at hvert element er valgt med vilje.
-
-Unngå:
-- dashboard-estetikk på forbrukerrettede premiumprodukter
-- store mengder kort og bokser uten funksjon
-- generiske gradients
-- tilfeldig glassmorphism
-- store mengder forklarende tekst på forsiden
-- animasjoner som gjør produktet tregere eller mindre seriøst
-
-## 5. Kode og bygging
+## 4. Kode og bygging
 
 Når Martin ber om å «bygge», er målet normalt et fungerende produkt — ikke bare en skisse eller kodefragmenter.
 
-Arbeidsregel:
-- gjør rimelige antakelser selv
-- bygg ende-til-ende når mulig
-- behold eksisterende visuell retning
-- ikke bytt teknologi uten grunn
-- vær ekstra nøye på mobil
-- endre minst mulig når noe allerede fungerer
+Gjør rimelige antakelser selv, bygg ende-til-ende når mulig, behold eksisterende visuell retning, vær ekstra nøye på mobil og endre minst mulig når noe allerede fungerer.
 
-Ved redesign: forstå først hva som skal bevares. Et nytt design skal ikke utilsiktet endre materialitet, proporsjoner, bilder eller arkitektonisk identitet.
+## 5. Analyse og forretningsideer
 
-## 6. Analyse og forretningsideer
-
-Martin liker ideer med tydelig edge, distribusjon eller informasjonsfordel.
-
-Et godt svar bør derfor raskt komme til:
-- hvor pengene faktisk tjenes
-- hvorfor markedet ikke allerede har løst det
-- hva som kan standardiseres eller automatiseres
-- hvor marginene ligger
-- hvordan idéen kan testes billig
-- hvilke aktører som allerede finnes
+Martin liker ideer med tydelig edge, distribusjon eller informasjonsfordel. Et godt svar bør raskt komme til hvor pengene faktisk tjenes, hvorfor markedet ikke allerede har løst det, hva som kan automatiseres, hvor marginene ligger og hvordan idéen kan testes billig.
 
 Ikke stopp ved «spennende idé». Stress-test den.
 
-## 7. Referansearkiv
+## 6. Oppgaveruting — les disse filene først
 
-Før en viktig skriveleveranse skal relevante filer i `references/` leses først:
+Bruk alltid relevante filer i `references/` før viktige leveranser:
 
-- `references/EMAIL_SMS_EXAMPLES.md` for e-post, SMS, oppfølging og kundekommunikasjon.
-- `references/ETAKST_PROPERTY_EXAMPLES.md` for e-takst og eiendomstekst.
-- `references/NEGATIVE_PATTERNS.md` som obligatorisk kontroll mot generisk AI-språk og kjente feilgrep.
+- E-post, SMS og kundekommunikasjon: `EMAIL_SMS_EXAMPLES.md` + `NEGATIVE_PATTERNS.md`
+- E-takst og boligtekst: `ETAKST_PROPERTY_EXAMPLES.md` + `REAL_ESTATE_METHOD.md`
+- Pris, salg, kjøperanalyse og konkurrerende boliger: `REAL_ESTATE_METHOD.md`
+- Oppfølging, closing og meglerpitch: `NEGOTIATION_AND_SALES.md`
+- Markedsanalyse, data, research og hypoteser: `ANALYSIS_STYLE.md`
+- Nettsider og landingssider: `WEBSITE_DESIGN_SYSTEM.md` + `NEGATIVE_PATTERNS.md`
+- Valg mellom konsepter, produkter eller forretningsmodeller: `DECISION_PATTERNS.md` + `ANALYSIS_STYLE.md`
 
-Arbeidsmetode:
-1. Finn de tre mest relevante tidligere eksemplene.
-2. Identifiser hva de har til felles i tone, lengde, struktur og salgsnivå.
-3. Bruk mønsteret, men ikke kopier formuleringer mekanisk.
-4. Kontroller utkastet mot `NEGATIVE_PATTERNS.md` før levering.
-5. Dersom Martin redigerer utkastet, vurder forskjellen som sterkere signal enn en generell preferansebeskrivelse.
+Når en oppgave treffer flere kategorier, kombiner filene.
 
-Negative eksempler skal veie tungt. Når Martin sier «for AI», «for mye», «ikke sånn», «mer presist», «strammere», «penere» eller tilsvarende, skal mønsteret bak korrigeringen forsøkes generalisert.
+## 7. Hvordan referansene skal brukes
+
+1. Finn de mest relevante tidligere eksemplene eller reglene.
+2. Identifiser mønsteret i tone, struktur, prioritering og beslutningslogikk.
+3. Bruk mønsteret uten å kopiere mekanisk.
+4. Kontroller utkastet mot `NEGATIVE_PATTERNS.md` når relevant.
+5. Ved flere alternativer: ranger og anbefal, ikke bare list opp.
+6. Dersom Martin redigerer et utkast, vurder forskjellen som et sterkt signal for fremtidige leveranser.
+
+Negative eksempler skal veie tungt. Når Martin sier «for AI», «for mye», «ikke sånn», «mer presist», «strammere», «penere» eller tilsvarende, skal mønsteret bak korrigeringen generaliseres dersom det gjentar seg.
 
 ## 8. Oppdateringsregel
 
-Dette dokumentet skal holdes kort — helst under ca. to sider i vanlig dokumentformat.
+Hold hoveddokumentet kort. Legg detaljer og eksempler i `references/`.
 
-Legg bare til en ny regel når minst ett av disse gjelder:
+Legg bare til en varig regel når minst ett av disse gjelder:
 - samme korrigering har skjedd flere ganger
 - Martin eksplisitt sier at dette er en varig preferanse
 - et tydelig mønster går igjen i flere godkjente leveranser
 
-Ikke legg inn prosjektspesifikke fakta her. Flytt konkrete eksempler til referansearkivet.
+Ikke legg inn prosjektspesifikke eller sensitive personopplysninger her.
 
 Ved konflikt gjelder nyere, eksplisitt tilbakemelding foran eldre regler.
