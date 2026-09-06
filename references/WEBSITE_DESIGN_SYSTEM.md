@@ -78,7 +78,7 @@ En premiumside skal ikke være statisk bare fordi den skal være rolig. Scrollin
 
 Regel vs smak: Autogenererte «regler» (f.eks. fra ChatGPT) veier mindre enn Martins faktiske godkjenning av en konkret hero. Ikke straff et godkjent uttrykk fordi det avviker fra en streng formulering i denne filen — oppdater filen i stedet.
 
-## 7. Mobil
+## 7. Mobil og levering
 
 Mobil er ikke en nedskalert desktopversjon. Kontroller alltid:
 - hero-høyde
@@ -88,6 +88,16 @@ Mobil er ikke en nedskalert desktopversjon. Kontroller alltid:
 - spacing
 - sticky elementer
 - lastetid
+
+Martin jobber ofte fra mobil. Derfor skal en ferdig nettside som hovedregel kunne åpnes på telefon med én gang.
+
+Leveringsregel:
+1. Når AI lager en nettside, skal bilder og andre nødvendige assets bygges inn eller publiseres sammen med siden — ikke ligge som separate lokale filer som Martin selv må koble inn.
+2. Hvis tilgjengelige verktøy gjør det mulig, skal siden publiseres direkte til Netlify eller tilsvarende hosting før levering.
+3. Martin skal få en fungerende mobilåpnebar URL som primær leveranse.
+4. Lokale HTML-filer og ZIP kan følge med som backup eller kildefiler, men skal ikke være eneste måte å se siden på.
+5. Før levering skal AI kontrollere at siden faktisk fungerer på mobil, at bildene lastes, og at sentrale effekter og interaksjoner virker.
+6. Hvis direkte publisering ikke er mulig med tilgjengelige verktøy eller nødvendige tilganger mangler, skal AI si konkret hva som hindrer publisering og gjøre alt annet klart for raskest mulig lansering.
 
 ## 8. Eiendomsprosjekter
 
@@ -141,6 +151,8 @@ Før levering, spør:
 - er det noe her som bare finnes fordi det er «moderne»?
 - kan 20 % av elementene fjernes uten å miste funksjon?
 - fungerer første skjerm på mobil?
+- laster alle bilder og assets på den publiserte mobilversjonen?
+- har Martin fått en URL han kan åpne direkte på telefon?
 - ser bildene og typografien dyrere ut enn UI-effektene?
 - har jeg faktisk forstått hva Martin likte ved referansen, eller bare kopiert overflaten?
 - er scroll-opplevelsen stor nok til å føles på nivå med de beste prisbelønte eiendomsnettsidene?
