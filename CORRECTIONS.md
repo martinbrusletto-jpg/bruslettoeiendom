@@ -169,3 +169,22 @@ Martin presiserte at AI skal si konkret hva som mangler for å nå benchmarkniv�
 Ved kvalitetsgap skal AI både gjøre gap-analysen og utføre alle forbedringer den har verktøy og kapasitet til, i stedet for å stoppe ved anbefalinger.
 
 **Status:** varig regel — eksplisitt global preferanse
+
+---
+
+### 2026-09-06
+Kategori: design
+
+**Før:**
+Holmenkollveien 48B-presentasjonen: dempet beige/kalk-palett, én Ken Burns på hero, lite øvrig bevegelse. Martin syntes den var fin.
+
+**Etter:**
+«Mangler farger og eksklusivitet.» «Mangler også effekter slik at man ikke får den store opplevelsen.»
+
+**Læringssignal:**
+Stille luksus er ikke det samme som blek og stillestående. Bolig-/premiumsider trenger rikere farge- og materialdybde (varmere toner, kontrast, merkevarefølelse) og et par kuraterte opplevelseseffekter — ikke bare én subtil hero-bevegelse. Unngå fortsatt støy og mange små scroll-effekter; lag heller få, tydelige øyeblikk.
+
+**Status:**
+observasjon
+
+Notion: https://app.notion.com/p/3d3f76d1e8808179b8e8c50c3c4e1065

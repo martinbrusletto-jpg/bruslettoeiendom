@@ -157,3 +157,20 @@ Før levering, spør:
 - har jeg faktisk forstått hva Martin likte ved referansen, eller bare kopiert overflaten?
 - er scroll-opplevelsen stor nok til å føles på nivå med de beste prisbelønte eiendomsnettsidene?
 - har jeg selv laget alt jeg faktisk kan lage for å lukke kvalitetsgapet?
+
+
+## 11. Farge, eksklusivitet og opplevelse (signal 2026-09-06)
+
+Stille luksus skal ikke bli blek eller «flat».
+
+Foretrekk:
+- rikere, varmere fargedybde (stein, eik, bronse, sage, mørkere kontrast) — ikke bare lys beige på lys beige
+- eksklusivitet gjennom materialitet, typografi, bildeutsnitt og hierarki
+- få, bevisste opplevelseseffekter: f.eks. hero-bevegelse + én reveal/parallax/lys-overgang som merkes
+
+Unngå:
+- å tolke «rolig» som mangel på farge
+- å stoppe på én subtil animasjon når siden skal føles som en stor presentasjon
+- spredning av mange små scroll-effekter (fortsatt ugyldig)
+
+Når Martin sier at noe mangler «den store opplevelsen», prioriter farge/kontrast og 1–2 sterke, kuraterte øyeblikk fremfor flere mikrointeraksjoner.
