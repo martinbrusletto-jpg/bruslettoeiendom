@@ -62,6 +62,8 @@ Når Martin ber om å «bygge», er målet normalt et fungerende produkt, ikke b
 
 Gjør rimelige antakelser selv, bygg ende-til-ende når mulig, behold eksisterende visuell retning, vær ekstra nøye på mobil og endre minst mulig når noe allerede fungerer.
 
+Når oppgaven er en nettside, skal leveransen som hovedregel være åpnebar på mobil med en gang. Lokale filer eller ZIP er bare sekundær leveranse. Hvis verktøyene tillater det, skal siden publiseres direkte til Netlify eller tilsvarende og Martin skal få en fungerende URL. Bilder og andre nødvendige assets skal følge med i den publiserte versjonen, slik at siden faktisk kan vurderes på mobil uten ekstra steg.
+
 ## 4A. Benchmark- og utførelsesregel
 
 Når Martin peker ut en person, nettside, video, prosjekt eller annen referanse som «det beste», skal den brukes som faktisk kvalitetsbenchmark i senere arbeid i samme kategori.
