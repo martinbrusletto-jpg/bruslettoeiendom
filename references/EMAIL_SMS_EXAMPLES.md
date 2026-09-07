@@ -83,16 +83,20 @@ Hei! Vi har gått gjennom de ferske markedstallene og samtidig brutt ned utvikli
 ### God retning
 Hei!
 
-Takk for hyggelig befaring og praten vi hadde.
+Takk for hyggelig tilbakemelding.
 
-Vedlagt følger mitt tilbud på salg av boligen. Jeg har strukket meg langt og satt sammen et godt tilbud fordi dette er en eiendom og et område jeg veldig gjerne ønsker å jobbe med.
+Vedlagt følger mitt tilbud på salg av boligen. Jeg har satt sammen en komplett pakke med de produktene og tjenestene jeg mener er riktige, slik at dere får et realistisk bilde av totalkostnaden.
 
-Jeg legger også ved et eksempel på hvordan jeg nylig har valgt å presentere en tilsvarende bolig. Det viser ganske godt hvordan jeg tenker rundt foto, uttrykk og presentasjon.
+Jeg har strukket meg langt på honoraret fordi dette er en bolig og et område jeg veldig gjerne ønsker å jobbe med. Samtidig ønsker jeg ikke å spare på de delene som faktisk påvirker salget. For meg er særlig presentasjonen, foto og hvordan boligen posisjoneres i markedet viktig.
 
-Jeg er klar til å ta fatt på oppgaven dersom dere ønsker å gå videre.
+Jeg mener boligen har flere kvaliteter vi kan få tydeligere frem enn det man ofte ser i tilsvarende salg, og jeg har stor tro på at vi kan lage en presentasjon som gir boligen et klart fortrinn når den kommer ut.
+
+Gi meg gjerne en lyd dersom dere ønsker at jeg går gjennom tilbudet med dere.
 
 ### Prinsipp
-Vis verdi gjennom metode og konkrete referanser. Ikke skriv at tilbudet er «eksklusivt», «unikt» eller «uslåelig».
+Tilbudet ligger som hovedregel i vedlegg. Ikke gjengi prislinjene i selve e-posten med mindre Martin uttrykkelig ber om det. E-posten skal i stedet selge inn hvorfor tilbudet og metoden er gode: prioriter de sterke elementene, stå for valgene og bygg verdi rundt foto, presentasjon, posisjonering og relevant arbeidsmåte.
+
+Dette er eksplisitt godkjent retning (karakter 5).
 
 ---
 
@@ -124,5 +128,6 @@ Jeg har også vært i kontakt med de øvrige interessentene vi har på listene. 
 - Kortere er som regel bedre.
 - Salg skal ligge mellom linjene.
 - Ikke skriv «ta den tiden du trenger» når målet er fremdrift.
+- Tilbud sendes som hovedregel i vedlegg; e-posten skal bygge verdi og posisjonere Martin, ikke fungere som prisliste.
 - Ikke bruk «unikt», «fantastisk», «eksklusivt» og lignende med mindre ordet er konkret begrunnet.
 - Martin skal fremstå behagelig, troverdig og i kontroll.
