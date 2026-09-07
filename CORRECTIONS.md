@@ -216,3 +216,154 @@ Det ble lagt inn en egen Martin-standard for eiendomstekst med kjerneprinsippet 
 Eiendomstekst skal raskt forklare hvorfor objektet er vanskelig å erstatte i markedet. Fakta og knapphet skal bære sterke formuleringer; standard meglerprosa og ubegrunnede superlativer skal nedprioriteres.
 
 **Status:** gjentatt/sterkt signal — samsvarer med eksisterende preferanser for lokal data, konkrete kvaliteter, korte setninger og lite reklamespråk
+
+
+### 2026-09-05
+Kategori: design
+
+**Før:**
+Gulleråsveien 43B v2: hero med linjevis tittel og parallax, clip-path-avdekking av bilder, tellere, sticky-sekvens for badene, progressstripe. Ingen horisontal scroll eller layoutbrudd.
+
+**Etter:**
+Martin: «Bra.» Godkjent uten endringer.
+
+**Læringssignal:**
+Dette bevegelsesnivået er riktig for boligpresentasjoner: flere orkestrerte effekter som følger scroll, men rolige og uten brudd. Bruk som referanse for «én scroll-opplevelse».
+
+**Status:**
+observasjon
+
+Notion: https://app.notion.com/p/3d2f76d1e88081269ad0ee787376bf90
+
+---
+
+### 2026-09-05
+Kategori: design
+
+**Før:**
+Gullerås-side med én fade som eneste bevegelse, etter WEBSITE_DESIGN_SYSTEM §6 («for mange scroll-animasjoner» dårlig).
+
+**Etter:**
+Martin: «Bra nettside men karakter 4 fordi det ikke er effekter og at man ikke får en større opplevelse av nettsiden når man scroller.»
+
+**Læringssignal:**
+Martin vil ha en scroll-opplevelse: parallax, avdekking av bilder, sticky-paneler, tellere. Regelen om lite bevegelse er ChatGPT-utledet og strengere enn smaken. Andre gang §6 motsies av en godkjenning (Los Verdiales var første).
+
+**Status:**
+gjentatt mønster (målfil `references/WEBSITE_DESIGN_SYSTEM.md` §6 — allerede oppdatert)
+
+Notion: https://app.notion.com/p/3d2f76d1e8808133a42ad5e422b6d892
+
+---
+
+### 2026-09-05
+Kategori: design
+
+**Før:**
+Gulleråsveien 43B-presentasjon: kjøkken som hero, ett stort bilde per seksjon, én følelsessetning + én faktasetning, materialbolk, mørk kontaktseksjon.
+
+**Etter:**
+Score 4. Tekst, struktur, bildevalg og palett godkjent uten kommentar. Trekk kun for manglende bevegelse.
+
+**Læringssignal:**
+Oppbyggingen bilde + én følelsessetning + én faktasetning treffer. Kan brukes som mal for boligpresentasjoner.
+
+**Status:**
+observasjon
+
+Notion: https://app.notion.com/p/3d2f76d1e880815e9684fbaff239402f
+
+---
+
+### 2026-09-05
+Kategori: system
+
+**Før:**
+Læringsloop levert: LEARNING_LOOP, CORRECTIONS-synk, skill, mandagsroutine, designregel.
+
+**Etter:**
+Martin sa «Supert» uten endringer.
+
+**Læringssignal:**
+Godkjenning uten endringer: levert løsning for læringsaktør traff.
+
+**Status:**
+observasjon
+
+Notion: https://app.notion.com/p/3d2f76d1e880818f9207d1ca99419ed1
+
+---
+
+### 2026-09-05
+Kategori: e-post/SMS
+
+**Før:**
+Første kjøring av tests/oppgaver.md #01 mot AI_OS d737e7fa.
+
+**Etter:**
+Score 4. «Ganske så bra.» To korrigeringer logget separat.
+
+**Læringssignal:**
+Struktur, lengde og tone i befaringsmail treffer. Feilene lå i språkform og salgsargument, ikke i oppbygging.
+
+**Status:**
+observasjon
+
+Notion: https://app.notion.com/p/3d2f76d1e880819d881df9a209ac9a8c
+
+---
+
+### 2026-09-05
+Kategori: tekst
+
+**Før:**
+Smakstest 01, befaringsmail: «Tomta og lyset i stuen».
+
+**Etter:**
+Martin: «Jeg bruker ikke a-endinger.» Skal være «tomten». Konservativt bokmål gjennomgående (tomten, boken, hytten, gaten).
+
+**Læringssignal:**
+Skriv konservativt bokmål uten a-endinger i all tekst for Martin.
+
+**Status:**
+varig regel (oppdatert i `references/EMAIL_SMS_EXAMPLES.md` og `AI_OS.md` §2)
+
+Notion: https://app.notion.com/p/3d2f76d1e88081c7a21ce40fc611daef
+
+---
+
+### 2026-09-05
+Kategori: eiendom
+
+**Før:**
+Smakstest 01 argumenterte med kjøkken fra 2019 og «innflyttingsklart» som salgspoeng.
+
+**Etter:**
+Martin: «Jeg liker å selge boligen på følelser fordi følelser er ubetalelig, men rene materialer har en pris.»
+
+**Læringssignal:**
+Boligens følelse (lys, ro, tomt, liv i huset) er hovedargumentet. Materialer og oppgraderinger er støtte, ikke overskrift, fordi de kan prises av kjøper.
+
+**Status:**
+observasjon
+
+Notion: https://app.notion.com/p/3d2f76d1e88081f6ac40d3227f933b92
+
+---
+
+### 2026-09-06
+Kategori: system
+
+**Før:**
+Gulleråsveien 43B ble levert som zip med index.html og img/-mappe. Kan ikke åpnes fra mobil uten å pakke ut og laste opp.
+
+**Etter:**
+Martin: nettsider skal ha bildene lagt inn og lanseres direkte på Netlify, slik at de kan åpnes på mobil med en gang.
+
+**Læringssignal:**
+Leveranseformat: nettsider deployes til Netlify (eller bilder bakes inn) før de leveres. En fil Martin ikke kan åpne på mobil er ikke ferdig.
+
+**Status:**
+varig regel (allerede i `AI_OS.md` §4 og `references/WEBSITE_DESIGN_SYSTEM.md` §7)
+
+Notion: https://app.notion.com/p/3d3f76d1e880810d8de2ec1bfd1c0814

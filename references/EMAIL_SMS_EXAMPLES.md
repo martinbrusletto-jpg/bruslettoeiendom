@@ -131,3 +131,4 @@ Jeg har også vært i kontakt med de øvrige interessentene vi har på listene. 
 - Tilbud sendes som hovedregel i vedlegg; e-posten skal bygge verdi og posisjonere Martin, ikke fungere som prisliste.
 - Ikke bruk «unikt», «fantastisk», «eksklusivt» og lignende med mindre ordet er konkret begrunnet.
 - Martin skal fremstå behagelig, troverdig og i kontroll.
+- Bruk konservativt bokmål uten a-endinger (tomten, boken, hytten, gaten — ikke tomta, boka, hytta, gata).

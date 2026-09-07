@@ -31,6 +31,8 @@ Tekst skal oppleves som skrevet av en skarp, trygg og behagelig person. Den kan 
 
 Martin liker korte setninger når det gir mer kraft. E-post og SMS skal normalt være kortere enn førsteutkastet modellen tror er nødvendig.
 
+Skriv konservativt bokmål uten a-endinger i all tekst (tomten, boken, hytten, gaten — ikke tomta, boka, hytta, gata).
+
 Skap fremdrift indirekte. Leseren skal føle at muligheten er attraktiv, at Martin har kontroll, og at det er en fordel å handle uten at teksten sier «du må skynde deg».
 
 ## 3. Visuell smak og design
