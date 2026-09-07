@@ -112,7 +112,7 @@ Martin presiserte at tilbud som hovedregel sendes som vedlegg, med mindre han ut
 **Signal:**
 Ved tilbudsmailer skal e-posten bygge verdi og posisjonere Martin, mens detaljert prisoppsett normalt ligger i vedlegget.
 
-**Status:** observasjon — eksplisitt positiv godkjenning av korrigert versjon
+**Status:** varig regel — eksplisitt formulert som generell arbeidsmåte og bekreftet med godkjent versjon
 
 ---
 
@@ -121,12 +121,12 @@ Ved tilbudsmailer skal e-posten bygge verdi og posisjonere Martin, mens detaljer
 Boligsiden hadde rolig redaksjonell retning, store bilder og diskrete animasjoner, men opplevdes hovedsakelig som en serie pene, statiske seksjoner.
 
 **Etter:**
-Martin vurderte siden som karakter 4 og presiserte at den manglet effekter og en større opplevelse når man scroller.
+Martin vurderte siden som karakter 4 og presiserte at den manglet effekter og en større opplevelse når man scroller. Dagen etter ga han samme type tilbakemelding på en annen boligpresentasjon: for lite effekt, fargedybde og eksklusiv opplevelse.
 
 **Signal:**
 Premium nettsider skal ikke bare være visuelt pene; scrollingen bør ha dramaturgi, bevegelse og tydelig progresjon som gjør at siden føles større og mer opplevelsesrik uten å bli masete.
 
-**Status:** observasjon
+**Status:** gjentatt mønster — to separate leveranser peker samme vei
 
 ---
 
@@ -185,6 +185,34 @@ Holmenkollveien 48B-presentasjonen: dempet beige/kalk-palett, én Ken Burns på 
 Stille luksus er ikke det samme som blek og stillestående. Bolig-/premiumsider trenger rikere farge- og materialdybde (varmere toner, kontrast, merkevarefølelse) og et par kuraterte opplevelseseffekter — ikke bare én subtil hero-bevegelse. Unngå fortsatt støy og mange små scroll-effekter; lag heller få, tydelige øyeblikk.
 
 **Status:**
-observasjon
+gjentatt mønster sammen med scroll-tilbakemeldingen 2026-09-05
 
 Notion: https://app.notion.com/p/3d3f76d1e8808179b8e8c50c3c4e1065
+
+---
+
+### 2026-09-06 · nettside/arbeidsflyt · Ferdige sider skal kunne åpnes direkte på mobil
+**Før:**
+Nettsider kunne bli levert som lokal HTML/ZIP som krevde ekstra steg før Martin kunne vurdere dem på telefon.
+
+**Etter:**
+Martin presiserte at han ofte jobber fra mobil, at bilder skal være med i nettsiden, og at ferdige sider skal publiseres direkte på Netlify eller tilsvarende når mulig slik at de kan åpnes med en gang.
+
+**Læringssignal:**
+For nettsideoppgaver er en fungerende mobilåpnebar URL del av selve leveransen, ikke et valgfritt siste steg. Lokale filer er backup.
+
+**Status:** varig regel — eksplisitt global arbeidsflytpreferanse
+
+---
+
+### 2026-09-06 · eiendomstekst · Selg det markedet ikke kan erstatte
+**Før:**
+Eiendomsreglene prioriterte lokal sammenligning, kjøpergruppe og konkrete verdidrivere, men hadde ikke et samlet skrivehierarki for annonser og salgsdokumenter.
+
+**Etter:**
+Det ble lagt inn en egen Martin-standard for eiendomstekst med kjerneprinsippet «Selg det markedet ikke kan erstatte»: knapphetskvaliteter, mikrobeliggenhet, tomt, sol/utsikt, arkitektur og praktiske goder skal komme før generiske interiørsuperlativer. Stilen skal være stram, moderne, faktabasert og autoritativ uten å bli pompøs.
+
+**Læringssignal:**
+Eiendomstekst skal raskt forklare hvorfor objektet er vanskelig å erstatte i markedet. Fakta og knapphet skal bære sterke formuleringer; standard meglerprosa og ubegrunnede superlativer skal nedprioriteres.
+
+**Status:** gjentatt/sterkt signal — samsvarer med eksisterende preferanser for lokal data, konkrete kvaliteter, korte setninger og lite reklamespråk
