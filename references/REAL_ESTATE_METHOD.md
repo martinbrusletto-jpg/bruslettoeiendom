@@ -103,3 +103,22 @@ E-takst: faktabasert, kort og nøktern.
 Markedsføring: kan være mer emosjonell og stemningsdrevet, men fortsatt konkret.
 
 Ikke bland stilene.
+
+## 9. Eiendomstekst: selg det markedet ikke kan erstatte
+
+Når teksten skal selge, begynn med eiendommens faktiske knapphet — ikke med generiske ord om interiør eller stemning.
+
+Prioritert hierarki:
+1. mikrobeliggenhet og posisjon
+2. tomt og uteareal
+3. sol og utsikt
+4. arkitektur, byggeår og proveniens
+5. knapphetsgoder som garasje, heis, terrasse, parkering, egen tomt eller separat del
+6. planløsning og funksjon
+7. standard og interiør
+
+Språket skal være stramt, moderne og faktabasert. Korte setninger. Konkret før poetisk. Autoritativt uten å bli pompøst. Sterke formuleringer skal kunne forklares med fakta, lokale sammenligninger eller reell knapphet.
+
+Unngå standard meglerprosa og ubegrunnede superlativer som «fantastisk», «unik», «drømmebolig», «wow-faktor» og «sjelden mulighet». Bruk heller formuleringer som beskriver hva som faktisk er vanskelig å finne igjen i markedet.
+
+For full skriveguide, bruk `docs/eiendomsstil-martin-brusletto.md` som detaljert referanse.
