@@ -16,6 +16,8 @@ styles.css      Design (Cormorant Garamond + Inter, slate/kobber-palett)
 script.js       Scroll-reveal, sticky header, mobilmeny og prosjekt-tidslinje
 assets/         Prosjektfoto (JPG), drivved-logo, favicon
 netlify.toml    Publiserer rotmappen som den er
+netlify/        Serverless-funksjoner (BytePlus-proxy)
+scripts/        Verktøy for verifisering
 ```
 
 Scroll-animasjonene er koblet til en `js`-klasse på `<html>` — uten JavaScript
@@ -37,3 +39,14 @@ python -m http.server 8000
 
 Skjemaet bruker [Netlify Forms](https://docs.netlify.com/forms/setup/)
 (`data-netlify="true"`). Innsendinger vises i Netlify-dashbordet under **Forms**.
+
+## BytePlus
+
+`POST /api/byteplus` går mot BytePlus ModelArk gjennom en Netlify-funksjon.
+Nøkkelen ligger som hemmelig miljøvariabel på Netlify og eksponeres aldri i
+nettleseren. Se `docs/byteplus.md` for endepunkt, grenser og oppsett.
+
+```bash
+curl -sS https://bruslettoeiendom.netlify.app/api/byteplus            # status
+BYTEPLUS_API_KEY=... node scripts/byteplus-check.mjs                  # nøkkelsjekk
+```

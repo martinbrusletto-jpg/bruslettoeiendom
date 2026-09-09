@@ -1,6 +1,12 @@
 # Netlify CLI build cache / local state
 .netlify/
 
+# Hemmeligheter og avhengigheter (aldri commit)
+.env
+.env.*
+!.env.example
+node_modules/
+
 # OS / editor
 .DS_Store
 Thumbs.db
