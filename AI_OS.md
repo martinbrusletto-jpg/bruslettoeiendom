@@ -98,6 +98,7 @@ Les `ABOUT_MARTIN.md` først i nye samtaler eller prosjekter. Deretter relevante
 - Oppfølging, closing og meglerpitch: `references/NEGOTIATION_AND_SALES.md`
 - Markedsanalyse, data, research og hypoteser: `references/ANALYSIS_STYLE.md`
 - Nettsider og landingssider: `references/WEBSITE_DESIGN_SYSTEM.md` + `references/NEGATIVE_PATTERNS.md`
+- Bilder, rendering og arkitekturvisualisering: `references/VISUAL_RENDERING.md`
 - Valg mellom konsepter, produkter eller forretningsmodeller: `references/DECISION_PATTERNS.md` + `references/ANALYSIS_STYLE.md`
 
 Når en oppgave treffer flere kategorier, kombiner filene.
