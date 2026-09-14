@@ -367,3 +367,20 @@ Leveranseformat: nettsider deployes til Netlify (eller bilder bakes inn) før de
 varig regel (allerede i `AI_OS.md` §4 og `references/WEBSITE_DESIGN_SYSTEM.md` §7)
 
 Notion: https://app.notion.com/p/3d3f76d1e880810d8de2ec1bfd1c0814
+
+---
+
+### 2026-09-13
+Kategori: design/rendering
+
+**Før:**
+Flere arkitekturrendere forbedret lys, omgivelser og finish, men modellen tok samtidig kreative friheter med volum, proporsjoner, plassering eller arkitektoniske detaljer.
+
+**Etter:**
+Martin korrigerte dette flere ganger med formuleringer som «du tar deg store friheter», «lås arkitektur og forhold», «rendre helt eksakt» og at arkitekturen skulle opprettholdes mens kun finish, realisme og omgivelser ble løftet. Han presiserte også at nybygg skal se nytt og ferdig ut, ikke gammelt eller slitt.
+
+**Læringssignal:**
+Ved rendering og bildebearbeiding er bevaring av arkitektur, proporsjoner, perspektiv og komposisjon viktigere enn kreativ nytolkning. Endre bare det som er bestilt; bruk AI-kreativitet på materialrealisme, lys, finish og sekundære omgivelser. Bakgrunnen kan gjerne gi dybde og atmosfære, men skal ikke konkurrere med hovedmotivet når den er ment å være diffus.
+
+**Status:**
+gjentatt mønster — opprettet `references/VISUAL_RENDERING.md` og routet bildefaglige oppgaver dit
