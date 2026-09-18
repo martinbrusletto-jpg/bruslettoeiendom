@@ -69,7 +69,7 @@
   const schedule = () => { if (!queued) { queued = true; requestAnimationFrame(paint); } };
   window.addEventListener('scroll', schedule, {passive:true});
   window.addEventListener('resize', () => { if (window.innerWidth > 640 && !menu.hidden) setMenu(false); schedule(); }, {passive:true});
-  reduced.addEventListener('change', () => { document.documentElement.classList.toggle('motion-ready', !reduced.matches); schedule(); });
+  reduced.addEventListener('change', () => { document.documentElement.classList.remove('motion-ready'); schedule(); });
   paint();
   const dialog = document.getElementById('imageDialog');
   const dialogImage = document.getElementById('dialogImage');
