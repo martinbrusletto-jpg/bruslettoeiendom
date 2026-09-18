@@ -1,199 +1,90 @@
-// «Snekret i 1984»: hero-bildet snekres sammen av seks bord ved lasting.
-// Bygges kun med JS og hoppes over ved prefers-reduced-motion —
-// da står det ferdige bildet der som før.
-//
-// Bordene må ikke begynne å smelle sammen før selve fotografiet er
-// lastet ferdig — ellers "bygges" det bare mørke/tomme flater på
-// tregere mobilnett, og bildet dukker opp etterpå uten noen effekt.
-const heroSection = document.querySelector('.hero');
-const buildReduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-if (heroSection && !buildReduceMotion) {
-  const HERO_IMG_URL = 'assets/hero-engraved.jpg';
-  const HERO_LOAD_TIMEOUT = 7000; // gi opp montasjen om bildet bruker for lang tid (treigt mobilnett)
-
-  const runBuild = () => {
-    const BOARDS = 6;
-    heroSection.classList.add('assembling');
-    const build = document.createElement('div');
-    build.className = 'hero-build';
-    build.setAttribute('aria-hidden', 'true');
-    let landed = 0;
-    const finish = () => {
-      if (!build.isConnected || build.classList.contains('done')) return;
-      build.classList.add('done');
-      setTimeout(() => build.remove(), 1100);
-    };
-    for (let i = 0; i < BOARDS; i++) {
-      const board = document.createElement('div');
-      board.className = 'board ' + (i % 2 ? 'from-right' : 'from-left');
-      board.style.setProperty('--i', i);
-      const img = document.createElement('div');
-      img.className = 'board-img';
-      img.style.setProperty('--i', i);
-      board.appendChild(img);
-      build.appendChild(board);
-      board.addEventListener('animationend', () => {
-        // Hammerslag: nagler inn, liten risting og sagflis langs skjøten
-        board.classList.add('landed');
-        build.classList.remove('thud');
-        void build.offsetWidth;
-        build.classList.add('thud');
-        const seamY = Math.min(((i + 1) / BOARDS) * 100, 97);
-        for (let d = 0; d < 7; d++) {
-          const dust = document.createElement('span');
-          dust.className = 'dust';
-          dust.style.left = (6 + Math.random() * 88) + '%';
-          dust.style.top = 'calc(' + seamY + '% - 6px)';
-          dust.style.setProperty('--dx', (Math.random() * 64 - 32).toFixed(0) + 'px');
-          dust.style.setProperty('--dy', '-' + (18 + Math.random() * 52).toFixed(0) + 'px');
-          dust.addEventListener('animationend', () => dust.remove());
-          build.appendChild(dust);
-        }
-        if (++landed === BOARDS) setTimeout(finish, 650);
-      }, { once: true });
-    }
-    const buildYear = document.createElement('div');
-    buildYear.className = 'build-year';
-    buildYear.textContent = '1984';
-    build.appendChild(buildYear);
-    heroSection.appendChild(build);
-    setTimeout(finish, 6000); // sikkerhetsnett om animasjonene aldri fullfører
-  };
-
-  // Vent til bildet faktisk er lastet (typisk umiddelbart, takket være
-  // preload-lenken i <head>) — men gi opp montasjen om det tar for lang
-  // tid, slik at siden bare viser bildet rett frem i stedet for å bygge
-  // tomme flater.
-  const heroImg = new Image();
-  let started = false;
-  const start = () => {
-    if (started) return;
-    started = true;
-    runBuild();
-  };
-  const giveUp = setTimeout(() => { started = true; }, HERO_LOAD_TIMEOUT);
-  heroImg.addEventListener('load', () => { clearTimeout(giveUp); start(); });
-  heroImg.addEventListener('error', () => clearTimeout(giveUp));
-  heroImg.src = HERO_IMG_URL;
-  if (heroImg.complete) start();
-}
-
-// Scroll reveal
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach((entry) => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-      observer.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.12 });
-document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
-
-// Project timeline: reveal each item + fill the spine as you scroll through
-const tlItems = document.querySelectorAll('.tl-item');
-const tlObserver = new IntersectionObserver((entries) => {
-  entries.forEach((entry) => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('in');
-      tlObserver.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.28 });
-tlItems.forEach((el) => tlObserver.observe(el));
-
-const tl = document.getElementById('tl');
-const tlFill = document.getElementById('tlFill');
-const scrubber = document.getElementById('tlScrubber');
-const scrubberDot = document.getElementById('tlScrubberDot');
-const updateTl = () => {
-  if (!tl || !tlFill) return;
-  const rect = tl.getBoundingClientRect();
-  const progressed = window.innerHeight * 0.5 - rect.top;
-  const pct = Math.max(0, Math.min(1, progressed / rect.height));
-  tlFill.style.height = (pct * 100).toFixed(2) + '%';
-  if (scrubberDot) scrubberDot.style.top = (pct * 100).toFixed(1) + '%';
-  if (scrubber) {
-    const inView = rect.top < window.innerHeight * 0.55 && rect.bottom > window.innerHeight * 0.45;
-    scrubber.classList.toggle('show', inView);
+(() => {
+  'use strict';
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const nav = document.getElementById('siteNav');
+  const toggle = document.getElementById('navToggle');
+  const menu = document.getElementById('primaryNav');
+  function setMenu(open) {
+    menu.hidden = !open;
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.innerHTML = open ? 'Lukk <span aria-hidden="true">×</span>' : 'Meny <span aria-hidden="true">☰</span>';
+    nav.classList.toggle('menu-active', open);
+    document.body.classList.toggle('menu-open', open);
+    if (open) menu.querySelector('a').focus();
   }
-};
-updateTl();
-window.addEventListener('scroll', updateTl, { passive: true });
-window.addEventListener('resize', updateTl);
-
-// Apple-style hero: parallax background + fading scroll cue
-const heroBg = document.querySelector('.hero-bg');
-const scrollCue = document.querySelector('.scroll-cue');
-const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-if (heroBg && !reduceMotion) {
-  const onHeroScroll = () => {
-    const y = window.scrollY;
-    if (window.innerWidth > 900) {
-      if (y <= window.innerHeight) {
-        const scale = (1.04 + Math.min(y, 700) / 700 * 0.06).toFixed(4);
-        heroBg.style.transform = 'translate3d(0,' + (y * 0.35).toFixed(1) + 'px,0) scale(' + scale + ')';
+  toggle.addEventListener('click', () => setMenu(menu.hidden));
+  menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMenu(false)));
+  document.addEventListener('keydown', e => {
+    if (!menu.hidden && e.key === 'Escape') { setMenu(false); toggle.focus(); }
+    if (!menu.hidden && e.key === 'Tab') {
+      const links = [...menu.querySelectorAll('a')];
+      if (e.shiftKey && document.activeElement === links[0]) { e.preventDefault(); toggle.focus(); }
+      else if (!e.shiftKey && document.activeElement === links.at(-1)) { e.preventDefault(); toggle.focus(); }
+      else if (document.activeElement === toggle) { e.preventDefault(); (e.shiftKey ? links.at(-1) : links[0]).focus(); }
+    }
+  });
+  if ('IntersectionObserver' in window && !reduced.matches) {
+    const reveals = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) { entry.target.classList.add('visible'); reveals.unobserve(entry.target); }
+      });
+    }, {threshold: .07});
+    document.querySelectorAll('.reveal').forEach(el => reveals.observe(el));
+    document.documentElement.classList.add('motion-ready');
+  }
+  const hero = document.querySelector('.hero');
+  const heroImage = document.querySelector('.hero-image');
+  const heroCopy = document.querySelector('.hero-copy');
+  const stories = [...document.querySelectorAll('.sale-story')].map(el => ({el, img:el.querySelector('img'), fill:el.querySelector('.story-progress span')}));
+  const material = document.querySelector('.material-story');
+  const materialPhoto = document.querySelector('.material-photo');
+  const progress = document.getElementById('readingProgress');
+  const clamp = (v,min=0,max=1) => Math.min(max,Math.max(min,v));
+  let queued = false;
+  function paint() {
+    queued = false;
+    const y = window.scrollY, vh = window.innerHeight;
+    nav.classList.toggle('scrolled', y > 80);
+    const total = document.documentElement.scrollHeight - vh;
+    progress.style.transform = `scaleX(${total > 0 ? y / total : 0})`;
+    if (reduced.matches) return;
+    const hr = hero.getBoundingClientRect();
+    if (hr.bottom > 0) {
+      const hp = clamp(-hr.top / (hr.height * .7));
+      heroImage.style.transform = `scale(${1.04 + hp * .08}) translateY(${hp * 3}%)`;
+      heroCopy.style.transform = `translateY(${-hp * 65}px)`;
+      heroCopy.style.opacity = String(1 - hp * .55);
+    }
+    stories.forEach(({el,img,fill}) => {
+      const r = el.getBoundingClientRect();
+      if (r.top < vh && r.bottom > 0) {
+        const p = clamp((vh - r.top) / (r.height + vh));
+        img.style.transform = `scale(${1.025 + p * .075}) translateY(${(p-.5)*3}%)`;
+        fill.style.transform = `scaleX(${clamp((vh-r.top)/r.height)})`;
       }
-    } else {
-      heroBg.style.transform = '';
-    }
-    if (scrollCue) scrollCue.style.opacity = y > 60 ? '0' : '';
-  };
-  onHeroScroll();
-  window.addEventListener('scroll', onHeroScroll, { passive: true });
-}
-
-// Solid header after scrolling past the hero
-const nav = document.getElementById('siteNav');
-const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 40);
-onScroll();
-window.addEventListener('scroll', onScroll, { passive: true });
-
-// Aman-style sale notice: gentle fade-in, dismissible, remembered for the visit.
-// It retires by itself when the visitor reaches the project timeline —
-// the two "Til salgs" flags take over from there.
-const notice = document.getElementById('saleNotice');
-if (notice) {
-  let dismissed = false;
-  try { dismissed = sessionStorage.getItem('bnoticeDismissed') === '1'; } catch (e) {}
-  const dismiss = () => {
-    notice.classList.remove('show');
-    try { sessionStorage.setItem('bnoticeDismissed', '1'); } catch (e) {}
-  };
-  if (!dismissed) {
-    setTimeout(() => notice.classList.add('show'), 2200);
-    const close = document.getElementById('noticeClose');
-    if (close) close.addEventListener('click', dismiss);
-    const works = document.getElementById('prosjekter');
-    if (works && 'IntersectionObserver' in window) {
-      const noticeObserver = new IntersectionObserver((entries) => {
-        if (entries.some((e) => e.isIntersecting)) {
-          dismiss();
-          noticeObserver.disconnect();
-        }
-      }, { rootMargin: '0px 0px -30% 0px' });
-      noticeObserver.observe(works);
-    }
+    });
+    const mr = material.getBoundingClientRect();
+    if (mr.top < vh && mr.bottom > 0) materialPhoto.style.transform = `translateY(${(clamp((vh-mr.top)/(vh+mr.height))-.5)*8}%)`;
   }
-}
-
-// Mobile menu toggle
-const toggle = document.getElementById('navToggle');
-const menu = document.getElementById('primaryNav');
-const navLabel = toggle.querySelector('.nav-label');
-const setOpen = (open) => {
-  const wasOpen = nav.classList.contains('open');
-  nav.classList.toggle('open', open);
-  menu.classList.toggle('open', open);
-  toggle.setAttribute('aria-expanded', String(open));
-  toggle.setAttribute('aria-label', open ? 'Lukk meny' : 'Åpne meny');
-  if (navLabel) navLabel.textContent = open ? 'Lukk' : 'Meny';
-  if (open) {
-    const first = menu.querySelector('a');
-    if (first) first.focus();
-  } else if (wasOpen) {
-    toggle.focus();
-  }
-};
-toggle.addEventListener('click', () => setOpen(!nav.classList.contains('open')));
-menu.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => setOpen(false)));
-document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setOpen(false); });
+  const schedule = () => { if (!queued) { queued = true; requestAnimationFrame(paint); } };
+  window.addEventListener('scroll', schedule, {passive:true});
+  window.addEventListener('resize', () => { if (window.innerWidth > 640 && !menu.hidden) setMenu(false); schedule(); }, {passive:true});
+  reduced.addEventListener('change', () => { document.documentElement.classList.toggle('motion-ready', !reduced.matches); schedule(); });
+  paint();
+  const dialog = document.getElementById('imageDialog');
+  const dialogImage = document.getElementById('dialogImage');
+  const caption = document.getElementById('imageCaption');
+  document.querySelectorAll('.image-open').forEach(button => {
+    button.addEventListener('click', () => {
+      if (typeof dialog.showModal !== 'function') { window.open(button.dataset.image, '_blank','noopener'); return; }
+      dialogImage.src = button.dataset.image;
+      dialogImage.alt = button.dataset.caption;
+      caption.textContent = button.dataset.caption;
+      dialog.showModal();
+      document.body.classList.add('dialog-open');
+    });
+  });
+  dialog.querySelector('.dialog-close').addEventListener('click', () => dialog.close());
+  dialog.addEventListener('close', () => document.body.classList.remove('dialog-open'));
+  dialog.addEventListener('click', e => { if (e.target === dialog || e.target.tagName === 'FIGURE') dialog.close(); });
+})();
