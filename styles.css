@@ -10,3 +10,6 @@
 /* Image-led opening with a quiet architectural signature. */
 .hero-copy{top:auto;bottom:145px;right:var(--gutter)}.hero-copy .eyebrow{font-size:10px;letter-spacing:.18em;margin-bottom:14px}.hero h1{font-family:var(--sans);font-size:clamp(18px,1.7vw,25px);font-weight:400;line-height:1.4;letter-spacing:.015em;text-shadow:0 1px 15px #0005}.hero-link{font-size:12px;margin-top:22px;padding:0 0 10px;gap:35px}.hero-side{display:none}.hero-shade{background:linear-gradient(180deg,#07171044 0%,#07171000 30%,#07171008 55%,#0717109c 100%)}
 @media(max-width:700px){.hero-copy{top:auto;bottom:130px;left:24px;right:24px}.hero-copy .eyebrow{font-size:9px;margin-bottom:12px}.hero h1{font-size:18px;line-height:1.45;letter-spacing:0}.hero-link{font-size:11px;margin-top:18px;padding:0 0 10px;gap:30px}}
+
+/* Drawn arrows retain the brand colour on every device. */
+.arrow-icon{display:inline-block;width:20px;height:20px;flex:none;vertical-align:middle;overflow:visible}.hero-link .arrow-icon{width:19px;height:19px}.image-zoom .arrow-icon{width:21px;height:21px}footer>a:last-child{display:inline-flex;align-items:center;gap:12px}
