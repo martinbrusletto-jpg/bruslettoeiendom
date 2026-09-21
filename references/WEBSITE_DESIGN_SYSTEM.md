@@ -12,16 +12,21 @@ Referansefølelse:
 - high-end arkitekturmagasin
 - diskret hotell- og boligpresentasjon
 
+Brusletto Eiendom skal i tillegg kunne opptre som et kvalitetsstempel: en tydelig, arkitektonisk merkevare som signaliserer en egen standard for bygg, arkitektur og interiør. Et enkelt monogram/segl kan brukes når det styrker denne følelsen, men merkevaren skal aldri konkurrere med prosjektfotografiet.
+
 ## 2. Første skjerm
 
 Hero-seksjonen skal være sterk nok til å forklare følelsen før brukeren leser mye.
 
 Prioriter:
 - ett sterkt bilde eller en rolig video
-- kort overskrift
+- la hero-fotografiet ha førsteprioritet; tekst skal ikke dekke eller konkurrere med et godt hovedmotiv
+- kort overskrift eller en liten, presis arkitektonisk signatur
 - lite forklarende tekst
 - én tydelig handling
 - god luft
+
+Nyere signal: stor slogan-typografi er ikke automatisk mer eksklusivt. Når bildet er sterkt, kan en liten og tilbakeholden linje fungere bedre. «Gjennomført. Fra første strek.» er et godkjent eksempel på denne retningen for Brusletto Eiendom; bruk prinsippet, ikke nødvendigvis formuleringen, på andre prosjekter.
 
 ## 3. Typografi
 
@@ -44,6 +49,7 @@ Foretrekk:
 - gode marger
 - færre, større seksjoner
 - klare pauser mellom innhold
+- ferdigstilte prosjekter skal presenteres med samme redaksjonelle omtanke som prosjekter til salgs; historikk skal ikke reduseres til en anonym liste dersom godt visuelt materiale finnes
 
 Unngå:
 - mange små kort
@@ -67,6 +73,7 @@ Bra:
 - **én** ambisiøs, langsom hero-bevegelse (f.eks. døgnsyklus) når den er bevisst og ikke konkurrerer med lesbarhet — godkjent 2026-09-05 på Los Verdiales
 - tydelig scroll-dramaturgi som gjør at siden føles større når man beveger seg gjennom den
 - sticky-sekvenser, rolige overganger, skalaendringer og lagvis introduksjon når de styrker historien
+- redaksjonell scroll-storytelling for både aktive og ferdigstilte prosjekter
 
 Dårlig:
 - hopping
@@ -144,7 +151,13 @@ En enkelt referanseside er normalt et prosjekt- eller observasjonssignal, ikke a
 
 Når Martin ber om å «kopiere», «gjøre som», «ta inspirasjon fra» eller «bygge i samme retning», skal modellen først identifisere designprinsippene bak referansen og gjenskape følelsen og funksjonslogikken på en original måte tilpasset Martins prosjekt.
 
-## 11. Kvalitetskontroll
+## 11. Mikrodetaljer og UI-finish
+
+Små UI-elementer skal være like gjennomarbeidet som resten av siden. Unngå emoji-lignende symboler, fargede systemikoner eller detaljer som gir et billig/app-aktig uttrykk på premiumsidene. Bruk heller fine, monokrome SVG-ikoner eller egen tegnsetting med kontrollert strekvekt og geometri.
+
+Dette gjelder særlig piler, eksterne lenker, zoom-symboler, navigasjon og andre små interaksjonssignaler. De skal føles tegnet for identiteten, ikke hentet tilfeldig fra operativsystemet.
+
+## 12. Kvalitetskontroll
 
 Før levering, spør:
 - ser dette ut som en template?
@@ -154,12 +167,13 @@ Før levering, spør:
 - laster alle bilder og assets på den publiserte mobilversjonen?
 - har Martin fått en URL han kan åpne direkte på telefon?
 - ser bildene og typografien dyrere ut enn UI-effektene?
+- er små ikoner, piler og navigasjon like eksklusive som resten av siden?
+- får hovedbildet nok plass, eller konkurrerer copy/UI med fotografiet?
 - har jeg faktisk forstått hva Martin likte ved referansen, eller bare kopiert overflaten?
 - er scroll-opplevelsen stor nok til å føles på nivå med de beste prisbelønte eiendomsnettsidene?
 - har jeg selv laget alt jeg faktisk kan lage for å lukke kvalitetsgapet?
 
-
-## 11. Farge, eksklusivitet og opplevelse (signal 2026-09-06)
+## 13. Farge, eksklusivitet og opplevelse (signal 2026-09-06)
 
 Stille luksus skal ikke bli blek eller «flat».
 
