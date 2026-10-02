@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Disallow: /profil/
+Sitemap: https://bruslettoeiendom.no/sitemap.xml

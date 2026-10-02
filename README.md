@@ -1,39 +1,49 @@
 # Brusletto Eiendom
 
-Konsept- og profilside for **Brusletto Eiendom AS** — utvikler av eksklusive boliger
-i Oslo, på fjellet og ved sjøen siden 1984. Uttrykket «Carved Luxury»: norsk skifer,
-drivved, bronse og presis boligkunst.
+Nettsted for **Brusletto Eiendom AS**. Kjernebudskap (Martin, 2. okt 2026):
+«Vi bygger hus og leiligheter vi vil bo i selv. Da bygger vi det beste.
+Ingenting blir overlatt til tilfeldighetene.»
 
-## Teknisk
+Forsiden ble bygget om 2. oktober 2026 etter et konsept Martin godkjente
+(«utrolig bra», «bygg den ferdig og launch»). Ikke gjør visuelle endringer på
+forsiden, merket eller profilen uten at Martin har godkjent dem.
 
-Statisk ettsides-nettsted uten byggetrinn — publiseres direkte på Netlify.
+## Struktur
 
 ```
-index.html      Innhold og struktur (semantisk, med JSON-LD + Open Graph)
-takk.html       Bekreftelsesside etter innsendt kontaktskjema
-404.html        Egen feilside i samme profil
-styles.css      Design (Cormorant Garamond + Inter, slate/kobber-palett)
-script.js       Scroll-reveal, sticky header, mobilmeny og prosjekt-tidslinje
-assets/         Prosjektfoto (JPG), drivved-logo, favicon
-netlify.toml    Publiserer rotmappen som den er
+index.html      Forsiden: intro (merket konstrueres, spilles av som film) og åtte kapitler
+be.css          All stil (Geist, kalkpuss #F3F1EC, skifer #1D2327, kobber #B0703F)
+be.js           Scrollmotor: festede scener, solbane, spørsmål, bildestripe, arkiv, film-intro
+profil/         Profilside (noindex): merket, farger, brevark, visittkort, skilt, nedlasting
+takk.html       Etter innsendt skjema (Netlify Forms «kontakt»)
+404.html        Feilside
+assets/ny/      Bilder i WebP brukt av forsiden
+assets/merke/   Merket som SVG i skifer, kalk og kobber
+assets/favicon.svg, og.jpg, robots.txt, sitemap.xml
 ```
 
-Scroll-animasjonene er koblet til en `js`-klasse på `<html>` — uten JavaScript
-(eller med `prefers-reduced-motion`) vises alt innhold direkte.
+## Merket
 
-### Seksjoner
-Hero · Intro · Nøkkeltall · Prosess · Prosjekter (scroll-drevet tidslinje) ·
-Nåværende retning · Materialer · Drivved-logo · Kontakt (Netlify-skjema) · Footer
+Speilvendt B og E som deler én bærevegg. Nett 12,75 × 16 moduler, strek 2 moduler,
+boller R 3,25 (over) og R 3,75 (under), midje på 7,5. SVG-geometri:
 
-## Lokal visning
-
-Åpne `index.html` direkte i nettleser, eller kjør en enkel server:
-
-```bash
-python -m http.server 8000
+```
+M6.75 0V16
+M12.25 1H4.75A3.25 3.25 0 0 0 4.75 7.5H11.25
+M12.75 15H4.75A3.75 3.75 0 0 1 4.75 7.5
 ```
 
-## Kontaktskjema
+## Språk
 
-Skjemaet bruker [Netlify Forms](https://docs.netlify.com/forms/setup/)
-(`data-netlify="true"`). Innsendinger vises i Netlify-dashbordet under **Forms**.
+Konservativt bokmål uten a-endinger: stuen, solen, døren, natten, klokken. «Syv», ikke «sju».
+
+## Publisering
+
+Netlify-prosjektet `bruslettoeiendom` er koblet til GitHub og publiserer automatisk ved push til `main`.
+Ingen byggetrinn. Lokal visning: `python -m http.server` i rotmappen.
+
+## Åpne punkter
+
+- Boligsummen i arkivet blir 179 (Nedre Skøyen vei mangler antall); tidligere side sa 176.
+- Tomtekapitlet bruker eksempeltall (dreid 18°, kveldssol til 21:40), merket «eksempel».
+- Domenet bruslettoeiendom.no ligger hos Domeneshop (okt 2026) og er lagt inn på Netlify. DNS: A @ 75.2.60.5, CNAME www bruslettoeiendom.netlify.app.
