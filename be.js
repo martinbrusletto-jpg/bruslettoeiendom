@@ -200,156 +200,20 @@
   // stille, der det bare er bevegelse går den fortere. All brukerinput stopper filmen.
   // inn: sekunder fra forrige kapittel til dette står øverst.
   // kf: [sekunder etter inn, andel av kapitlet] (0 = kapitlet øverst, 1 = ferdig scrollet).
+  // ---- Scrollfilm: siden spiller seg selv av (se /scrollfilm.js) ----
   // Rytmen: hvert kapittel ankommer rolig, står stille mens overskriften leses, spiller av
-  // bevegelsen sin i lesetempo og hviler før det går videre. Kurven gjennom nøkkelbildene er
-  // en monoton kubisk spline, så farten endrer seg mykt uten rykk mellom bevegelse og pause.
-  const INTRO = [[0, 0], [.4, 0], [2.5, .37], [3.6, .57], [4.1, .60], [6.4, .60], [8.4, 1], [9.4, 1]];
-  function arkivTempo() {
-    // Lysbildefremvisning: hvert prosjekt glir inn og får stå.
-    const n = 16, FLYTT = .5, STA = 1.2, kf = [[0, 0], [2.4, .02]];
-    let t = 2.4;
-    for (let k = 0; k < n; k++) {
-      const p = .02 + (k + .5) / n * .92;
-      t += FLYTT; kf.push([t, p]);
-      t += STA + (k === n - 1 ? 1.4 : 0); kf.push([t, p]);
-    }
-    kf.push([t + .8, 1]);
-    return kf;
-  }
-  const TEMPO = {
-    loftet:   { inn: 2, kf: [[0, 0], [.8, .02], [5.3, .33], [6.1, .40], [8.8, .40], [10.8, .64], [11.8, .80], [15.3, .80], [16.3, 1]] },
-    tomten:   { inn: 2, kf: [[0, 0], [4, .03], [10, .72], [11.6, .85], [14.4, .85], [15.2, 1]] },
-    sporsmal: { inn: 2, kf: [[0, 0], [3.2, .05], [13.2, .82], [14.2, .90], [17.2, .90], [17.9, 1]] },
-    detaljer: { inn: 2, kf: [[0, 0], [2.8, .03], [13.8, .92], [15.4, .92], [16.2, 1]] },
-    arkivet:  { inn: 2, kf: arkivTempo() },
-    salg:     { inn: 2.6, kf: [[0, 0], [5.4, 1]] },
-    samtale:  { inn: 2.4, kf: [[0, 0], [5, 1]] },
-    merket:   { inn: 2.6, kf: [[0, 0], [3.6, .5], [7, 1], [8, 1]] }
-  };
-  const KAP = Object.keys(TEMPO);
-  // Hele filmen som én liste [tid, scrollposisjon].
-  function manus() {
-    const max = document.documentElement.scrollHeight - innerHeight;
-    const introDist = $('intro').offsetHeight - innerHeight;
-    const L = INTRO.map(([t, p]) => [t, p * introDist]);
-    L.marks = [{ id: 'intro', t: 0, pos: 0 }];
-    let t0 = L[L.length - 1][0];
-    KAP.forEach(id => {
-      const el = $(id), top = Math.min(max, el.getBoundingClientRect().top + scrollY);
-      const end = Math.min(max, el.classList.contains('scene') ? top + el.offsetHeight - innerHeight : Math.max(top, top + el.offsetHeight - innerHeight));
-      const { inn, kf } = TEMPO[id];
-      L.push([t0 + inn, top]);
-      L.marks.push({ id, t: t0 + inn, pos: top });
-      kf.forEach(([t, p]) => { if (t > 0) L.push([t0 + inn + t, top + p * (end - top)]); });
-      t0 = L[L.length - 1][0];
-    });
-    return L;
-  }
-  // Monoton kubisk interpolasjon (Fritsch–Carlson): ingen oversving, pauser blir ekte stillstand.
-  function kurve(L) {
-    const n = L.length, d = [], m = new Array(n).fill(0);
-    for (let k = 0; k < n - 1; k++) d.push((L[k + 1][1] - L[k][1]) / (L[k + 1][0] - L[k][0]));
-    for (let k = 1; k < n - 1; k++) m[k] = d[k - 1] * d[k] <= 0 ? 0 : (d[k - 1] + d[k]) / 2;
-    for (let k = 0; k < n - 1; k++) {
-      if (d[k] === 0) { m[k] = 0; m[k + 1] = 0; continue; }
-      const a = m[k] / d[k], b = m[k + 1] / d[k], h = a * a + b * b;
-      if (h > 9) { const tau = 3 / Math.sqrt(h); m[k] = tau * a * d[k]; m[k + 1] = tau * b * d[k]; }
-    }
-    return t => {
-      let k = 0;
-      while (k < n - 2 && t > L[k + 1][0]) k++;
-      const [t0, y0] = L[k], [t1, y1] = L[k + 1], h = t1 - t0, s = Math.min(1, Math.max(0, (t - t0) / h));
-      const s2 = s * s, s3 = s2 * s;
-      return (2 * s3 - 3 * s2 + 1) * y0 + (s3 - 2 * s2 + s) * h * m[k] + (-2 * s3 + 3 * s2) * y1 + (s3 - s2) * h * m[k + 1];
-    };
-  }
-  const knapp = document.createElement('button');
-  knapp.type = 'button'; knapp.className = 'film-knapp';
-  document.body.appendChild(knapp);
-  const rolig = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  let spiller = false, raf = 0;
-  const vis = () => { knapp.textContent = spiller ? 'Pause' : 'Spill av'; knapp.setAttribute('aria-pressed', spiller); };
-  function stop() { spiller = false; cancelAnimationFrame(raf); vis(); }
-  // Spill av en liste [tid, posisjon] fra start.
-  function kjør(L) {
-    cancelAnimationFrame(raf);
-    spiller = true; vis();
-    const slutt = L[L.length - 1][0], y = kurve(L);
-    let start = null;
-    const step = now => {
-      if (!spiller) return;
-      if (start === null) start = now;
-      const t = (now - start) / 1000;
-      scrollTo(0, y(t));
-      if (t >= slutt) { stop(); return; }
-      raf = requestAnimationFrame(step);
-    };
-    raf = requestAnimationFrame(step);
-  }
-  // Gli til et kapittel og spill filmen videre derfra.
-  function fraKapittel(i) {
-    const L = manus(), m = L.marks[Math.max(0, Math.min(L.marks.length - 1, i))];
-    const y0 = scrollY, glid = Math.abs(m.pos - y0) < 2 ? 0 : Math.min(1.6, .7 + Math.abs(m.pos - y0) / 4000);
-    const rest = L.filter(([t]) => t > m.t + .001).map(([t, pos]) => [t - m.t + glid, pos]);
-    kjør(glid ? [[0, y0], [glid, m.pos], ...rest] : [[0, m.pos], ...rest]);
-  }
-  // Hvilket kapittel står leseren i nå?
-  function nå() {
-    const marks = manus().marks, y = scrollY + 4;
-    let i = 0; marks.forEach((m, k) => { if (m.pos <= y) i = k; });
-    return { i, inne: scrollY > marks[i].pos + innerHeight * .35 };
-  }
-  function bla(retning) {
-    const { i, inne } = nå();
-    fraKapittel(retning > 0 ? i + 1 : (inne ? i : i - 1));
-  }
-  // Fortsett fra der leseren står (Spill av-knappen midt på siden).
-  function fortsett() {
-    let L = manus();
-    const y = scrollY, k = L.findIndex(([, pos]) => pos > y + 2);
-    if (k < 1) return;
-    const dt = Math.max(1, (L[k][0] - L[k - 1][0]) * Math.min(1, (L[k][1] - y) / Math.max(1, L[k][1] - L[k - 1][1])));
-    const base = L[k][0] - dt;
-    kjør([[0, y], ...L.slice(k).map(([t, pos]) => [t - base, pos])]);
-  }
-
-  // Scroll blar ett kapittel opp eller ned, og filmen går videre derfra.
-  // Én bevegelse med hjul eller styreflate gir ett hopp, selv om den sender mange hendelser.
-  let sisteHjul = 0, sisteBla = 0;
-  const skjema = el => el && el.closest && el.closest('input, textarea, select, button, [contenteditable]');
-  function prøvBla(retning) {
-    const t = performance.now();
-    if (t - sisteBla > 900) { sisteBla = t; bla(retning); }
-  }
-  if (!rolig) {
-    addEventListener('wheel', e => {
-      if (e.ctrlKey) return;
-      e.preventDefault();
-      const t = performance.now(), ny = t - sisteHjul > 280;
-      sisteHjul = t;
-      if (Math.abs(e.deltaY) < 3) return;
-      if (ny || t - sisteBla > 1600) { sisteBla = 0; prøvBla(Math.sign(e.deltaY)); }
-    }, { passive: false });
-    let ty = null;
-    addEventListener('touchstart', e => { ty = e.touches[0].clientY; }, { passive: true });
-    addEventListener('touchmove', e => { if (!skjema(e.target)) e.preventDefault(); }, { passive: false });
-    addEventListener('touchend', e => {
-      if (ty === null) return;
-      const dy = ty - e.changedTouches[0].clientY; ty = null;
-      if (Math.abs(dy) > 40) prøvBla(Math.sign(dy));
-    }, { passive: true });
-    addEventListener('keydown', e => {
-      if (skjema(e.target)) return;
-      const ned = ['ArrowDown', 'PageDown', ' '].includes(e.key), opp = ['ArrowUp', 'PageUp'].includes(e.key);
-      if (e.key === 'Home') { e.preventDefault(); fraKapittel(0); return; }
-      if (e.key === 'End') { e.preventDefault(); fraKapittel(99); return; }
-      if (ned || opp) { e.preventDefault(); prøvBla(ned ? 1 : -1); }
-    });
-    // Klikk på siden (lenker, skinnen, arkivet) setter filmen på pause.
-    addEventListener('mousedown', e => { if (e.target !== knapp && !knapp.contains(e.target)) stop(); }, { capture: true });
-  }
-  knapp.addEventListener('click', () => spiller ? stop() : (scrollY < 10 ? fraKapittel(0) : fortsett()));
-  vis();
-  if (rolig) knapp.hidden = true;
-  else if (scrollY < 10) (document.fonts ? document.fonts.ready : Promise.resolve()).then(() => setTimeout(() => fraKapittel(0), 150));
+  // bevegelsen sin i lesetempo og hviler før det går videre. Nøkkelbilder: [sekunder, andel].
+  ScrollFilm.start({
+    kapitler: [
+      { el: '#intro',    kf: [[0, 0], [.4, 0], [2.5, .37], [3.6, .57], [4.1, .60], [6.4, .60], [8.4, 1], [9.4, 1]] },
+      { el: '#loftet',   inn: 2, kf: [[0, 0], [.8, .02], [5.3, .33], [6.1, .40], [8.8, .40], [10.8, .64], [11.8, .80], [15.3, .80], [16.3, 1]] },
+      { el: '#tomten',   inn: 2, kf: [[0, 0], [4, .03], [10, .72], [11.6, .85], [14.4, .85], [15.2, 1]] },
+      { el: '#sporsmal', inn: 2, kf: [[0, 0], [3.2, .05], [13.2, .82], [14.2, .90], [17.2, .90], [17.9, 1]] },
+      { el: '#detaljer', inn: 2, kf: [[0, 0], [2.8, .03], [13.8, .92], [15.4, .92], [16.2, 1]] },
+      { el: '#arkivet',  inn: 2, kf: ScrollFilm.lysbilder(16) },
+      { el: '#salg',     inn: 2.6, kf: [[0, 0], [5.4, 1]] },
+      { el: '#samtale',  inn: 2.4, kf: [[0, 0], [5, 1]] },
+      { el: '#merket',   inn: 2.6, kf: [[0, 0], [3.6, .5], [7, 1], [8, 1]] }
+    ]
+  });
 })();

@@ -30,6 +30,8 @@ hverandre gir en pause for lesing. Arkivet genereres av `arkivTempo()` (ca. 1,7 
 Hele filmen tar rundt 2,5 minutter. Kurven er en monoton kubisk spline (`kurve()`), så farten endrer seg mykt. Scroll (hjul, styreflate, sveip, piltaster, Page Up/Down, mellomrom) blar ett kapittel opp eller ned og
 spiller filmen videre derfra. Home og End går til start og slutt. Klikk setter filmen på pause.
 
+Motoren er `scrollfilm.js` (kopi av `~/.claude/skills/scrollfilm/scrollfilm.js`); tempoet står nederst i `be.js`.
+
 ## Merket
 
 Speilvendt B og E som deler én bærevegg. Nett 12,75 × 16 moduler, strek 2 moduler,
