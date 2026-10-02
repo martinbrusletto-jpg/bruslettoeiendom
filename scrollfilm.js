@@ -21,9 +21,19 @@
  *     ]
  *   });
  *
+ * Trinn (anbefalt, versjon 1.1): i stedet for faste tider beskrives kapitlet som trinn, og
+ * lesetiden regnes ut fra teksten som faktisk vises (innerText, så skjult tekst på mobil telles ikke):
+ *   { til: .33, sek: 2 }                 gli til andel .33 på 2 sekunder
+ *   { til: .72, les: '.copy' }           gli mens teksten i .copy leses (selektor i kapitlet; '' = hele)
+ *   { til: .40, les: '.vow2', min: 3 }   minst 3 sekunder
+ *   { til: .33, ord: 9 }                 lesetid for 9 ord
+ *   { vent: 1 }                          stå stille i 1 sekund
+ * Lesetid = 0,5 s + ord / lesefart (standard 4 ord/s ≈ 240 ord/min, gjennomsnittlig stillelesing). Juster med start({ lesefart }).
+ * Start hvert kapittel med bevegelse (ikke en ren pause), så det skjer noe med en gang leseren kommer.
+ *
  * Andel 0 = kapitlets topp står øverst i vinduet. Andel 1 = kapitlet er scrollet ferdig
  * (for et høyt kapittel med sticky scene: bunnen nås; for en vanlig seksjon: den står i ro).
- * Versjon 1.0 · 2026-10-02 · Martin Brusletto / Claude
+ * Versjon 1.1 · 2026-10-02 · Martin Brusletto / Claude
  */
 (function (global) {
   'use strict';
@@ -49,15 +59,39 @@
     };
   }
 
+  let LESEFART = 4;   // ord per sekund: gjennomsnittlig stillelesing ≈ 240 ord/min (Brysbaert 2019)
+  const ordIn = tekst => (tekst || '').trim().split(/\s+/).filter(w => /[\p{L}\p{N}]/u.test(w)).length;
+  const lesetid = (ord, min = 1) => Math.max(min, .5 + ord / LESEFART);
+  function ordI(rot, sel) {
+    if (typeof sel === 'number') return sel;
+    const els = sel === '' || sel == null ? [rot] : (sel.startsWith('#') ? [...document.querySelectorAll(sel)] : [...rot.querySelectorAll(sel)]);
+    return els.reduce((n, el) => n + ordIn(el.innerText), 0);
+  }
+  // Trinn -> nøkkelbilder [[sek, andel], ...]
+  function trinnTilKf(rot, trinn) {
+    const kf = [[0, 0]];
+    let t = 0, p = 0;
+    trinn.forEach(tr => {
+      if (tr.vent) { t += tr.vent; kf.push([t, p]); return; }
+      const til = tr.til ?? p;
+      let sek = tr.sek;
+      if (sek == null) sek = lesetid(tr.ord != null ? tr.ord : ordI(rot, tr.les), tr.min || 1);
+      else if (tr.min) sek = Math.max(sek, tr.min);
+      t += sek; p = til; kf.push([t, p]);
+    });
+    return kf;
+  }
+
   // Lysbildefremvisning: n trinn som hvert glir inn og står (for tidslinjer, arkiv, lister).
   function lysbilder(n, o = {}) {
     const { forst = 2.4, flytt = .5, sta = 1.2, fra = .02, til = .94, hvil = 1.4 } = o;
+    // sta: sekunder per trinn, eller funksjon (k) => sekunder, f.eks. k => ScrollFilm.lesetid(ord[k]) .
     const kf = [[0, 0], [forst, fra]];
     let t = forst;
     for (let k = 0; k < n; k++) {
       const p = fra + (k + .5) / n * (til - fra);
       t += flytt; kf.push([t, p]);
-      t += sta + (k === n - 1 ? hvil : 0); kf.push([t, p]);
+      t += (typeof sta === 'function' ? sta(k) : sta) + (k === n - 1 ? hvil : 0); kf.push([t, p]);
     }
     kf.push([t + .8, 1]);
     return kf;
@@ -71,14 +105,15 @@
   function start(opt) {
     const o = Object.assign({
       kapitler: [], autostart: true, bla: true, knapp: true, css: true,
-      tekst: { spill: 'Spill av', pause: 'Pause' }, onKapittel: null
+      tekst: { spill: 'Spill av', pause: 'Pause' }, onKapittel: null, lesefart: 4
     }, opt);
+    LESEFART = o.lesefart;
     const rolig = matchMedia('(prefers-reduced-motion: reduce)').matches;
     const kap = o.kapitler.map((k, i) => {
       const el = $(k.el);
       if (!el) throw new Error('scrollfilm: finner ikke ' + k.el);
       const v = k.varighet || 6;
-      return { el, id: el.id || 'k' + i, inn: i === 0 ? (k.inn || 0) : (k.inn ?? 2), kf: k.kf || [[0, 0], [v * .55, 1], [v, 1]] };
+      return { el, id: el.id || 'k' + i, inn: i === 0 ? (k.inn || 0) : (k.inn ?? 2), trinn: k.trinn, kf: k.kf || [[0, 0], [v * .55, 1], [v, 1]] };
     });
 
     // Hele filmen som [tid, scrollposisjon], med et merke der hvert kapittel står øverst.
@@ -93,7 +128,8 @@
         const end = Math.min(max, Math.max(top, top + hoy - innerHeight));
         push(t0 + k.inn, top);
         L.marks.push({ id: k.id, t: L[L.length - 1][0], pos: top });
-        k.kf.forEach(([t, p]) => { if (t > 0) push(t0 + k.inn + t, top + p * (end - top)); });
+        const kf = k.trinn ? trinnTilKf(k.el, k.trinn) : k.kf;
+        kf.forEach(([t, p]) => { if (t > 0) push(t0 + k.inn + t, top + p * (end - top)); });
         t0 = L[L.length - 1][0];
       });
       if (L.length < 2) L.push([1, L[0][1]]);
@@ -190,5 +226,5 @@
     return { spill: () => (scrollY < 10 ? til(0) : fortsett()), pause, til, fortsett, get spiller() { return spiller; }, manus };
   }
 
-  global.ScrollFilm = { start, lysbilder, kurve, versjon: '1.0' };
+  global.ScrollFilm = { start, lysbilder, kurve, lesetid: (ord, min) => lesetid(ord, min), ord: ordIn, versjon: '1.1' };
 })(window);
