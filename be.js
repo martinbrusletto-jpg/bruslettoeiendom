@@ -197,9 +197,11 @@
 
   // ---- Siden spilles av som en film ----
   // Introen følger egne nøkkelbilder (merket ferdig på rundt 4 sekunder),
-  // deretter får hvert kapittel 4 sekunder. All brukerinput stopper filmen.
+  // deretter får hvert kapittel 4 sekunder (Spørsmålene og Arkivet 8). All brukerinput stopper filmen.
   const FILM = [[0, 0], [.3, 0], [2.4, .37], [3.4, .57], [3.9, .60], [5.2, 1]];
   const PER = 4;
+  // Kapitler med mye å lese får 4 sekunder ekstra.
+  const EKSTRA = { sporsmal: 4, arkivet: 4 };
   const KAP = ['loftet', 'tomten', 'sporsmal', 'detaljer', 'arkivet', 'salg', 'samtale', 'merket'];
   const smoothstep = t => t * t * (3 - 2 * t);
   function film(t) {
@@ -213,9 +215,10 @@
   function targets() {
     const max = document.documentElement.scrollHeight - innerHeight;
     return KAP.map(id => {
+      const dur = PER + (EKSTRA[id] || 0);
       const el = $(id), top = el.getBoundingClientRect().top + scrollY;
       const end = el.classList.contains('scene') ? top + el.offsetHeight - innerHeight : Math.max(top, top + el.offsetHeight - innerHeight);
-      return Math.min(max, Math.round(end));
+      return { til: Math.min(max, Math.round(end)), dur };
     });
   }
   const knapp = document.createElement('button');
@@ -241,7 +244,7 @@
     if (fraStart && fra < introDist) segs.push({ intro: true, dur: FILM[FILM.length - 1][0] });
     else if (fra < introDist) segs.push({ fra, til: introDist, dur: PER });
     let pos = Math.max(fra, segs.length ? introDist : fra);
-    T.forEach(til => { if (til > pos + 4) { segs.push({ fra: pos, til, dur: PER }); pos = til; } });
+    T.forEach(({ til, dur }) => { if (til > pos + 4) { segs.push({ fra: pos, til, dur }); pos = til; } });
     if (!segs.length) { stop(); return; }
     let i = 0, start = null;
     const step = now => {
