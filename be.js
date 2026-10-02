@@ -17,16 +17,6 @@
   for (let x = 0; x <= 13; x++) ln(grid, Math.min(x, 12.75), -.8, Math.min(x, 12.75), 16.8);
   for (let y = 0; y <= 16; y++) ln(grid, -.8, y, 13.55, y);
 
-  // Konstruksjonsark i Merket-kapitlet: samme tegning, ferdig og stille
-  const sheet = $('markSheet');
-  const cons = $('cons').cloneNode(true); cons.removeAttribute('id');
-  cons.querySelector('.grid').removeAttribute('id');
-  cons.style.cssText = '--gk:1;--rk:1;--ak:1;--co:1';
-  sheet.appendChild(cons);
-  const solid = document.createElementNS(NS, 'use'); solid.setAttribute('href', '#be');
-  solid.setAttribute('width', 12.75); solid.setAttribute('height', 16); solid.style.color = 'var(--ink)';
-  sheet.appendChild(solid);
-
   // ---- 0: merket konstrueres ----
   const big = $('bigmark'), segs = [...big.querySelectorAll('.seg')], consEl = $('cons');
   const wm = $('wm'), rule = $('rule'), lock = $('lock'), introSub = $('introSub'), introImg = $('introImg');

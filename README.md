@@ -14,11 +14,11 @@ forsiden, merket eller profilen uten at Martin har godkjent dem.
 index.html      Forsiden: intro (merket konstrueres, spilles av som film) og åtte kapitler
 be.css          All stil (Geist, kalkpuss #F3F1EC, skifer #1D2327, kobber #B0703F)
 be.js           Scrollmotor: festede scener, solbane, spørsmål, bildestripe, arkiv, film-intro
-profil/         Profilside (noindex): merket, farger, brevark, visittkort, skilt, nedlasting
+profil/         Profilside bak innlogging: merket, farger, brevark, visittkort, skilt, SVG (profil/merke/)
+netlify/edge-functions/profil.ts  Innlogging for /profil/ (PROFIL_PASSORD i Netlify, bruker job@reserva.as)
 takk.html       Etter innsendt skjema (Netlify Forms «kontakt»)
 404.html        Feilside
 assets/ny/      Bilder i WebP brukt av forsiden
-assets/merke/   Merket som SVG i skifer, kalk og kobber
 assets/favicon.svg, og.jpg, robots.txt, sitemap.xml
 ```
 
@@ -26,7 +26,7 @@ assets/favicon.svg, og.jpg, robots.txt, sitemap.xml
 
 Forsiden spiller seg selv av med `scrollfilm.js` 2.0 (kopi av `~/.claude/skills/scrollfilm/scrollfilm.js`).
 Hver seksjon har `data-film="4 | 8 | 12"` i `index.html`: spill i så mange sekunder, så 3 sekunder ro.
-Scroll ned spoler seksjonen ferdig på 1 sekund, venter 2 og går videre; scroll under ventetiden går rett
+Hver seksjon glir inn på 0,9 s før tiden begynner. Scroll ned spoler seksjonen ferdig på 1 sekund, venter 2 og går videre; scroll under ventetiden går rett
 til neste. Scroll opp går til starten av seksjonen. Klikk setter på pause.
 
 ## Merket

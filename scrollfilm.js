@@ -1,11 +1,11 @@
 /*!
- * scrollfilm.js 2.0 — siden spiller seg selv av, seksjon for seksjon.
+ * scrollfilm.js 2.1 — siden spiller seg selv av, seksjon for seksjon.
  *
  * Modellen (Martin, okt 2026): hver seksjon spilles på 4, 8 eller 12 sekunder, avhengig av hvor
  * mye som skal ses eller leses, og står så stille i 3 sekunder før neste begynner.
  * Scroller noen, spiller seksjonen seg raskt ferdig, venter 2 sekunder og går videre.
  *
- *   spill (4 | 8 | 12 s)  →  vent (3 s)  →  neste seksjon
+ *   glid inn (0,9 s)  →  spill (4 | 8 | 12 s)  →  vent (3 s)  →  neste seksjon
  *   scroll ned under spill   →  spill ferdig på ~1 s  →  vent 2 s  →  neste
  *   scroll ned under vent    →  neste seksjon med en gang
  *   scroll opp               →  starten av denne seksjonen, eller forrige hvis du står i starten
@@ -28,8 +28,10 @@
 
   const $ = s => typeof s === 'string' ? document.querySelector(s) : s;
   const ord = t => (t || '').trim().split(/\s+/).filter(w => /[\p{L}\p{N}]/u.test(w)).length;
-  const myk = t => t * t * (3 - 2 * t);                    // inn og ut
+  // Jevn fart med myk start og landing (trapes): innholdet midt i seksjonen får samme tid som resten.
+  const jevn = (t, r = .18) => { const v = 1 / (1 - r); return t < r ? .5 * v * t * t / r : t > 1 - r ? 1 - .5 * v * (1 - t) * (1 - t) / r : v * (t - r / 2); };
   const ut = t => 1 - Math.pow(1 - t, 3);                  // rask start, myk landing
+  const overgangKurve = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
 
   const CSS = '.sf-knapp{position:fixed;right:clamp(16px,4vw,56px);bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:60;' +
     'mix-blend-mode:difference;color:#fff;background:none;border:1px solid currentColor;border-radius:999px;padding:8px 13px;' +
@@ -43,6 +45,7 @@
       vent: 3,                  // sekunder stille etter hver seksjon
       ferdigVent: 2,            // sekunder stille etter at en seksjon er spolt ferdig med scroll
       hurtig: 1,                // sekunder for å spille ferdig når noen scroller
+      overgang: .9,             // sekunder for glidet fra forrige seksjon (ikke en del av seksjonens tid)
       grenser: [25, 70],        // auto: <=25 ord = 4 s, <=70 ord = 8 s, ellers 12 s
       autostart: true, knapp: true, linje: false, css: true,
       tekst: { spill: 'Spill av', pause: 'Pause' }, onSeksjon: null
@@ -101,7 +104,10 @@
       if (n >= S.length) { stopp(); return; }
       i = n; fase = 'spill'; spiller = true; vis();
       if (o.onSeksjon) o.onSeksjon(S[i].el.id, i);
-      tween(pos(i).end, dur ?? varighet(i), myk, () => { fase = 'vent'; vent(venting(i), () => spill(i + 1)); });
+      const p = pos(i), d = dur ?? varighet(i);
+      const innhold = () => tween(p.end, d, jevn, () => { fase = 'vent'; vent(venting(i), () => spill(i + 1)); });
+      // Kort, rask overgang inn til seksjonen, så får innholdet hele tiden sin.
+      if (scrollY < p.top - 4) tween(p.top, o.overgang, overgangKurve, innhold); else innhold();
     }
     function spolFerdig() {
       fase = 'spoler';
@@ -176,5 +182,5 @@
     };
   }
 
-  global.ScrollFilm = { start, ord, versjon: '2.0' };
+  global.ScrollFilm = { start, ord, versjon: '2.1' };
 })(window);
