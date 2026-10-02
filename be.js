@@ -232,12 +232,14 @@
     const max = document.documentElement.scrollHeight - innerHeight;
     const introDist = $('intro').offsetHeight - innerHeight;
     const L = INTRO.map(([t, p]) => [t, p * introDist]);
+    L.marks = [{ id: 'intro', t: 0, pos: 0 }];
     let t0 = L[L.length - 1][0];
     KAP.forEach(id => {
       const el = $(id), top = Math.min(max, el.getBoundingClientRect().top + scrollY);
       const end = Math.min(max, el.classList.contains('scene') ? top + el.offsetHeight - innerHeight : Math.max(top, top + el.offsetHeight - innerHeight));
       const { inn, kf } = TEMPO[id];
       L.push([t0 + inn, top]);
+      L.marks.push({ id, t: t0 + inn, pos: top });
       kf.forEach(([t, p]) => { if (t > 0) L.push([t0 + inn + t, top + p * (end - top)]); });
       t0 = L[L.length - 1][0];
     });
@@ -264,27 +266,14 @@
   const knapp = document.createElement('button');
   knapp.type = 'button'; knapp.className = 'film-knapp';
   document.body.appendChild(knapp);
-  const INPUT = ['wheel', 'touchstart', 'keydown', 'mousedown'];
+  const rolig = matchMedia('(prefers-reduced-motion: reduce)').matches;
   let spiller = false, raf = 0;
   const vis = () => { knapp.textContent = spiller ? 'Pause' : 'Spill av'; knapp.setAttribute('aria-pressed', spiller); };
-  function stop() {
-    spiller = false; cancelAnimationFrame(raf); vis();
-    INPUT.forEach(e => removeEventListener(e, avbryt, true));
-  }
-  function avbryt(e) { if (e.target !== knapp && !knapp.contains(e.target)) stop(); }
-  function play(fraStart) {
-    if (spiller) return;
-    let L = manus();
-    if (!fraStart) {
-      // Fortsett der leseren står: hopp til neste nøkkelbilde lenger ned og spill videre derfra.
-      const y = scrollY, k = L.findIndex(([, pos]) => pos > y + 2);
-      if (k < 0) return;
-      const dt = Math.max(1, L[k][0] - L[k - 1][0]) * Math.min(1, (L[k][1] - y) / Math.max(1, L[k][1] - L[k - 1][1]));
-      const base = L[k][0] - Math.max(1, dt);
-      L = [[0, y], ...L.slice(k).map(([t, pos]) => [t - base, pos])];
-    }
+  function stop() { spiller = false; cancelAnimationFrame(raf); vis(); }
+  // Spill av en liste [tid, posisjon] fra start.
+  function kjør(L) {
+    cancelAnimationFrame(raf);
     spiller = true; vis();
-    INPUT.forEach(e => addEventListener(e, avbryt, { passive: true, capture: true }));
     const slutt = L[L.length - 1][0], y = kurve(L);
     let start = null;
     const step = now => {
@@ -297,8 +286,70 @@
     };
     raf = requestAnimationFrame(step);
   }
-  knapp.addEventListener('click', () => spiller ? stop() : play(scrollY < 10));
+  // Gli til et kapittel og spill filmen videre derfra.
+  function fraKapittel(i) {
+    const L = manus(), m = L.marks[Math.max(0, Math.min(L.marks.length - 1, i))];
+    const y0 = scrollY, glid = Math.abs(m.pos - y0) < 2 ? 0 : Math.min(1.6, .7 + Math.abs(m.pos - y0) / 4000);
+    const rest = L.filter(([t]) => t > m.t + .001).map(([t, pos]) => [t - m.t + glid, pos]);
+    kjør(glid ? [[0, y0], [glid, m.pos], ...rest] : [[0, m.pos], ...rest]);
+  }
+  // Hvilket kapittel står leseren i nå?
+  function nå() {
+    const marks = manus().marks, y = scrollY + 4;
+    let i = 0; marks.forEach((m, k) => { if (m.pos <= y) i = k; });
+    return { i, inne: scrollY > marks[i].pos + innerHeight * .35 };
+  }
+  function bla(retning) {
+    const { i, inne } = nå();
+    fraKapittel(retning > 0 ? i + 1 : (inne ? i : i - 1));
+  }
+  // Fortsett fra der leseren står (Spill av-knappen midt på siden).
+  function fortsett() {
+    let L = manus();
+    const y = scrollY, k = L.findIndex(([, pos]) => pos > y + 2);
+    if (k < 1) return;
+    const dt = Math.max(1, (L[k][0] - L[k - 1][0]) * Math.min(1, (L[k][1] - y) / Math.max(1, L[k][1] - L[k - 1][1])));
+    const base = L[k][0] - dt;
+    kjør([[0, y], ...L.slice(k).map(([t, pos]) => [t - base, pos])]);
+  }
+
+  // Scroll blar ett kapittel opp eller ned, og filmen går videre derfra.
+  // Én bevegelse med hjul eller styreflate gir ett hopp, selv om den sender mange hendelser.
+  let sisteHjul = 0, sisteBla = 0;
+  const skjema = el => el && el.closest && el.closest('input, textarea, select, button, [contenteditable]');
+  function prøvBla(retning) {
+    const t = performance.now();
+    if (t - sisteBla > 900) { sisteBla = t; bla(retning); }
+  }
+  if (!rolig) {
+    addEventListener('wheel', e => {
+      if (e.ctrlKey) return;
+      e.preventDefault();
+      const t = performance.now(), ny = t - sisteHjul > 280;
+      sisteHjul = t;
+      if (Math.abs(e.deltaY) < 3) return;
+      if (ny || t - sisteBla > 1600) { sisteBla = 0; prøvBla(Math.sign(e.deltaY)); }
+    }, { passive: false });
+    let ty = null;
+    addEventListener('touchstart', e => { ty = e.touches[0].clientY; }, { passive: true });
+    addEventListener('touchmove', e => { if (!skjema(e.target)) e.preventDefault(); }, { passive: false });
+    addEventListener('touchend', e => {
+      if (ty === null) return;
+      const dy = ty - e.changedTouches[0].clientY; ty = null;
+      if (Math.abs(dy) > 40) prøvBla(Math.sign(dy));
+    }, { passive: true });
+    addEventListener('keydown', e => {
+      if (skjema(e.target)) return;
+      const ned = ['ArrowDown', 'PageDown', ' '].includes(e.key), opp = ['ArrowUp', 'PageUp'].includes(e.key);
+      if (e.key === 'Home') { e.preventDefault(); fraKapittel(0); return; }
+      if (e.key === 'End') { e.preventDefault(); fraKapittel(99); return; }
+      if (ned || opp) { e.preventDefault(); prøvBla(ned ? 1 : -1); }
+    });
+    // Klikk på siden (lenker, skinnen, arkivet) setter filmen på pause.
+    addEventListener('mousedown', e => { if (e.target !== knapp && !knapp.contains(e.target)) stop(); }, { capture: true });
+  }
+  knapp.addEventListener('click', () => spiller ? stop() : (scrollY < 10 ? fraKapittel(0) : fortsett()));
   vis();
-  if (matchMedia('(prefers-reduced-motion: reduce)').matches) knapp.hidden = true;
-  else if (scrollY < 10) (document.fonts ? document.fonts.ready : Promise.resolve()).then(() => setTimeout(() => play(true), 150));
+  if (rolig) knapp.hidden = true;
+  else if (scrollY < 10) (document.fonts ? document.fonts.ready : Promise.resolve()).then(() => setTimeout(() => fraKapittel(0), 150));
 })();
