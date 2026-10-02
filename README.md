@@ -46,4 +46,4 @@ Ingen byggetrinn. Lokal visning: `python -m http.server` i rotmappen.
 
 - Boligsummen i arkivet blir 179 (Nedre Skøyen vei mangler antall); tidligere side sa 176.
 - Tomtekapitlet bruker eksempeltall (dreid 18°, kveldssol til 21:40), merket «eksempel».
-- Domenet bruslettoeiendom.no er ikke koblet til Netlify ennå.
+- Domenet bruslettoeiendom.no ligger hos Domeneshop (okt 2026) og er lagt inn på Netlify. DNS: A @ 75.2.60.5, CNAME www bruslettoeiendom.netlify.app.
