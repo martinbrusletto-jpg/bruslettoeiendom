@@ -200,36 +200,38 @@
   // stille, der det bare er bevegelse går den fortere. All brukerinput stopper filmen.
   // inn: sekunder fra forrige kapittel til dette står øverst.
   // kf: [sekunder etter inn, andel av kapitlet] (0 = kapitlet øverst, 1 = ferdig scrollet).
-  const FILM = [[0, 0], [.3, 0], [2.4, .37], [3.4, .57], [3.9, .60], [5.2, 1]];
-  // Arkivet vises som en rolig lysbildefremvisning: hvert prosjekt glir inn og får stå litt.
+  // Rytmen: hvert kapittel ankommer rolig, står stille mens overskriften leses, spiller av
+  // bevegelsen sin i lesetempo og hviler før det går videre. Kurven gjennom nøkkelbildene er
+  // en monoton kubisk spline, så farten endrer seg mykt uten rykk mellom bevegelse og pause.
+  const INTRO = [[0, 0], [.4, 0], [2.5, .37], [3.6, .57], [4.1, .60], [6.4, .60], [8.4, 1], [9.4, 1]];
   function arkivTempo() {
-    const n = 16, FLYTT = .45, STA = 1.15, kf = [[0, 0], [1.4, .02]];
-    let t = 1.4;
+    // Lysbildefremvisning: hvert prosjekt glir inn og får stå.
+    const n = 16, FLYTT = .5, STA = 1.2, kf = [[0, 0], [2.4, .02]];
+    let t = 2.4;
     for (let k = 0; k < n; k++) {
       const p = .02 + (k + .5) / n * .92;
       t += FLYTT; kf.push([t, p]);
-      t += STA + (k === n - 1 ? 1 : 0); kf.push([t, p]);
+      t += STA + (k === n - 1 ? 1.4 : 0); kf.push([t, p]);
     }
-    kf.push([t + .5, 1]);
+    kf.push([t + .8, 1]);
     return kf;
   }
   const TEMPO = {
-    loftet:   { inn: 1.4, kf: [[0, 0], [4.2, .33], [6.4, .40], [8.2, .62], [9.4, .80], [12.4, .80], [13.2, 1]] },
-    tomten:   { inn: 1.2, kf: [[0, 0], [2.2, .02], [6.8, .72], [8.2, .85], [10.8, .85], [11.4, 1]] },
-    sporsmal: { inn: 1.2, kf: [[0, 0], [2.2, .04], [9.2, .82], [10.2, .90], [13, .90], [13.5, 1]] },
-    detaljer: { inn: 1.2, kf: [[0, 0], [1.8, .03], [10, .92], [10.6, 1]] },
-    arkivet:  { inn: 1.2, kf: arkivTempo() },
-    salg:     { inn: 2.4, kf: [[0, 0], [4.5, 1]] },
-    samtale:  { inn: 2.2, kf: [[0, 0], [4, 1]] },
-    merket:   { inn: 2.4, kf: [[0, 0], [3, .5], [6, 1]] }
+    loftet:   { inn: 2, kf: [[0, 0], [.8, .02], [5.3, .33], [6.1, .40], [8.8, .40], [10.8, .64], [11.8, .80], [15.3, .80], [16.3, 1]] },
+    tomten:   { inn: 2, kf: [[0, 0], [4, .03], [10, .72], [11.6, .85], [14.4, .85], [15.2, 1]] },
+    sporsmal: { inn: 2, kf: [[0, 0], [3.2, .05], [13.2, .82], [14.2, .90], [17.2, .90], [17.9, 1]] },
+    detaljer: { inn: 2, kf: [[0, 0], [2.8, .03], [13.8, .92], [15.4, .92], [16.2, 1]] },
+    arkivet:  { inn: 2, kf: arkivTempo() },
+    salg:     { inn: 2.6, kf: [[0, 0], [5.4, 1]] },
+    samtale:  { inn: 2.4, kf: [[0, 0], [5, 1]] },
+    merket:   { inn: 2.6, kf: [[0, 0], [3.6, .5], [7, 1], [8, 1]] }
   };
   const KAP = Object.keys(TEMPO);
-  const smoothstep = t => t * t * (3 - 2 * t);
-  // Hele filmen som én liste [tid, scrollposisjon]. Like posisjoner etter hverandre = pause.
+  // Hele filmen som én liste [tid, scrollposisjon].
   function manus() {
     const max = document.documentElement.scrollHeight - innerHeight;
     const introDist = $('intro').offsetHeight - innerHeight;
-    const L = FILM.map(([t, p]) => [t, p * introDist]);
+    const L = INTRO.map(([t, p]) => [t, p * introDist]);
     let t0 = L[L.length - 1][0];
     KAP.forEach(id => {
       const el = $(id), top = Math.min(max, el.getBoundingClientRect().top + scrollY);
@@ -240,6 +242,24 @@
       t0 = L[L.length - 1][0];
     });
     return L;
+  }
+  // Monoton kubisk interpolasjon (Fritsch–Carlson): ingen oversving, pauser blir ekte stillstand.
+  function kurve(L) {
+    const n = L.length, d = [], m = new Array(n).fill(0);
+    for (let k = 0; k < n - 1; k++) d.push((L[k + 1][1] - L[k][1]) / (L[k + 1][0] - L[k][0]));
+    for (let k = 1; k < n - 1; k++) m[k] = d[k - 1] * d[k] <= 0 ? 0 : (d[k - 1] + d[k]) / 2;
+    for (let k = 0; k < n - 1; k++) {
+      if (d[k] === 0) { m[k] = 0; m[k + 1] = 0; continue; }
+      const a = m[k] / d[k], b = m[k + 1] / d[k], h = a * a + b * b;
+      if (h > 9) { const tau = 3 / Math.sqrt(h); m[k] = tau * a * d[k]; m[k + 1] = tau * b * d[k]; }
+    }
+    return t => {
+      let k = 0;
+      while (k < n - 2 && t > L[k + 1][0]) k++;
+      const [t0, y0] = L[k], [t1, y1] = L[k + 1], h = t1 - t0, s = Math.min(1, Math.max(0, (t - t0) / h));
+      const s2 = s * s, s3 = s2 * s;
+      return (2 * s3 - 3 * s2 + 1) * y0 + (s3 - 2 * s2 + s) * h * m[k] + (-2 * s3 + 3 * s2) * y1 + (s3 - s2) * h * m[k + 1];
+    };
   }
   const knapp = document.createElement('button');
   knapp.type = 'button'; knapp.className = 'film-knapp';
@@ -265,15 +285,13 @@
     }
     spiller = true; vis();
     INPUT.forEach(e => addEventListener(e, avbryt, { passive: true, capture: true }));
-    const slutt = L[L.length - 1][0];
-    let start = null, i = 1;
+    const slutt = L[L.length - 1][0], y = kurve(L);
+    let start = null;
     const step = now => {
       if (!spiller) return;
       if (start === null) start = now;
       const t = (now - start) / 1000;
-      while (i < L.length - 1 && t > L[i][0]) i++;
-      const [ta, ya] = L[i - 1], [tb, yb] = L[i];
-      scrollTo(0, ya + (yb - ya) * smoothstep(Math.min(1, Math.max(0, (t - ta) / (tb - ta)))));
+      scrollTo(0, y(t));
       if (t >= slutt) { stop(); return; }
       raf = requestAnimationFrame(step);
     };

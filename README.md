@@ -26,8 +26,8 @@ assets/favicon.svg, og.jpg, robots.txt, sitemap.xml
 
 Forsiden spiller seg selv av ved første besøk. Tempoet styres i `TEMPO` i `be.js`: hvert kapittel har
 `inn` (sekunder inn fra forrige kapittel) og nøkkelbilder `[sekunder, andel av kapitlet]`. Like andeler etter
-hverandre gir en pause for lesing. Arkivet genereres av `arkivTempo()` (ca. 1,6 sekunder per prosjekt).
-Hele filmen tar rundt 110 sekunder. Scroll, klikk eller tast stopper den.
+hverandre gir en pause for lesing. Arkivet genereres av `arkivTempo()` (ca. 1,7 sekunder per prosjekt).
+Hele filmen tar rundt 2,5 minutter. Kurven er en monoton kubisk spline (`kurve()`), så farten endrer seg mykt. Scroll, klikk eller tast stopper den.
 
 ## Merket
 
