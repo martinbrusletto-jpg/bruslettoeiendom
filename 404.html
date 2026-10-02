@@ -1,34 +1,33 @@
 <!doctype html>
 <html lang="no">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Finner ikke siden — Brusletto Eiendom</title>
-  <meta name="robots" content="noindex" />
-  <meta name="theme-color" content="#121a1f" />
-  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <style>
-    :root{--copper:#d8a27d}
-    *{box-sizing:border-box}
-    body{margin:0;min-height:100svh;display:grid;place-items:center;background:#121a1f;color:#f4efe7;font-family:Inter,system-ui,sans-serif;text-align:center;padding:32px}
-    .eyebrow{text-transform:uppercase;letter-spacing:.3em;font-size:11px;color:var(--copper);font-weight:600;margin:0 0 22px;display:flex;align-items:center;justify-content:center;gap:12px}
-    .eyebrow::before,.eyebrow::after{content:"";width:26px;height:1px;background:var(--copper)}
-    h1{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(38px,6vw,72px);line-height:1.02;letter-spacing:-.03em;margin:0}
-    p{max-width:440px;margin:26px auto 0;line-height:1.75;color:rgba(244,239,231,.72);font-size:16px}
-    a{display:inline-block;margin-top:40px;color:#f4efe7;text-decoration:none;font-size:11px;letter-spacing:.24em;text-transform:uppercase;padding-bottom:6px;border-bottom:1px solid var(--copper);transition:color .35s ease}
-    a:hover{color:var(--copper)}
-    a:focus-visible{outline:2px solid var(--copper);outline-offset:4px}
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Finner ikke siden · Brusletto Eiendom</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+:root{--bg:#F3F1EC;--ink:#171C20;--ink-2:#5E6266;--cu:#B0703F;--cu-ink:#8C5329;color-scheme:light}
+*{box-sizing:border-box}
+body{margin:0;min-height:100svh;display:grid;place-items:center;background:var(--bg);color:var(--ink);font-family:"Geist","Helvetica Neue",Arial,sans-serif;padding:32px 16px;-webkit-font-smoothing:antialiased}
+main{display:flex;flex-direction:column;align-items:center;gap:22px;text-align:center;max-width:520px}
+svg{height:56px;width:auto}
+.e{font-family:"Geist Mono",monospace;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--cu-ink)}
+h1{margin:0;font-weight:500;font-size:clamp(30px,5vw,52px);letter-spacing:-.045em;line-height:1.05;text-wrap:balance}
+p{margin:0;color:var(--ink-2);line-height:1.6}
+a{color:var(--ink);font-weight:500;text-decoration:none;border-bottom:1px solid var(--cu);padding-bottom:2px}
+</style>
 </head>
 <body>
-  <main>
-    <p class="eyebrow">404</p>
-    <h1>Denne adressen<br>finnes ikke.</h1>
-    <p>Siden du leter etter er flyttet eller har aldri eksistert. Alle våre adresser finner du på forsiden.</p>
-    <a href="/">Tilbake til forsiden</a>
-  </main>
+<main>
+<svg viewBox="0 0 12.75 16" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2"><path d="M6.75 0V16"/><path d="M12.25 1H4.75A3.25 3.25 0 0 0 4.75 7.5H11.25"/><path d="M12.75 15H4.75A3.75 3.75 0 0 1 4.75 7.5"/></g></svg>
+<span class="e">404</span>
+<h1>Denne adressen finnes ikke.</h1>
+<p>Siden kan være flyttet eller slettet. Resten av adressene våre finner du på forsiden.</p>
+<a href="/">Til forsiden</a>
+</main>
 </body>
 </html>

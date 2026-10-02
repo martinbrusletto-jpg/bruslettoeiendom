@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Disallow: /profil/
+Sitemap: https://bruslettoeiendom.netlify.app/sitemap.xml

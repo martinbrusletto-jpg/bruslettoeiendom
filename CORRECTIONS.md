@@ -384,3 +384,37 @@ Ved rendering og bildebearbeiding er bevaring av arkitektur, proporsjoner, persp
 
 **Status:**
 gjentatt mønster — opprettet `references/VISUAL_RENDERING.md` og routet bildefaglige oppgaver dit
+
+---
+
+### 2026-10-02
+Kategori: design
+
+**Før:**
+Forsiden i «Carved Luxury»/Aman-stil (Cormorant Garamond, mørk skifer, drivved-logo).
+
+**Etter:**
+Martin godkjente et nytt konsept i samme stil som «Forskjellen» på martinbrusletto.no: kalkpuss-lys bakgrunn, Geist, ingen kursiv, lite tekst, scrollfortelling i kapitler, nytt BE-merke konstruert på modulnett, intro som spilles av som film (merket ferdig på ca. 4 sekunder). Kjernebudskap fra Martin: «Vi bygger hus og leiligheter vi vil bo i selv. Da bygger vi det beste. Ingenting blir overlatt til tilfeldighetene.»
+
+**Læringssignal:**
+Konkret godkjent eksempel. Overstyrer eldre generelle stilregler for dette nettstedet.
+
+**Status:**
+godkjenning
+
+---
+
+### 2026-10-02
+Kategori: språk
+
+**Før:**
+«Stua», «sola», «døra» i nettsidetekst.
+
+**Etter:**
+Martin: «vi bruker ikke a endinger». Stuen, solen, døren, natten, klokken; «syv».
+
+**Læringssignal:**
+Konservativt bokmål i all tekst for Martin.
+
+**Status:**
+varig regel (Martin sa det eksplisitt)
