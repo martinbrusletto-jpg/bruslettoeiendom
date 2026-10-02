@@ -24,13 +24,10 @@ assets/favicon.svg, og.jpg, robots.txt, sitemap.xml
 
 ## Filmen
 
-Forsiden spiller seg selv av ved første besøk. Tempoet styres i `TEMPO` i `be.js`: hvert kapittel har
-`inn` (sekunder inn fra forrige kapittel) og nøkkelbilder `[sekunder, andel av kapitlet]`. Like andeler etter
-hverandre gir en pause for lesing. Arkivet genereres av `arkivTempo()` (ca. 1,7 sekunder per prosjekt).
-Hele filmen tar rundt 2,5 minutter. Kurven er en monoton kubisk spline (`kurve()`), så farten endrer seg mykt. Scroll (hjul, styreflate, sveip, piltaster, Page Up/Down, mellomrom) blar ett kapittel opp eller ned og
-spiller filmen videre derfra. Home og End går til start og slutt. Klikk setter filmen på pause.
-
-Motoren er `scrollfilm.js` (kopi av `~/.claude/skills/scrollfilm/scrollfilm.js`); tempoet står nederst i `be.js`.
+Forsiden spiller seg selv av med `scrollfilm.js` 2.0 (kopi av `~/.claude/skills/scrollfilm/scrollfilm.js`).
+Hver seksjon har `data-film="4 | 8 | 12"` i `index.html`: spill i så mange sekunder, så 3 sekunder ro.
+Scroll ned spoler seksjonen ferdig på 1 sekund, venter 2 og går videre; scroll under ventetiden går rett
+til neste. Scroll opp går til starten av seksjonen. Klikk setter på pause.
 
 ## Merket
 

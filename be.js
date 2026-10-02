@@ -201,47 +201,6 @@
   // inn: sekunder fra forrige kapittel til dette står øverst.
   // kf: [sekunder etter inn, andel av kapitlet] (0 = kapitlet øverst, 1 = ferdig scrollet).
   // ---- Scrollfilm: siden spiller seg selv av (se /scrollfilm.js) ----
-  // Tempoet regnes ut fra lesetiden til teksten som faktisk vises. Hvert kapittel starter med
-  // bevegelse, og bevegelsen skjer mens teksten leses, ikke før eller etter.
-  ScrollFilm.start({
-    kapitler: [
-      { el: '#intro', trinn: [
-        { vent: .4 }, { til: .37, sek: 2.1 }, { til: .57, sek: 1.1 },          // merket ferdig på ~4 s
-        { til: .62, les: '#introSub', min: 2.5 },                               // navnet og løftet
-        { til: 1, sek: 2.6 }, { vent: .8 } ] },                                 // bildet åpner seg
-      { el: '#loftet', inn: 1.8, trinn: [
-        { til: .03, sek: .6 },
-        { til: .33, les: '.vow' },                                              // ord for ord i lesetempo
-        { til: .42, les: '.vow2', min: 2.4 },
-        { til: .76, sek: 2.4 },                                                 // bildet åpner seg
-        { til: .88, les: '.vow-foot' }, { til: 1, sek: .9 } ] },
-      { el: '#tomten', inn: 1.8, trinn: [
-        { til: .72, les: '.copy', min: 7 },                                     // solen går mens teksten leses
-        { til: .82, sek: 1.6 },                                                 // huset låser seg
-        { til: .9, les: '.readout' }, { til: 1, sek: .8 } ] },
-      { el: '#sporsmal', inn: 1.8, trinn: [
-        { til: .06, les: '.q-head' },
-        { til: 0.140, les: '.qs li:nth-child(1)' },
-        { til: 0.216, les: '.qs li:nth-child(2)' },
-        { til: 0.292, les: '.qs li:nth-child(3)' },
-        { til: 0.368, les: '.qs li:nth-child(4)' },
-        { til: 0.444, les: '.qs li:nth-child(5)' },
-        { til: 0.520, les: '.qs li:nth-child(6)' },
-        { til: 0.596, les: '.qs li:nth-child(7)' },
-        { til: 0.672, les: '.qs li:nth-child(8)' },
-        { til: 0.748, les: '.qs li:nth-child(9)' },
-        { til: 0.824, les: '.qs li:nth-child(10)' },
-        { til: .92, les: '.q-end' }, { til: 1, sek: .8 } ] },
-      { el: '#detaljer', inn: 1.8, trinn: [
-        { til: .05, les: '.det-head' },
-        { til: .92, les: '.det' },                                              // stripen glir mens kortene leses
-        { vent: .6 }, { til: 1, sek: .8 } ] },
-      { el: '#arkivet', inn: 1.8, kf: ScrollFilm.lysbilder(ARK.length, {
-        forst: ScrollFilm.lesetid(ScrollFilm.ord($('arkivet').querySelector('h2').innerText)),
-        sta: k => ScrollFilm.lesetid(ScrollFilm.ord(ARK[k][1] + ' ' + ARK[k][2]) + (ARK[k][3] > 1 ? 2 : 0)) }) },
-      { el: '#salg', inn: 2.2, trinn: [{ til: .5, les: 'header' }, { til: 1, les: '.salg-list' }] },
-      { el: '#samtale', inn: 2.2, trinn: [{ til: 1, les: 'h2, .lead' }, { vent: 1.5 }] },
-      { el: '#merket', inn: 2.2, trinn: [{ til: .6, les: '.m-copy h2, .m-copy > p' }, { til: 1, les: '.m-rules, .sw, .note' }] }
-    ]
-  });
+  // Varigheten står i HTML: data-film="4 | 8 | 12" på hver seksjon. Etter hver seksjon: 3 s ro.
+  ScrollFilm.start();
 })();
