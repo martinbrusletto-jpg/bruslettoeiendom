@@ -196,30 +196,50 @@
   document.fonts && document.fonts.ready.then(() => { measure(); frameTick(); });
 
   // ---- Siden spilles av som en film ----
-  // Introen følger egne nøkkelbilder (merket ferdig på rundt 4 sekunder),
-  // deretter får hvert kapittel 4 sekunder (Spørsmålene og Arkivet 8). All brukerinput stopper filmen.
+  // Hvert kapittel har eget tempo, tilpasset innholdet: der det skal leses står filmen
+  // stille, der det bare er bevegelse går den fortere. All brukerinput stopper filmen.
+  // inn: sekunder fra forrige kapittel til dette står øverst.
+  // kf: [sekunder etter inn, andel av kapitlet] (0 = kapitlet øverst, 1 = ferdig scrollet).
   const FILM = [[0, 0], [.3, 0], [2.4, .37], [3.4, .57], [3.9, .60], [5.2, 1]];
-  const PER = 4;
-  // Kapitler med mye å lese får 4 sekunder ekstra.
-  const EKSTRA = { sporsmal: 4, arkivet: 4 };
-  const KAP = ['loftet', 'tomten', 'sporsmal', 'detaljer', 'arkivet', 'salg', 'samtale', 'merket'];
-  const smoothstep = t => t * t * (3 - 2 * t);
-  function film(t) {
-    for (let i = 1; i < FILM.length; i++) {
-      const [t0, p0] = FILM[i - 1], [t1, p1] = FILM[i];
-      if (t <= t1) return p0 + (p1 - p0) * smoothstep((t - t0) / (t1 - t0));
+  // Arkivet vises som en rolig lysbildefremvisning: hvert prosjekt glir inn og får stå litt.
+  function arkivTempo() {
+    const n = 16, FLYTT = .45, STA = 1.15, kf = [[0, 0], [1.4, .02]];
+    let t = 1.4;
+    for (let k = 0; k < n; k++) {
+      const p = .02 + (k + .5) / n * .92;
+      t += FLYTT; kf.push([t, p]);
+      t += STA + (k === n - 1 ? 1 : 0); kf.push([t, p]);
     }
-    return 1;
+    kf.push([t + .5, 1]);
+    return kf;
   }
-  // Sluttpunktet for hvert kapittel: festede scener scrolles helt gjennom, vanlige seksjoner til de står i ro.
-  function targets() {
+  const TEMPO = {
+    loftet:   { inn: 1.4, kf: [[0, 0], [4.2, .33], [6.4, .40], [8.2, .62], [9.4, .80], [12.4, .80], [13.2, 1]] },
+    tomten:   { inn: 1.2, kf: [[0, 0], [2.2, .02], [6.8, .72], [8.2, .85], [10.8, .85], [11.4, 1]] },
+    sporsmal: { inn: 1.2, kf: [[0, 0], [2.2, .04], [9.2, .82], [10.2, .90], [13, .90], [13.5, 1]] },
+    detaljer: { inn: 1.2, kf: [[0, 0], [1.8, .03], [10, .92], [10.6, 1]] },
+    arkivet:  { inn: 1.2, kf: arkivTempo() },
+    salg:     { inn: 2.4, kf: [[0, 0], [4.5, 1]] },
+    samtale:  { inn: 2.2, kf: [[0, 0], [4, 1]] },
+    merket:   { inn: 2.4, kf: [[0, 0], [3, .5], [6, 1]] }
+  };
+  const KAP = Object.keys(TEMPO);
+  const smoothstep = t => t * t * (3 - 2 * t);
+  // Hele filmen som én liste [tid, scrollposisjon]. Like posisjoner etter hverandre = pause.
+  function manus() {
     const max = document.documentElement.scrollHeight - innerHeight;
-    return KAP.map(id => {
-      const dur = PER + (EKSTRA[id] || 0);
-      const el = $(id), top = el.getBoundingClientRect().top + scrollY;
-      const end = el.classList.contains('scene') ? top + el.offsetHeight - innerHeight : Math.max(top, top + el.offsetHeight - innerHeight);
-      return { til: Math.min(max, Math.round(end)), dur };
+    const introDist = $('intro').offsetHeight - innerHeight;
+    const L = FILM.map(([t, p]) => [t, p * introDist]);
+    let t0 = L[L.length - 1][0];
+    KAP.forEach(id => {
+      const el = $(id), top = Math.min(max, el.getBoundingClientRect().top + scrollY);
+      const end = Math.min(max, el.classList.contains('scene') ? top + el.offsetHeight - innerHeight : Math.max(top, top + el.offsetHeight - innerHeight));
+      const { inn, kf } = TEMPO[id];
+      L.push([t0 + inn, top]);
+      kf.forEach(([t, p]) => { if (t > 0) L.push([t0 + inn + t, top + p * (end - top)]); });
+      t0 = L[L.length - 1][0];
     });
+    return L;
   }
   const knapp = document.createElement('button');
   knapp.type = 'button'; knapp.className = 'film-knapp';
@@ -234,26 +254,27 @@
   function avbryt(e) { if (e.target !== knapp && !knapp.contains(e.target)) stop(); }
   function play(fraStart) {
     if (spiller) return;
+    let L = manus();
+    if (!fraStart) {
+      // Fortsett der leseren står: hopp til neste nøkkelbilde lenger ned og spill videre derfra.
+      const y = scrollY, k = L.findIndex(([, pos]) => pos > y + 2);
+      if (k < 0) return;
+      const dt = Math.max(1, L[k][0] - L[k - 1][0]) * Math.min(1, (L[k][1] - y) / Math.max(1, L[k][1] - L[k - 1][1]));
+      const base = L[k][0] - Math.max(1, dt);
+      L = [[0, y], ...L.slice(k).map(([t, pos]) => [t - base, pos])];
+    }
     spiller = true; vis();
     INPUT.forEach(e => addEventListener(e, avbryt, { passive: true, capture: true }));
-    const introDist = $('intro').offsetHeight - innerHeight;
-    const T = targets();
-    // Bygg filmen: introen (hvis vi står i den) og deretter ett segment per kapittel som ikke er passert.
-    const segs = [];
-    let fra = scrollY;
-    if (fraStart && fra < introDist) segs.push({ intro: true, dur: FILM[FILM.length - 1][0] });
-    else if (fra < introDist) segs.push({ fra, til: introDist, dur: PER });
-    let pos = Math.max(fra, segs.length ? introDist : fra);
-    T.forEach(({ til, dur }) => { if (til > pos + 4) { segs.push({ fra: pos, til, dur }); pos = til; } });
-    if (!segs.length) { stop(); return; }
-    let i = 0, start = null;
+    const slutt = L[L.length - 1][0];
+    let start = null, i = 1;
     const step = now => {
       if (!spiller) return;
       if (start === null) start = now;
-      const s = segs[i], t = (now - start) / 1000;
-      if (s.intro) scrollTo(0, film(t) * introDist);
-      else scrollTo(0, s.fra + (s.til - s.fra) * smoothstep(Math.min(1, t / s.dur)));
-      if (t >= s.dur) { i++; start = now; if (i >= segs.length) { stop(); return; } }
+      const t = (now - start) / 1000;
+      while (i < L.length - 1 && t > L[i][0]) i++;
+      const [ta, ya] = L[i - 1], [tb, yb] = L[i];
+      scrollTo(0, ya + (yb - ya) * smoothstep(Math.min(1, Math.max(0, (t - ta) / (tb - ta)))));
+      if (t >= slutt) { stop(); return; }
       raf = requestAnimationFrame(step);
     };
     raf = requestAnimationFrame(step);

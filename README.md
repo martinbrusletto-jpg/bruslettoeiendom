@@ -22,6 +22,13 @@ assets/merke/   Merket som SVG i skifer, kalk og kobber
 assets/favicon.svg, og.jpg, robots.txt, sitemap.xml
 ```
 
+## Filmen
+
+Forsiden spiller seg selv av ved første besøk. Tempoet styres i `TEMPO` i `be.js`: hvert kapittel har
+`inn` (sekunder inn fra forrige kapittel) og nøkkelbilder `[sekunder, andel av kapitlet]`. Like andeler etter
+hverandre gir en pause for lesing. Arkivet genereres av `arkivTempo()` (ca. 1,6 sekunder per prosjekt).
+Hele filmen tar rundt 110 sekunder. Scroll, klikk eller tast stopper den.
+
 ## Merket
 
 Speilvendt B og E som deler én bærevegg. Nett 12,75 × 16 moduler, strek 2 moduler,
