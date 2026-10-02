@@ -293,3 +293,36 @@ p{margin:0}
 .top a.hjem{border:0;padding:0;border-radius:0}
 @media (max-width:820px){.skjema{justify-self:stretch}.kontakt{margin-top:28px}}
 .sf-knapp{font-family:var(--f-mono)!important;font-weight:400!important}
+
+/* ---------- tekstsider: /prosjekter/, /om/ ---------- */
+.fotnav{display:flex;gap:18px;flex-wrap:wrap}
+.side{padding:18vh var(--gut) 12vh;max-width:1200px;margin:0 auto;display:flex;flex-direction:column;gap:9vh}
+.side-hode{display:flex;flex-direction:column;gap:18px;max-width:760px}
+.side-hode h1{font-size:clamp(34px,5vw,72px);letter-spacing:-.05em;line-height:1}
+.ingress{font-size:clamp(16px,1.4vw,19px);color:var(--ink-2);max-width:52ch}
+.hopp{display:flex;gap:10px 22px;flex-wrap:wrap;margin-top:8px}
+.hopp a{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;border-bottom:1px solid var(--cu);padding-bottom:2px}
+.gruppe{display:flex;flex-direction:column;gap:14px;border-top:1px solid var(--line);padding-top:28px;scroll-margin-top:90px}
+.gruppe h2{font-size:clamp(24px,2.8vw,40px)}
+.gruppe-ingress{color:var(--ink-2);max-width:56ch}
+.kort-rad{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,260px),1fr));gap:28px 20px;margin-top:12px}
+.prosjekt{display:flex;flex-direction:column;gap:6px;min-width:0}
+.prosjekt img,.uten-bilde{width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;background:var(--paper);margin-bottom:6px}
+.uten-bilde{display:flex;align-items:center;justify-content:center;color:var(--ink-3);border:1px solid var(--line)}
+.prosjekt .aar{color:var(--cu-ink)}
+.prosjekt h3{font-size:19px;letter-spacing:-.025em}
+.prosjekt .fakta{color:var(--ink-2);font-size:14px}
+.prosjekt .go{align-self:flex-start;font-weight:500;text-decoration:none;border-bottom:1px solid var(--cu);padding-bottom:2px;margin-top:4px}
+.prosjekt .solgt{color:var(--ink-3);margin-top:4px}
+.side-slutt{border-top:1px solid var(--line);padding-top:28px;color:var(--ink-2)}
+.side-slutt a,.tekst a{color:var(--ink);font-weight:500;text-decoration:none;border-bottom:1px solid var(--cu)}
+.tekst{display:flex;flex-direction:column;gap:14px;max-width:68ch}
+.tekst h2{font-size:clamp(22px,2.4vw,32px)}
+.tekst p{color:var(--ink-2);font-size:16px;line-height:1.7}
+.faq details{border-top:1px solid var(--line);padding:16px 0}
+.faq details:last-of-type{border-bottom:1px solid var(--line)}
+.faq summary{cursor:pointer;font-weight:500;font-size:17px;letter-spacing:-.01em;list-style:none;display:flex;justify-content:space-between;gap:16px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";color:var(--cu-ink);font-family:var(--f-mono)}
+.faq details[open] summary::after{content:"–"}
+.faq details p{margin-top:10px}

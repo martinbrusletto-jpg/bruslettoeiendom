@@ -21,3 +21,15 @@
   from = "/journal/*"
   to = "/"
   status = 301
+
+# Én adresse for søkemotorene: netlify.app-adressen sendes til domenet
+[[redirects]]
+  from = "https://bruslettoeiendom.netlify.app/*"
+  to = "https://bruslettoeiendom.no/:splat"
+  status = 301
+  force = true
+
+[[headers]]
+  for = "/llms.txt"
+  [headers.values]
+    Content-Type = "text/plain; charset=utf-8"
