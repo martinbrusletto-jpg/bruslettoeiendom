@@ -1,4 +1,37 @@
 User-agent: *
 Allow: /
 Disallow: /profil/
+
+# KI-søk og svarmotorer er velkomne (unntatt den innloggede profilen)
+User-agent: GPTBot
+Allow: /
+Disallow: /profil/
+
+User-agent: OAI-SearchBot
+Allow: /
+Disallow: /profil/
+
+User-agent: ChatGPT-User
+Allow: /
+Disallow: /profil/
+
+User-agent: ClaudeBot
+Allow: /
+Disallow: /profil/
+
+User-agent: Claude-SearchBot
+Allow: /
+Disallow: /profil/
+
+User-agent: PerplexityBot
+Allow: /
+Disallow: /profil/
+
+User-agent: Applebot-Extended
+Allow: /
+Disallow: /profil/
+
+User-agent: Google-Extended
+Allow: /
+
 Sitemap: https://bruslettoeiendom.no/sitemap.xml

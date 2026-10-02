@@ -29,6 +29,16 @@ Hver seksjon har `data-film="4 | 8 | 12"` i `index.html`: spill i så mange seku
 Hver seksjon glir inn på 0,9 s før tiden begynner. Scroll ned spoler seksjonen ferdig på 1 sekund, venter 2 og går videre; scroll under ventetiden går rett
 til neste. Scroll opp går til starten av seksjonen. Klikk setter på pause.
 
+## SEO og KI-søk
+
+- `verktoy/lag_seo_sider.py` lager `/prosjekter/`, `/om/` (med spørsmål og svar), `llms.txt` og `sitemap.xml`
+  fra én prosjektliste. Kjør `python verktoy/lag_seo_sider.py` etter endringer i prosjekter eller fakta.
+- Strukturerte data (schema.org): Organization + HomeAndConstructionBusiness, WebSite, WebPage, ItemList
+  (til salgs og prosjekter), FAQPage og BreadcrumbList.
+- `robots.txt` slipper inn KI-crawlere (GPTBot, ClaudeBot, PerplexityBot m.fl.), men ikke `/profil/`.
+- `bruslettoeiendom.netlify.app` sendes med 301 til `bruslettoeiendom.no`.
+- Fakta: boligutvikling siden 1984; Brusletto Eiendom AS stiftet 26.05.1997 (Enhetsregisteret).
+
 ## Merket
 
 Speilvendt B og E som deler én bærevegg. Nett 12,75 × 16 moduler, strek 2 moduler,
