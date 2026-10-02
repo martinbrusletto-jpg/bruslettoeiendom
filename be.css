@@ -292,3 +292,5 @@ p{margin:0}
 .colo a:hover{color:var(--ink)}
 .top a.hjem{border:0;padding:0;border-radius:0}
 @media (max-width:820px){.skjema{justify-self:stretch}.kontakt{margin-top:28px}}
+.film-knapp{position:fixed;right:var(--gut);bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:50;mix-blend-mode:difference;color:#fff;background:none;
+  border:1px solid currentColor;border-radius:999px;padding:8px 13px;font-family:var(--f-mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;cursor:pointer}

@@ -195,9 +195,12 @@
   addEventListener('resize', () => { measure(); lastK = -1; frameTick(); });
   document.fonts && document.fonts.ready.then(() => { measure(); frameTick(); });
 
-  // ---- Introen spilles av som en film: siden scroller seg selv gjennom merket ----
-  // Nøkkelbilder [sekunder, andel av introen]. Merket er ferdig på rundt 4 sekunder.
+  // ---- Siden spilles av som en film ----
+  // Introen følger egne nøkkelbilder (merket ferdig på rundt 4 sekunder),
+  // deretter får hvert kapittel 4 sekunder. All brukerinput stopper filmen.
   const FILM = [[0, 0], [.3, 0], [2.4, .37], [3.4, .57], [3.9, .60], [5.2, 1]];
+  const PER = 4;
+  const KAP = ['loftet', 'tomten', 'sporsmal', 'detaljer', 'arkivet', 'salg', 'samtale', 'merket'];
   const smoothstep = t => t * t * (3 - 2 * t);
   function film(t) {
     for (let i = 1; i < FILM.length; i++) {
@@ -206,20 +209,54 @@
     }
     return 1;
   }
-  function play() {
-    if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    const intro = $('intro'), dist = intro.offsetHeight - innerHeight;
-    let start = null, stopped = false;
-    const stop = () => { stopped = true; ['wheel', 'touchstart', 'keydown', 'mousedown'].forEach(e => removeEventListener(e, stop)); };
-    ['wheel', 'touchstart', 'keydown', 'mousedown'].forEach(e => addEventListener(e, stop, { passive: true }));
-    const step = now => {
-      if (stopped) return;
-      if (start === null) start = now;
-      const t = (now - start) / 1000;
-      scrollTo(0, film(t) * dist);
-      if (t < FILM[FILM.length - 1][0]) requestAnimationFrame(step); else stop();
-    };
-    requestAnimationFrame(step);
+  // Sluttpunktet for hvert kapittel: festede scener scrolles helt gjennom, vanlige seksjoner til de står i ro.
+  function targets() {
+    const max = document.documentElement.scrollHeight - innerHeight;
+    return KAP.map(id => {
+      const el = $(id), top = el.getBoundingClientRect().top + scrollY;
+      const end = el.classList.contains('scene') ? top + el.offsetHeight - innerHeight : Math.max(top, top + el.offsetHeight - innerHeight);
+      return Math.min(max, Math.round(end));
+    });
   }
-  if (scrollY < 10) (document.fonts ? document.fonts.ready : Promise.resolve()).then(() => setTimeout(play, 150));
+  const knapp = document.createElement('button');
+  knapp.type = 'button'; knapp.className = 'film-knapp';
+  document.body.appendChild(knapp);
+  const INPUT = ['wheel', 'touchstart', 'keydown', 'mousedown'];
+  let spiller = false, raf = 0;
+  const vis = () => { knapp.textContent = spiller ? 'Pause' : 'Spill av'; knapp.setAttribute('aria-pressed', spiller); };
+  function stop() {
+    spiller = false; cancelAnimationFrame(raf); vis();
+    INPUT.forEach(e => removeEventListener(e, avbryt, true));
+  }
+  function avbryt(e) { if (e.target !== knapp && !knapp.contains(e.target)) stop(); }
+  function play(fraStart) {
+    if (spiller) return;
+    spiller = true; vis();
+    INPUT.forEach(e => addEventListener(e, avbryt, { passive: true, capture: true }));
+    const introDist = $('intro').offsetHeight - innerHeight;
+    const T = targets();
+    // Bygg filmen: introen (hvis vi står i den) og deretter ett segment per kapittel som ikke er passert.
+    const segs = [];
+    let fra = scrollY;
+    if (fraStart && fra < introDist) segs.push({ intro: true, dur: FILM[FILM.length - 1][0] });
+    else if (fra < introDist) segs.push({ fra, til: introDist, dur: PER });
+    let pos = Math.max(fra, segs.length ? introDist : fra);
+    T.forEach(til => { if (til > pos + 4) { segs.push({ fra: pos, til, dur: PER }); pos = til; } });
+    if (!segs.length) { stop(); return; }
+    let i = 0, start = null;
+    const step = now => {
+      if (!spiller) return;
+      if (start === null) start = now;
+      const s = segs[i], t = (now - start) / 1000;
+      if (s.intro) scrollTo(0, film(t) * introDist);
+      else scrollTo(0, s.fra + (s.til - s.fra) * smoothstep(Math.min(1, t / s.dur)));
+      if (t >= s.dur) { i++; start = now; if (i >= segs.length) { stop(); return; } }
+      raf = requestAnimationFrame(step);
+    };
+    raf = requestAnimationFrame(step);
+  }
+  knapp.addEventListener('click', () => spiller ? stop() : play(scrollY < 10));
+  vis();
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) knapp.hidden = true;
+  else if (scrollY < 10) (document.fonts ? document.fonts.ready : Promise.resolve()).then(() => setTimeout(() => play(true), 150));
 })();
