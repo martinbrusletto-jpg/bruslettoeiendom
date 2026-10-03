@@ -16,7 +16,7 @@ ADR = {"streetAddress": "Helleveien 8", "postalCode": "0376", "addressLocality":
 # (år, adresse, sted, kommune, type, antall boliger eller None, bilde eller None, til salgs-lenke eller None)
 PROSJEKTER = [
     (2027, "Varden 8", "Kvitfjell", "Ringebu", "Fjellhytte", 1, "varden", "https://varden8.netlify.app"),
-    (2023, "Heyerdahls vei 8B", "Slemdal", "Oslo", "Enebolig", 1, "inngang", "https://heyerdahls-vei-8b.netlify.app"),
+    (2023, "Heyerdahls vei 8B", "Slemdal", "Oslo", "Enebolig", 1, "inngang", "https://bruslettoeiendom.no/heyerdahlsvei8/"),
     (2021, "Tangenodden 13", "Sandefjord", "Sandefjord", "Strandeiendom", 1, "tangenodden", None),
     (2020, "Helleveien 8", "Holmendammen", "Oslo", "Leiligheter", 6, "helleveien", None),
     (2013, "Nye Havsdalsvegen 35", "Geilo", "Hol", "Leiligheter", 4, None, None),

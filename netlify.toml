@@ -44,3 +44,22 @@
   from = "/wp-*"
   to = "/"
   status = 301
+
+# Prosjektsidene under eget domene
+[[redirects]]
+  from = "/heyerdahlsvei8"
+  to = "/heyerdahlsvei8/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/heyerdahlsvei8/*"
+  to = "https://heyerdahls-vei-8b.netlify.app/:splat"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/heyerdahls-vei-8b/*"
+  to = "/heyerdahlsvei8/:splat"
+  status = 301
+  force = true
