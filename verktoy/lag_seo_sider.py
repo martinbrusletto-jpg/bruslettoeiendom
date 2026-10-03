@@ -15,7 +15,7 @@ ADR = {"streetAddress": "Helleveien 8", "postalCode": "0376", "addressLocality":
 
 # (år, adresse, sted, kommune, type, antall boliger eller None, bilde eller None, til salgs-lenke eller None)
 PROSJEKTER = [
-    (2027, "Varden 8", "Kvitfjell", "Ringebu", "Fjellhytte", 1, "varden", "https://varden8.netlify.app"),
+    (2027, "Varden 8", "Kvitfjell", "Ringebu", "Fjellhytte", 1, "varden", "https://bruslettoeiendom.no/varden8/"),
     (2023, "Heyerdahls vei 8B", "Slemdal", "Oslo", "Enebolig", 1, "inngang", "https://bruslettoeiendom.no/heyerdahlsvei8/"),
     (2021, "Tangenodden 13", "Sandefjord", "Sandefjord", "Strandeiendom", 1, "tangenodden", None),
     (2020, "Helleveien 8", "Holmendammen", "Oslo", "Leiligheter", 6, "helleveien", None),
@@ -265,7 +265,7 @@ def lag_llms():
 
 
 def lag_sitemap():
-    sider = [("/", "1.0"), ("/prosjekter/", "0.8"), ("/om/", "0.8")]
+    sider = [("/", "1.0"), ("/prosjekter/", "0.8"), ("/om/", "0.8"), ("/varden8/", "0.9"), ("/heyerdahlsvei8/", "0.9")]
     x = ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
     x += [f"  <url><loc>{URL}{s}</loc><lastmod>{I_DAG}</lastmod><priority>{p}</priority></url>" for s, p in sider]
     x.append("</urlset>")
