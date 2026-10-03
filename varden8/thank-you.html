@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/svg+xml" href="/varden8/favicon.svg">
+<title>Thank you — Varden VIII</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300&family=Inter:wght@300;400;500&family=EB+Garamond:ital,wght@0,400;0,500;0,700;1,400&family=Italiana&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1a1a;
+    --paper: #f4f1ea;
+    --paper-dark: #e8e3d8;
+    --moss: #3a4a35;
+    --stone: #8a7e6d;
+    --gold: #b89968;
+    --rule: rgba(26,26,26,0.12);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 1.5rem;
+  }
+  .container { max-width: 680px; text-align: center; }
+  .emblem { width: 90px; height: 90px; margin: 0 auto 3rem; display: block; }
+  .eyebrow {
+    font-size: 0.7rem; letter-spacing: 0.4em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1.5rem; display: inline-block;
+    padding: 0 2.5rem; position: relative;
+  }
+  .eyebrow::before, .eyebrow::after {
+    content: ''; position: absolute; top: 50%;
+    width: 1.8rem; height: 1px; background: var(--gold);
+  }
+  .eyebrow::before { left: 0; }
+  .eyebrow::after { right: 0; }
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.4rem, 6vw, 3.6rem);
+    font-weight: 300; line-height: 1.05; margin-bottom: 1.4rem;
+  }
+  h1 em { font-style: italic; color: var(--moss); }
+  .lede {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem; font-style: italic;
+    color: var(--stone); margin-bottom: 3rem;
+  }
+  .next-steps {
+    text-align: left; background: var(--paper-dark);
+    padding: 2.5rem; border-left: 3px solid var(--gold);
+    margin-bottom: 3rem;
+  }
+  .next-steps h3 {
+    font-size: 0.7rem; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1.5rem;
+  }
+  .step {
+    display: grid; grid-template-columns: 36px 1fr;
+    gap: 1.2rem; padding: 1rem 0; border-bottom: 1px solid var(--rule);
+  }
+  .step:last-child { border-bottom: none; }
+  .step-num {
+    font-family: 'Italiana', serif; font-size: 1.6rem;
+    color: var(--gold); line-height: 1;
+  }
+  .step h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem; font-weight: 400; margin-bottom: 0.2rem;
+  }
+  .step p { font-size: 0.92rem; color: var(--ink); line-height: 1.5; }
+  .back-link {
+    display: inline-block; color: var(--ink);
+    text-decoration: none; font-size: 0.7rem;
+    letter-spacing: 0.3em; text-transform: uppercase;
+    border-bottom: 1px solid var(--gold);
+    padding-bottom: 0.4rem; transition: color 0.3s;
+  }
+  .back-link:hover { color: var(--gold); }
+</style>
+</head>
+<body>
+  <div class="container">
+    <svg class="emblem" viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg">
+      <rect x="6" y="6" width="128" height="128" fill="none" stroke="#1a1a1a" stroke-width="2.5"/>
+      <rect x="12" y="12" width="116" height="116" fill="none" stroke="#1a1a1a" stroke-width="0.5"/>
+      <text x="70" y="86" text-anchor="middle" font-family="'Italiana', serif" font-weight="400" font-size="56" fill="#1a1a1a" letter-spacing="1">VIII</text>
+      <text x="70" y="32" text-anchor="middle" font-family="'EB Garamond', serif" font-weight="500" font-size="8" fill="#1a1a1a" letter-spacing="5">VARDEN</text>
+      <line x1="30" y1="38" x2="110" y2="38" stroke="#b89968" stroke-width="0.6"/>
+      <line x1="30" y1="100" x2="110" y2="100" stroke="#b89968" stroke-width="0.6"/>
+      <text x="70" y="112" text-anchor="middle" font-family="'EB Garamond', serif" font-weight="400" font-size="6" fill="#8a7e6d" letter-spacing="4">KVITFJELL</text>
+      <text x="70" y="122" text-anchor="middle" font-family="'EB Garamond', serif" font-weight="400" font-size="4.5" fill="#8a7e6d" letter-spacing="2" font-style="italic">N · 61°27′ E · 10°10′</text>
+    </svg>
+
+    <span class="eyebrow">Inquiry received</span>
+    <h1>Thank you — we <em>have you.</em></h1>
+    <p class="lede">Your inquiry has been registered. You will hear from Martin within 24 hours.</p>
+
+    <div class="next-steps">
+      <h3>What happens now</h3>
+      <div class="step">
+        <div class="step-num">I</div>
+        <div>
+          <h4>Personal response within 24 hours</h4>
+          <p>You will receive a personal email from Martin Brusletto with material tailored to your selections.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">II</div>
+        <div>
+          <h4>If you requested the full prospectus</h4>
+          <p>NDA will be sent for signing first. After signing, you receive complete delivery specification, MARK drawings, and cost basis the same day.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">III</div>
+        <div>
+          <h4>If you requested a viewing</h4>
+          <p>We will propose 2–3 dates for visiting Kvitfjell in our response email. A full-day visit includes site walkthrough, local tour, and dinner.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">IV</div>
+        <div>
+          <h4>Questions in the meantime?</h4>
+          <p>Direct contact: <a href="mailto:martin@varden8.no" style="color: var(--ink);">martin@varden8.no</a></p>
+        </div>
+      </div>
+    </div>
+
+    <a href="/varden8/" class="back-link">← Back to Varden VIII</a>
+  </div>
+</body>
+</html>

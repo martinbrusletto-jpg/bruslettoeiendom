@@ -57,3 +57,10 @@
   to = "/heyerdahlsvei8/:splat"
   status = 301
   force = true
+
+# Varden 8: registrering til kjøperportalen går fortsatt til Varden 8-nettstedet
+[[redirects]]
+  from = "/varden8/api/quick-register"
+  to = "https://varden8.netlify.app/.netlify/functions/quick-register"
+  status = 200
+  force = true

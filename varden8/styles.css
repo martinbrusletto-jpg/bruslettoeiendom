@@ -1,0 +1,841 @@
+/* === Varden VIII — Fantastic Frank Edition === */
+
+:root {
+  --bg: #f4f1ea;
+  --ink: #1a1a1a;
+  --muted: #6f7467;
+  --moss: #3a4a35;
+  --stone: #8a7e6d;
+  --gold: #b89968;
+  --card: #fffaf2;
+  --line: rgba(26, 26, 26, 0.1);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Inter', system-ui, sans-serif;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { display: block; width: 100%; height: 100%; object-fit: cover; }
+a { color: inherit; }
+
+.hidden { display: none !important; }
+
+/* ── Typography ── */
+
+h1 {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-weight: 400;
+  font-size: clamp(56px, 8vw, 120px);
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+}
+
+h1 em {
+  font-style: italic;
+  font-weight: 400;
+}
+
+h2 {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-weight: 400;
+  font-size: clamp(30px, 4vw, 58px);
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  margin-bottom: 28px;
+}
+
+h3 {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-weight: 500;
+  font-size: 22px;
+  letter-spacing: -0.01em;
+  margin-bottom: 4px;
+}
+
+.eyebrow {
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--stone);
+  margin-bottom: 16px;
+}
+
+/* ── Navigation ── */
+
+.nav {
+  position: fixed;
+  z-index: 100;
+  inset: 0 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+  color: #fff;
+  transition: background 0.5s ease, padding 0.4s ease;
+}
+
+.nav.scrolled {
+  background: rgba(26, 26, 26, 0.88);
+  backdrop-filter: blur(20px);
+  padding: 14px 40px;
+}
+
+.nav-brand {
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.nav-name {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+}
+
+.nav-sub {
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  opacity: 0.6;
+}
+
+.nav nav {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.nav nav a {
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  opacity: 0.75;
+  transition: opacity 0.3s;
+}
+
+.nav nav a:hover { opacity: 1; }
+
+.nav-cta {
+  border: 1px solid rgba(255, 255, 255, 0.4) !important;
+  padding: 8px 18px;
+  opacity: 1 !important;
+  transition: all 0.3s ease !important;
+}
+
+.nav-cta:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.nav-lang {
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.6 !important;
+  margin-left: 4px;
+  transition: opacity 0.3s ease;
+}
+.nav-lang:hover {
+  opacity: 1 !important;
+}
+
+/* ── Hero ── */
+
+.hero {
+  position: relative;
+  height: 100vh;
+  min-height: 700px;
+  overflow: hidden;
+}
+
+.hero > img {
+  position: absolute;
+  inset: 0;
+  transform: scale(1.05);
+  animation: heroZoom 14s ease-out forwards;
+}
+
+@keyframes heroZoom {
+  to { transform: scale(1); }
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    0deg,
+    rgba(18, 18, 16, 0.55) 0%,
+    rgba(18, 18, 16, 0.15) 40%,
+    rgba(18, 18, 16, 0.08) 100%
+  );
+  z-index: 1;
+}
+
+.hero-content {
+  position: absolute;
+  z-index: 2;
+  left: 7vw;
+  bottom: 12vw;
+  color: #fff;
+}
+
+.hero-eyebrow {
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  opacity: 0.6;
+  margin-bottom: 16px;
+}
+
+.hero-tagline {
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.55;
+  margin-top: 20px;
+}
+
+.hero-scroll {
+  position: absolute;
+  z-index: 2;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* Fade in */
+.fade-in {
+  opacity: 0;
+  transform: translateY(14px);
+  animation: fadeUp 1.8s cubic-bezier(0.23, 1, 0.32, 1) 0.5s forwards;
+}
+
+@keyframes fadeUp {
+  to { opacity: 1; transform: none; }
+}
+
+/* ── Intro ── */
+
+.intro {
+  padding: 160px 7vw;
+  display: flex;
+  justify-content: center;
+}
+
+.intro-inner {
+  max-width: 740px;
+  text-align: center;
+}
+
+.intro-inner p {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(22px, 2.6vw, 32px);
+  line-height: 1.6;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--moss);
+}
+
+/* ── Full-width image ── */
+
+.full-image {
+  padding: 0 7vw;
+}
+
+.full-image img {
+  width: 100%;
+  height: auto;
+  max-height: 80vh;
+  object-fit: cover;
+}
+
+.full-image.full-bleed {
+  padding: 0;
+}
+
+.full-image.full-bleed img {
+  max-height: 92vh;
+}
+
+/* ── Single centered image ── */
+
+.single-image {
+  padding: 0 20vw;
+}
+
+.single-image img {
+  width: 100%;
+  height: auto;
+  max-height: 70vh;
+  object-fit: cover;
+}
+
+/* ── Breath — short emotional text between images ── */
+
+.breath {
+  padding: 80px 7vw;
+  text-align: center;
+}
+
+.breath p {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(20px, 2.4vw, 30px);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--moss);
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.55;
+}
+
+/* ── Dual image ── */
+
+.dual-image {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  padding: 14px 7vw;
+}
+
+.dual-image img {
+  width: 100%;
+  height: 520px;
+  object-fit: cover;
+}
+
+/* ── Centered text variant ── */
+
+.text-center { text-align: center; }
+.text-section-inner.center { margin: 0 auto; }
+
+/* ── Text section ── */
+
+.text-section {
+  padding: 130px 7vw;
+}
+
+.text-section-inner {
+  max-width: 680px;
+}
+
+.text-section-inner p:not(.eyebrow) {
+  font-size: 17px;
+  line-height: 1.8;
+  color: var(--muted);
+  max-width: 580px;
+}
+
+/* ── Feature cards ── */
+
+.card-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  margin-top: 60px;
+  max-width: 960px;
+  border-top: 1px solid var(--line);
+}
+
+.feature-card {
+  padding: 28px 28px 28px 0;
+  border-right: 1px solid var(--line);
+}
+
+.feature-card:last-child { border-right: none; }
+
+.feature-num {
+  display: block;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 32px;
+  font-weight: 400;
+  color: var(--ink);
+  margin-bottom: 8px;
+  letter-spacing: -0.02em;
+}
+
+.feature-card p {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--stone);
+}
+
+/* ── Feeling section ── */
+
+.feeling-section {
+  display: grid;
+  grid-template-columns: 1.3fr 0.7fr;
+  min-height: 75vh;
+}
+
+.feeling-image { overflow: hidden; }
+.feeling-image img {
+  width: 100%;
+  height: 100%;
+  min-height: 560px;
+  object-fit: cover;
+}
+
+.feeling-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 80px 5vw;
+  background: var(--card);
+}
+
+.feeling-text p:not(.eyebrow) {
+  font-size: 17px;
+  line-height: 1.8;
+  color: var(--muted);
+  max-width: 420px;
+}
+
+/* ── Plans section ── */
+
+.plans-section {
+  padding: 130px 7vw;
+  background: #ece7dd;
+}
+
+.plan-levels {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border-top: 1px solid var(--line);
+  margin-top: 48px;
+  margin-bottom: 56px;
+  max-width: 900px;
+}
+
+.plan-level {
+  padding: 32px 32px 32px 0;
+  border-right: 1px solid var(--line);
+}
+
+.plan-level:last-child { border-right: none; }
+
+.plan-area {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 28px;
+  font-weight: 400;
+  color: var(--ink);
+  margin-bottom: 8px;
+}
+
+.plan-level p:last-child {
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--stone);
+}
+
+.plan-drawing {
+  margin: 0;
+  background: var(--card);
+  padding: 40px;
+  max-width: 800px;
+}
+
+.plan-drawing img {
+  height: auto;
+  object-fit: contain;
+}
+
+/* ── Quote ── */
+
+.quote-section {
+  padding: 120px 7vw;
+  text-align: center;
+}
+
+blockquote {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+blockquote p {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(26px, 3.2vw, 42px);
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--moss);
+  margin-bottom: 20px;
+}
+
+blockquote cite {
+  font-style: normal;
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--stone);
+}
+
+/* ── Prospekt wall ── */
+
+.wall-section {
+  padding: 120px 7vw;
+  background: var(--ink);
+  color: #fff;
+  text-align: center;
+}
+
+.wall-inner {
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+.wall-section .eyebrow { color: var(--gold); }
+
+.wall-section h2 {
+  color: #fff;
+  font-size: clamp(26px, 3.4vw, 44px);
+}
+
+.wall-section p {
+  font-size: 15px;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 32px;
+}
+
+.wall-form {
+  display: flex;
+  gap: 0;
+  max-width: 400px;
+  margin: 0 auto 20px;
+}
+
+.wall-form input {
+  flex: 1;
+  padding: 14px 18px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-right: none;
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+  font-size: 14px;
+  font-family: inherit;
+  outline: none;
+}
+
+.wall-form input::placeholder { color: rgba(255, 255, 255, 0.35); }
+.wall-form input:focus { border-color: var(--gold); }
+
+.wall-form button {
+  padding: 14px 24px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: transparent;
+  color: #fff;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.3s ease;
+}
+
+.wall-form button:hover {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: var(--ink);
+}
+
+.wall-note {
+  font-size: 12px !important;
+  color: rgba(255, 255, 255, 0.35) !important;
+}
+
+.wall-note a { text-decoration: underline; }
+
+.wall-success {
+  display: none;
+  margin-top: 24px;
+}
+
+.wall-success.show { display: block; }
+.wall-success p { color: var(--gold) !important; }
+
+/* ── Contact ── */
+
+.contact-section {
+  padding: 130px 7vw;
+}
+
+.contact-inner {
+  max-width: 600px;
+}
+
+.contact-lead {
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--muted);
+  margin-bottom: 48px;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.form-field { display: flex; flex-direction: column; gap: 6px; }
+
+.form-field label,
+.form-checks legend {
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--stone);
+}
+
+.form-field input,
+.form-field select,
+.form-field textarea {
+  padding: 12px 16px;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--ink);
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 300;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.form-field input:focus,
+.form-field select:focus,
+.form-field textarea:focus {
+  border-color: var(--moss);
+}
+
+.form-checks {
+  border: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.form-checks legend { margin-bottom: 8px; }
+
+.form-checks label {
+  font-size: 14px;
+  color: var(--ink);
+  cursor: pointer;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  line-height: 1.5;
+}
+
+.form-checks input[type="checkbox"] {
+  margin-top: 4px;
+  accent-color: var(--moss);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 28px;
+  border: 1px solid var(--ink);
+  background: transparent;
+  color: var(--ink);
+  font-family: inherit;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.35s ease;
+  align-self: flex-start;
+}
+
+.btn:hover {
+  background: var(--ink);
+  color: var(--bg);
+}
+
+.wall-section .btn {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+.wall-section .btn:hover {
+  background: var(--gold);
+  color: var(--ink);
+}
+
+.form-note {
+  font-size: 12px;
+  color: var(--stone);
+  margin-top: 4px;
+}
+
+.form-note a { text-decoration: underline; }
+
+/* ── Footer ── */
+
+footer {
+  background: var(--ink);
+  color: rgba(255, 255, 255, 0.7);
+  padding: 80px 7vw 40px;
+}
+
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-bottom: 48px;
+  color: #fff;
+}
+
+.footer-mark {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+}
+
+.footer-loc {
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  opacity: 0.5;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  margin-bottom: 56px;
+}
+
+.footer-label {
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 12px;
+}
+
+.footer-grid p {
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.footer-grid a {
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.footer-grid a:hover { color: #fff; }
+
+.footer-copy {
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  opacity: 0.35;
+  text-align: center;
+  padding-top: 32px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* ── Reveal ── */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 1.6s cubic-bezier(0.23, 1, 0.32, 1),
+              transform 1.6s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ── Mobile ── */
+
+@media (max-width: 900px) {
+  .nav { padding: 16px 20px; }
+  .nav nav { display: none; }
+  .nav.scrolled { padding: 12px 20px; }
+
+  .intro { padding: 100px 24px; }
+  .full-image { padding: 0 16px; }
+
+  .dual-image {
+    grid-template-columns: 1fr;
+    padding: 0 16px;
+    gap: 10px;
+  }
+  .dual-image img { height: 300px; }
+
+  .single-image { padding: 0 16px; }
+  .breath { padding: 60px 24px; }
+  .full-image.full-bleed img { max-height: 60vh; }
+
+  .text-section,
+  .contact-section { padding: 80px 24px; }
+
+  .card-row {
+    grid-template-columns: 1fr 1fr;
+    border-left: 1px solid var(--line);
+  }
+  .feature-card {
+    padding: 20px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .feeling-section {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+  .feeling-image img { min-height: 360px; }
+  .feeling-text { padding: 60px 24px; }
+
+  .plans-section { padding: 80px 24px; }
+  .plan-levels { grid-template-columns: 1fr; border-left: 1px solid var(--line); }
+  .plan-level {
+    padding: 24px;
+    border-right: none;
+    border-bottom: 1px solid var(--line);
+  }
+  .plan-drawing { padding: 16px; }
+
+  .quote-section { padding: 80px 24px; }
+
+  .wall-section { padding: 80px 24px; }
+  .wall-form { flex-direction: column; }
+  .wall-form input { border-right: 1px solid rgba(255, 255, 255, 0.2); }
+
+  .form-row { grid-template-columns: 1fr; }
+
+  .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+
+  h1 { font-size: 48px; }
+
+  .hero-content { left: 24px; bottom: 28vw; }
+}
