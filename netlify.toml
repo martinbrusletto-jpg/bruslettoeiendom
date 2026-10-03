@@ -47,12 +47,6 @@
 
 # Prosjektsidene under eget domene
 [[redirects]]
-  from = "/heyerdahlsvei8"
-  to = "/heyerdahlsvei8/"
-  status = 301
-  force = true
-
-[[redirects]]
   from = "/heyerdahlsvei8/*"
   to = "https://heyerdahls-vei-8b.netlify.app/:splat"
   status = 200
