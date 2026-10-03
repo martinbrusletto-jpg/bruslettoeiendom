@@ -27,7 +27,8 @@
     const h = big.getBoundingClientRect().height / (parseFloat(big.style.getPropertyValue('--s')) || 1);
     s0 = Math.max(1.4, Math.min(innerHeight * .52, innerWidth * .62 * 16 / 12.75) / h);
   }
-  const SEG = [[.15, .21], [.19, .27], [.23, .31], [.27, .32], [.29, .34], [.31, .36]];
+  // Rekkefølge som et bygg: bærevegg, dekke, buene, så E-armene.
+  const SEG = [[.15, .21], [.17, .23], [.21, .27], [.24, .30], [.26, .32], [.30, .35], [.31, .36]];
   function drawIntro(p) {
     consEl.style.setProperty('--gk', ease(span(p, .01, .12)));
     consEl.style.setProperty('--rk', ease(span(p, .07, .16)));

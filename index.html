@@ -30,13 +30,24 @@
 <body>
 
 
-<!-- Merket: B speilvendt og E deler én bærevegg. Konstruert på et nett på 12,75 × 16 moduler, strek = 2 moduler. -->
+<!-- Merket: B speilvendt og E deler én bærevegg. #be-d = detaljert med skyggefuger (fra 32 px), #be = forenklet (under 32 px). Konstruert på et nett på 12,75 × 16 moduler, strek = 2 moduler. -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <symbol id="be" viewBox="0 0 12.75 16">
     <g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="butt">
       <path d="M6.75 0V16"/>
       <path d="M12.25 1H4.75A3.25 3.25 0 0 0 4.75 7.5H11.25"/>
       <path d="M12.75 15H4.75A3.75 3.75 0 0 1 4.75 7.5"/>
+    </g>
+  </symbol>
+  <symbol id="be-d" viewBox="0 0 12.75 16">
+    <g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="butt">
+      <path d="M6.75 0V6.25"/>
+      <path d="M6.75 8.75V16"/>
+      <path d="M4.75 7.5H11.25"/>
+      <path d="M5.5 1H4.75A3.25 3.25 0 0 0 4.75 7.5"/>
+      <path d="M5.5 15H4.75A3.75 3.75 0 0 1 4.75 7.5"/>
+      <path d="M8 1H12.25"/>
+      <path d="M8 15H12.75"/>
     </g>
   </symbol>
 </svg>
@@ -77,17 +88,19 @@
           <line class="dim" x1="5.75" y1="-1.2" x2="5.75" y2="-.6"/><line class="dim" x1="7.75" y1="-1.2" x2="7.75" y2="-.6"/>
           <text x="14.8" y="8.15">16 M</text>
           <text x="5.55" y="-1.45">Strek 2 M</text>
-          <text x="15.2" y="7.35">Midje 7,5</text>
+          <text x="15.2" y="7.35">Dekke 7,5</text>
           <text x="-2.9" y="4.4" class="k">R 3,25</text>
           <text x="-2.9" y="11.4" class="k">R 3,75</text>
           <text x="7.1" y="17.4" class="k">Bærevegg</text>
+          <text x="8.35" y="4.6">Fuge 0,25</text>
         </g>
-        <path class="seg" pathLength="1" d="M6.75 0V16"/>
-        <path class="seg" pathLength="1" d="M6.75 1H4.75A3.25 3.25 0 0 0 4.75 7.5H6.75"/>
-        <path class="seg" pathLength="1" d="M6.75 15H4.75A3.75 3.75 0 0 1 4.75 7.5"/>
-        <path class="seg" pathLength="1" d="M6.75 1H12.25"/>
-        <path class="seg" pathLength="1" d="M6.75 7.5H11.25"/>
-        <path class="seg" pathLength="1" d="M6.75 15H12.75"/>
+        <path class="seg" pathLength="1" d="M6.75 0V6.25"/>
+        <path class="seg" pathLength="1" d="M6.75 8.75V16"/>
+        <path class="seg" pathLength="1" d="M4.75 7.5H11.25"/>
+        <path class="seg" pathLength="1" d="M5.5 1H4.75A3.25 3.25 0 0 0 4.75 7.5"/>
+        <path class="seg" pathLength="1" d="M5.5 15H4.75A3.75 3.75 0 0 1 4.75 7.5"/>
+        <path class="seg" pathLength="1" d="M8 1H12.25"/>
+        <path class="seg" pathLength="1" d="M8 15H12.75"/>
       </svg>
       <i class="rule" id="rule"></i>
       <span class="wm" id="wm"><span>BRUSLETTO</span><span>EIENDOM</span></span>

@@ -47,7 +47,7 @@ button{align-self:flex-start;font-family:"Geist Mono",monospace;font-size:11px;l
 a{color:var(--ink-2);font-size:13px}
 </style></head><body>
 <form method="POST" action="/profil/">
-<svg viewBox="0 0 12.75 16" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2"><path d="M6.75 0V16"/><path d="M12.25 1H4.75A3.25 3.25 0 0 0 4.75 7.5H11.25"/><path d="M12.75 15H4.75A3.75 3.75 0 0 1 4.75 7.5"/></g></svg>
+<svg viewBox="0 0 12.75 16" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2"><path d="M6.75 0V6.25"/><path d="M6.75 8.75V16"/><path d="M4.75 7.5H11.25"/><path d="M5.5 1H4.75A3.25 3.25 0 0 0 4.75 7.5"/><path d="M5.5 15H4.75A3.75 3.75 0 0 1 4.75 7.5"/><path d="M8 1H12.25"/><path d="M8 15H12.75"/></g></svg>
 <span class="e">Profil</span>
 <h1>Logg inn for å se merket og profilen.</h1>
 ${feil ? `<p class="feil" role="alert">${feil}</p>` : ""}
