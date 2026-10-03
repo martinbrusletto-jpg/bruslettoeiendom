@@ -11,7 +11,7 @@ ROT = pathlib.Path(__file__).resolve().parent.parent
 URL = "https://bruslettoeiendom.no"
 I_DAG = datetime.date.today().isoformat()
 TLF, TLF_VIS, EPOST = "+4790521234", "+47 905 21 234", "job@reserva.as"
-ADR = {"streetAddress": "Helleveien 8F", "postalCode": "0376", "addressLocality": "Oslo", "addressCountry": "NO"}
+ADR = {"streetAddress": "Helleveien 8", "postalCode": "0376", "addressLocality": "Oslo", "addressCountry": "NO"}
 
 # (år, adresse, sted, kommune, type, antall boliger eller None, bilde eller None, til salgs-lenke eller None)
 PROSJEKTER = [
@@ -56,7 +56,7 @@ FAQ = [
     ("Kjøper Brusletto Eiendom tomter og eiendommer?",
      "Ja. Vi kjøper tomter og eiendommer i Vestre Aker direkte, uten annonsering. Ta kontakt med en kort beskrivelse av eiendommen, så tar vi kontakt personlig."),
     ("Hvordan kontakter jeg Brusletto Eiendom?",
-     f"Ring {TLF_VIS} eller send e-post til {EPOST}. Kontoret ligger i Helleveien 8F, 0376 Oslo."),
+     f"Ring {TLF_VIS} eller send e-post til {EPOST}. Kontoret ligger i Helleveien 8, 0376 Oslo."),
 ]
 
 e = html.escape
@@ -101,7 +101,7 @@ def hode(tittel, beskrivelse, sti, ekstra_ld):
 
 def fot():
     return """<footer class="colo mono">
-  <span>Brusletto Eiendom AS · Org. 879 152 682 · Helleveien 8F, 0376 Oslo</span>
+  <span>Brusletto Eiendom AS · Org. 879 152 682 · Helleveien 8, 0376 Oslo</span>
   <nav class="fotnav" aria-label="Sider"><a href="/">Forsiden</a><a href="/prosjekter/">Prosjekter</a><a href="/om/">Om oss</a><a href="/profil/">Profil (innlogging)</a></nav>
   <span>© 1984–2026 · Oslo</span>
 </footer>
@@ -229,7 +229,7 @@ def lag_om():
 
 <section class="tekst" aria-labelledby="kontakt">
   <h2 id="kontakt">Kontakt</h2>
-  <p>Brusletto Eiendom AS · Helleveien 8F, 0376 Oslo · Telefon <a href="tel:{TLF}">{TLF_VIS}</a> · E-post <a href="mailto:{EPOST}">{EPOST}</a> · Org.nr. 879 152 682</p>
+  <p>Brusletto Eiendom AS · Helleveien 8, 0376 Oslo · Telefon <a href="tel:{TLF}">{TLF_VIS}</a> · E-post <a href="mailto:{EPOST}">{EPOST}</a> · Org.nr. 879 152 682</p>
 </section>
 </main>
 """)
@@ -249,7 +249,7 @@ def lag_llms():
         "- Boligutvikling siden 1984. Brusletto Eiendom AS stiftet 26.05.1997 (Enhetsregisteret, næringskode 68.120 Utvikling og salg av byggeprosjekter). Første prosjekt i arkivet: 1990",
         f"- Prosjekter: {len(PROSJEKTER)} adresser, minst {ANTALL} boliger",
         "- Områder: " + ", ".join(OMRADER) + " (Oslo vest, Bærum, fjellet og sjøen)",
-        f"- Kontakt: {TLF_VIS}, {EPOST}, Helleveien 8F, 0376 Oslo",
+        f"- Kontakt: {TLF_VIS}, {EPOST}, Helleveien 8, 0376 Oslo",
         "- Kjøper tomter og eiendommer i Vestre Aker direkte, uten annonsering",
         "",
         "## Til salgs nå",
