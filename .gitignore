@@ -7,3 +7,6 @@ Thumbs.db
 
 # Screenshot helper (aldri commit)
 _shot.html
+
+node_modules/
+deno.lock

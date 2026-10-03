@@ -1,0 +1,9 @@
+{
+  "name": "bruslettoeiendom",
+  "private": true,
+  "description": "Nettsted og plattform for Brusletto Eiendom. Ingen byggetrinn; avhengighetene brukes av Netlify-funksjonene.",
+  "type": "module",
+  "dependencies": {
+    "@netlify/blobs": "^8.1.0"
+  }
+}

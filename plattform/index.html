@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="no">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Plattform · Brusletto Eiendom</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="/plattform/plattform.css">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="be-d" viewBox="0 0 12.75 16"><g fill="none" stroke="currentColor" stroke-width="2"><path d="M6.75 0V6.25"/><path d="M6.75 8.75V16"/><path d="M4.75 7.5H11.25"/><path d="M5.5 1H4.75A3.25 3.25 0 0 0 4.75 7.5"/><path d="M5.5 15H4.75A3.75 3.75 0 0 1 4.75 7.5"/><path d="M8 1H12.25"/><path d="M8 15H12.75"/></g></symbol>
+</svg>
+<header class="topp">
+  <a class="merke" href="#/" aria-label="Til prosjektene"><svg viewBox="0 0 12.75 16"><use href="#be-d"/></svg><span>Brusletto Eiendom</span></a>
+  <div class="bruker"><span id="hei"></span><a class="knapp lys liten" href="/plattform/logg-ut">Logg ut</a></div>
+</header>
+<nav class="meny" aria-label="Meny">
+  <a href="#/" data-meny="prosjekter">Prosjekter</a>
+  <a href="/profil/">Merket og profil</a>
+  <a href="#/brukere" data-meny="brukere" id="meny-brukere" hidden>Brukere</a>
+  <a href="#/passord" data-meny="passord">Mitt passord</a>
+</nav>
+<main id="innhold" tabindex="-1"><p class="laster">Henter …</p></main>
+<div class="beskjed" id="beskjed" role="status" aria-live="polite"></div>
+<script src="/plattform/plattform.js" defer></script>
+</body>
+</html>
