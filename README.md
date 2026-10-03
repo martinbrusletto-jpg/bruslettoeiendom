@@ -39,6 +39,20 @@ til neste. Scroll opp går til starten av seksjonen. Klikk setter på pause.
 - `bruslettoeiendom.netlify.app` sendes med 301 til `bruslettoeiendom.no`.
 - Fakta: boligutvikling siden 1984; Brusletto Eiendom AS stiftet 26.05.1997 (Enhetsregisteret).
 
+## Plattformen (innlogget)
+
+`/plattform/` er familiens arbeidsflate: prosjekter, dokumenter og tegninger, og byggeregnskap.
+`/profil/` (merket og profilen) ligger bak samme innlogging.
+
+- `logg-inn/` innloggingssiden. `netlify/edge-functions/port.ts` sender alle uten økt dit.
+- `netlify/functions/api.mts` hele serverdelen (`/api/*`): innlogging, brukere, prosjekter, filer, regnskap.
+- `netlify/lib/okt.mts` signert økt (30 dager) og passord-hashing (PBKDF2).
+- `plattform/` brukerflaten (én side, `#/`-adresser). Laget for å være lett: stor tekst, store knapper, få valg.
+- Data ligger i Netlify Blobs (butikken `plattform`), aldri i repoet. Filer lagres i deler på 4 MB.
+- Første innlogging: job@reserva.as med passordet i `PROFIL_PASSORD` blir administrator.
+  Administrator gir andre tilgang under «Brukere». Bytter man `PROFIL_PASSORD`, logges alle ut.
+- Lokal test: `PROFIL_PASSORD=<testpassord> netlify dev --offline` (edge-funksjonene krever Deno).
+
 ## Merket
 
 Speilvendt B og E som deler én bærevegg. Nett 12,75 × 16 moduler, strek 2 moduler,

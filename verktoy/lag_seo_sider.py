@@ -102,7 +102,7 @@ def hode(tittel, beskrivelse, sti, ekstra_ld):
 def fot():
     return """<footer class="colo mono">
   <span>Brusletto Eiendom AS · Org. 879 152 682 · Helleveien 8, 0376 Oslo</span>
-  <nav class="fotnav" aria-label="Sider"><a href="/">Forsiden</a><a href="/prosjekter/">Prosjekter</a><a href="/om/">Om oss</a><a href="/profil/">Profil (innlogging)</a></nav>
+  <nav class="fotnav" aria-label="Sider"><a href="/">Forsiden</a><a href="/prosjekter/">Prosjekter</a><a href="/om/">Om oss</a><a href="/plattform/">Plattform (innlogging)</a></nav>
   <span>© 1984–2026 · Oslo</span>
 </footer>
 </body>
