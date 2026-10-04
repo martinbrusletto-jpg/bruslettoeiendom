@@ -1,7 +1,7 @@
 """Lager de tekstrike SEO-sidene for bruslettoeiendom.no fra én datakilde.
 
 Kjør fra repo-roten:  python verktoy/lag_seo_sider.py
-Skriver: prosjekter/index.html, om/index.html, llms.txt, sitemap.xml
+Skriver: prosjekter/index.html, prosjekter/<slug>/ for solgte adresser, om/index.html, llms.txt, sitemap.xml
 Oppdater PROSJEKTER under når et prosjekt endrer seg; forsidens arkiv (ARK i be.js) bør holdes likt.
 Bare fakta som står her eller på forsiden. Ingen påstander som ikke kan dokumenteres.
 """
