@@ -418,3 +418,22 @@ Konservativt bokmål i all tekst for Martin.
 
 **Status:**
 varig regel (Martin sa det eksplisitt)
+
+---
+
+### 2026-10-04
+Kategori: system/strategi
+
+**Før:**
+Ingen fast benchmark for AI-systemer og automatikk. Den daglige agenten på martinbrusletto.no målte suksess som «bygg grønt». `ABOUT_MARTIN.md` manglet konkret prosjektoversikt (åpen observasjon fra 2026-09-05).
+
+**Etter:**
+Martin ba om research på hvem som er lengst fremme på AI, en sammenligning med det han allerede har bygget, og at læringsdokumentene oppdateres på grunnlag av dette. Opprettet `references/AI_SYSTEMS_BENCHMARK.md` (benchmark, hull, implementeringsplan), routing i `AI_OS.md` §6 og benchmark i §4A. Prosjektoversikt lagt inn i `ABOUT_MARTIN.md`.
+
+**Læringssignal:**
+Benchmark-regelen i §4A gjelder også AI-systemer: Luxury Presence, Monks.Flow, Jellyfish/Pencil og Zillow SkyTour. Hovedhullet er at automatikken måler leveranse, ikke effekt. De seks prinsippene i benchmark-filen §3 er utledet av research, ikke uttalt av Martin, og veier derfor mindre enn hans godkjenninger.
+
+**Status:**
+varig regel for benchmarkbruk (Martin ba eksplisitt om at dette skal inn i læringsdokumentene). Observasjon for prinsippene og rekkefølgen i planen til Martin har godkjent eller korrigert dem. Åpen observasjon 2026-09-05 om konkret ABOUT_MARTIN er delvis lukket.
+
+Notion: ikke logget (Notion ikke tilgjengelig i denne økten). Synkes i neste mandagsrunde.

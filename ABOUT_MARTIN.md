@@ -40,3 +40,16 @@ Martin foretrekker rolig premiumdesign med høy opplevd kvalitet. Stille luksus,
 Martin vil vite hva som er interessant, ikke bare hva som er sant. Se etter feilprising, asymmetri, margin, distribusjon, automatisering, skalerbarhet og ting markedet kan ha oversett.
 
 Når flere løsninger er mulige, ranger dem og anbefal ett valg.
+## Systemer Martin har bygget (per oktober 2026)
+
+Konkret oversikt slik at AI bygger videre på det som finnes i stedet for å starte på nytt. Detaljer og hull: `references/AI_SYSTEMS_BENCHMARK.md`.
+
+- **martinbrusletto.no** (Astro, Netlify): daglig optimaliseringsagent (`AGENT_BRIEF.md`), blogg skrevet for Google og KI-søk, `llms.txt`, IndexNow, Vestre Aker Journal, nyhetsbrev (MailerLite), AI-verdivurdering og videoregi med Claude, Private Market.
+- **OFFMARKET° · EIE Vinderen** (`offmarket-vinderen`): flerbruker matchmotor for eiere og kjøpere med samtykke, sletting og morgenbrief. Beste kandidat som felles kjerne.
+- **Konsepter i samme rom:** `offmarket-engine`, `diskre`. Ikke i drift.
+- **Liggetid** (`liggetid`): Finn-data for Oslo og Akershus, peer-baserte avvik, Claude-rangering av underprisede boliger.
+- **Boligsider:** `property-site-template`, Lillevann, Los Verdiales, Holmenkollveien 48B, Heyerdahls vei 8B. Scrollfilm-motor.
+- **Brusletto Eiendom** (dette repoet): nettsted, profil og AI_OS.
+- **Andre:** Kverv (fagfolkplattform med AI-tilbud og regnskapsintegrasjoner), 9 Humans (nettsted), OPUS/Ultramegler (merkevarestrategi).
+
+Stack som går igjen: statisk HTML/JS eller Astro på Netlify, Netlify Functions og Blobs, Claude API, GitHub Actions for planlagte jobber.

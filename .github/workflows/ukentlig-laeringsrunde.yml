@@ -35,6 +35,8 @@ jobs:
             "references/ANALYSIS_STYLE.md"
             "references/WEBSITE_DESIGN_SYSTEM.md"
             "references/DECISION_PATTERNS.md"
+            "references/AI_SYSTEMS_BENCHMARK.md"
+            "references/VISUAL_RENDERING.md"
           )
 
           missing=0

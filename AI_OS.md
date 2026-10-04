@@ -74,6 +74,8 @@ For boligvideo er Huyrebel benchmark for presentasjon, flyt, trygghet, timing og
 
 For bolignettsider skal de utpekte award-vinnende referansene brukes som benchmark, med EVER som hovedreferanse og de øvrige prioriterte referansene i `references/WEBSITE_DESIGN_SYSTEM.md`.
 
+For AI-systemer og markedsføringsautomatikk er Luxury Presence (agentteam), Monks.Flow (produksjonslinje med tilbakekobling), Jellyfish/Pencil (effekt-score på annonser) og Zillow SkyTour (romlig visning) benchmark. En automatikk er ikke ferdig før den måler hva den førte til. Se `references/AI_SYSTEMS_BENCHMARK.md`.
+
 AI skal alltid:
 1. sammenligne egen leveranse mot benchmarknivået
 2. si konkret hva som mangler for å nå samme nivå
@@ -100,6 +102,7 @@ Les `ABOUT_MARTIN.md` først i nye samtaler eller prosjekter. Deretter relevante
 - Nettsider og landingssider: `references/WEBSITE_DESIGN_SYSTEM.md` + `references/NEGATIVE_PATTERNS.md`
 - Bilder, rendering og arkitekturvisualisering: `references/VISUAL_RENDERING.md`
 - Valg mellom konsepter, produkter eller forretningsmodeller: `references/DECISION_PATTERNS.md` + `references/ANALYSIS_STYLE.md`
+- AI-systemer, agenter, automatikk, AI-produksjon av bilde/video, KI-synlighet og hva som skal bygges neste: `references/AI_SYSTEMS_BENCHMARK.md` + `references/DECISION_PATTERNS.md`
 
 Når en oppgave treffer flere kategorier, kombiner filene.
 
