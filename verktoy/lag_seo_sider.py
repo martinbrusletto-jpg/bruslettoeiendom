@@ -62,9 +62,24 @@ FAQ = [
 e = html.escape
 
 
-def hode(tittel, beskrivelse, sti, ekstra_ld):
+def prosjekt_sti(p):
+    _, adr, _, _, _, _, _, salg = p
+    if salg:
+        return salg.replace(URL, "").rstrip("/") + "/"
+    return f"/prosjekter/{slug(adr)}/"
+
+
+def prosjekt_beskrivelse(p):
+    aar, adr, sted, kommune, typ, antall, bilde, salg = p
+    enhet = f", {antall} boliger" if antall and antall > 1 else ""
+    komm = f", {kommune}" if kommune != "Oslo" else ", Oslo"
+    return f"{typ} på {sted}{komm}{enhet}. Utviklet av Brusletto Eiendom i {aar}."
+
+
+def hode(tittel, beskrivelse, sti, ekstra_ld, og_bilde=None):
+    og = og_bilde or f"{URL}/og.jpg"
     return f"""<!doctype html>
-<html lang="no">
+<html lang="nb">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -79,7 +94,7 @@ def hode(tittel, beskrivelse, sti, ekstra_ld):
 <meta property="og:title" content="{e(tittel)}">
 <meta property="og:description" content="{e(beskrivelse)}">
 <meta property="og:url" content="{URL}{sti}">
-<meta property="og:image" content="{URL}/og.jpg">
+<meta property="og:image" content="{og}">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -124,7 +139,7 @@ def prosjekt_ld(p):
     t = "SingleFamilyResidence" if typ in ("Enebolig", "Strandeiendom") else "House" if typ == "Fjellhytte" else "ApartmentComplex"
     d = {"@type": t, "name": f"{adr}, {sted}", "address": {"@type": "PostalAddress", "streetAddress": adr, "addressLocality": sted, "addressRegion": kommune, "addressCountry": "NO"},
          "description": f"{typ} på {sted}" + (f", {antall} boliger" if antall and antall > 1 else "") + f". Utviklet av Brusletto Eiendom, {aar}.",
-         "url": salg or f"{URL}/prosjekter/#{slug(adr)}"}
+         "url": f"{URL}{prosjekt_sti(p).rstrip('/')}/"}
     if antall and antall > 1 and t == "ApartmentComplex":
         d["numberOfAccommodationUnits"] = antall
     if bilde:
@@ -165,11 +180,15 @@ def lag_prosjekter():
             fakta = f"{typ}" + (f" · {antall} boliger" if antall and antall > 1 else "") + f" · {sted}" + (f", {kommune}" if kommune != "Oslo" else ", Oslo")
             img = (f'<img src="/assets/ny/{bilde}.webp" alt="{e(adr)} på {e(sted)}, utviklet av Brusletto Eiendom" loading="lazy" decoding="async" width="720" height="540">'
                    if bilde else '<div class="uten-bilde mono">Ingen foto i arkivet</div>')
-            status = f'<a class="go" href="{salg}" target="_blank" rel="noopener">Til salgs: se prosjektet</a>' if salg else '<span class="mono solgt">Solgt</span>'
+            side = prosjekt_sti(p)
+            if salg:
+                status = f'<a class="go" href="{side}">Til salgs: se prosjektet</a>'
+            else:
+                status = f'<a class="go" href="{side}">Les om prosjektet</a>'
             b.append(f'''    <article class="prosjekt" id="{slug(adr)}">
-      {img}
+      <a href="{side}" class="prosjekt-lenke">{img}</a>
       <p class="mono aar">{aar}</p>
-      <h3>{e(adr)}</h3>
+      <h3><a href="{side}">{e(adr)}</a></h3>
       <p class="fakta">{e(fakta)}</p>
       {status}
     </article>
@@ -179,6 +198,45 @@ def lag_prosjekter():
     b.append(fot())
     (ROT / "prosjekter").mkdir(exist_ok=True)
     (ROT / "prosjekter" / "index.html").write_text("".join(b), encoding="utf-8")
+
+
+def lag_prosjektsider():
+    for p in PROSJEKTER:
+        aar, adr, sted, kommune, typ, antall, bilde, salg = p
+        if salg:
+            continue
+        sti = prosjekt_sti(p)
+        besk = prosjekt_beskrivelse(p)
+        tittel = f"{adr} · {typ} på {sted} · Brusletto Eiendom"
+        og = f"{URL}/assets/ny/{bilde}.webp" if bilde else f"{URL}/og.jpg"
+        ld = {"@context": "https://schema.org", "@graph": [
+            {"@type": "WebPage", "@id": URL + sti + "#side", "url": URL + sti, "name": tittel, "inLanguage": "nb",
+             "isPartOf": {"@id": URL + "/#nettsted"}, "about": org_ref, "breadcrumb": bredsmule(("Forsiden", "/"), ("Prosjekter", "/prosjekter/"), (adr, sti))},
+            prosjekt_ld(p),
+        ]}
+        b = [hode(tittel, besk, sti, ld, og_bilde=og)]
+        img = (f'<img src="/assets/ny/{bilde}.webp" alt="{e(adr)} på {e(sted)}, utviklet av Brusletto Eiendom" width="1200" height="900" loading="eager" decoding="async">'
+               if bilde else "")
+        fakta = f"{typ}" + (f" · {antall} boliger" if antall and antall > 1 else "") + f" · {sted}" + (f", {kommune}" if kommune != "Oslo" else ", Oslo")
+        b.append(f"""<main class="side">
+<header class="side-hode">
+  <span class="eyebrow"><a href="/prosjekter/">Prosjekter</a> · {aar}</span>
+  <h1>{e(adr)}</h1>
+  <p class="ingress">{e(fakta)}. {e(besk)}</p>
+</header>
+""")
+        if img:
+            b.append(f'<figure class="prosjekt-hero">{img}</figure>\n')
+        b.append(f"""<section class="tekst" aria-labelledby="om-prosjektet">
+  <h2 id="om-prosjektet">Om prosjektet</h2>
+  <p>{e(besk)} Prosjektet er solgt. <a href="/prosjekter/">Se alle adressene i arkivet</a> eller <a href="/#salg">boliger til salgs nå</a>.</p>
+</section>
+</main>
+""")
+        b.append(fot())
+        mappe = ROT / sti.strip("/")
+        mappe.mkdir(parents=True, exist_ok=True)
+        (mappe / "index.html").write_text("".join(b), encoding="utf-8")
 
 
 def lag_om():
@@ -256,7 +314,7 @@ def lag_llms():
     ]
     lin += [f"- [{p[1]}, {p[2]}]({p[7]}): {p[4].lower()}, {p[0]}" for p in PROSJEKTER if p[7]]
     lin += ["", "## Prosjekter (år, adresse, sted, type)"]
-    lin += [f"- {p[0]}: {p[1]}, {p[2]} – {p[4].lower()}" + (f", {p[5]} boliger" if p[5] and p[5] > 1 else "") for p in PROSJEKTER]
+    lin += [f"- {p[0]}: [{p[1]}, {p[2]}]({URL}{prosjekt_sti(p)}): {p[4].lower()}" + (f", {p[5]} boliger" if p[5] and p[5] > 1 else "") for p in PROSJEKTER]
     lin += ["", "## Sider",
             f"- [Forsiden]({URL}/): hvordan vi bygger, i kapitler",
             f"- [Prosjekter]({URL}/prosjekter/): alle adressene gruppert etter område",
@@ -266,6 +324,9 @@ def lag_llms():
 
 def lag_sitemap():
     sider = [("/", "1.0"), ("/prosjekter/", "0.8"), ("/om/", "0.8"), ("/varden8/", "0.9"), ("/heyerdahlsvei8/", "0.9")]
+    for p in PROSJEKTER:
+        if not p[7]:
+            sider.append((prosjekt_sti(p), "0.7"))
     x = ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
     x += [f"  <url><loc>{URL}{s}</loc><lastmod>{I_DAG}</lastmod><priority>{p}</priority></url>" for s, p in sider]
     x.append("</urlset>")
@@ -273,5 +334,6 @@ def lag_sitemap():
 
 
 if __name__ == "__main__":
-    lag_prosjekter(); lag_om(); lag_llms(); lag_sitemap()
-    print("Skrev prosjekter/, om/, llms.txt, sitemap.xml ·", len(PROSJEKTER), "prosjekter,", ANTALL, "boliger")
+    lag_prosjekter(); lag_prosjektsider(); lag_om(); lag_llms(); lag_sitemap()
+    solgte = sum(1 for p in PROSJEKTER if not p[7])
+    print("Skrev prosjekter/, om/, llms.txt, sitemap.xml ·", len(PROSJEKTER), "prosjekter,", solgte, "arkivsider,", ANTALL, "boliger")
