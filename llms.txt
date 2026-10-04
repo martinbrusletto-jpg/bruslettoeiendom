@@ -15,22 +15,22 @@
 - [Heyerdahls vei 8B, Slemdal](https://bruslettoeiendom.no/heyerdahlsvei8/): enebolig, 2023
 
 ## Prosjekter (år, adresse, sted, type)
-- 2027: Varden 8, Kvitfjell – fjellhytte
-- 2023: Heyerdahls vei 8B, Slemdal – enebolig
-- 2021: Tangenodden 13, Sandefjord – strandeiendom
-- 2020: Helleveien 8, Holmendammen – leiligheter, 6 boliger
-- 2013: Nye Havsdalsvegen 35, Geilo – leiligheter, 4 boliger
-- 2011: Skogryggveien 14, Vinderen – leiligheter, 8 boliger
-- 2007: Bærumsveien 219, Bekkestua – leiligheter, 8 boliger
-- 2004: Haakon den Godes vei 12, Vinderen – leiligheter, 14 boliger
-- 2003: Thorleif Haugs vei 1–7, Voksenkollen – leiligheter, 55 boliger
-- 2001: Tennisveien 26, Slemdal – leiligheter, 6 boliger
-- 2000: Ekelyveien 11, Vinderen – leiligheter, 14 boliger
-- 1999: Bjørnveien 101B, Holmen – terrasseleiligheter, 6 boliger
-- 1996: Nedre Skøyen vei, Skøyen – boligprosjekt
-- 1995: Krags vei 10, Holmenkollen – leiligheter, 14 boliger
-- 1993: Halvor Torgersens vei 14–20, Ris – leiligheter, 20 boliger
-- 1990: Øvre Ullern Terrasse 5, Ullern – terrasseleiligheter, 21 boliger
+- 2027: [Varden 8, Kvitfjell](https://bruslettoeiendom.no/varden8/): fjellhytte
+- 2023: [Heyerdahls vei 8B, Slemdal](https://bruslettoeiendom.no/heyerdahlsvei8/): enebolig
+- 2021: [Tangenodden 13, Sandefjord](https://bruslettoeiendom.no/prosjekter/tangenodden-13/): strandeiendom
+- 2020: [Helleveien 8, Holmendammen](https://bruslettoeiendom.no/prosjekter/helleveien-8/): leiligheter, 6 boliger
+- 2013: [Nye Havsdalsvegen 35, Geilo](https://bruslettoeiendom.no/prosjekter/nye-havsdalsvegen-35/): leiligheter, 4 boliger
+- 2011: [Skogryggveien 14, Vinderen](https://bruslettoeiendom.no/prosjekter/skogryggveien-14/): leiligheter, 8 boliger
+- 2007: [Bærumsveien 219, Bekkestua](https://bruslettoeiendom.no/prosjekter/baerumsveien-219/): leiligheter, 8 boliger
+- 2004: [Haakon den Godes vei 12, Vinderen](https://bruslettoeiendom.no/prosjekter/haakon-den-godes-vei-12/): leiligheter, 14 boliger
+- 2003: [Thorleif Haugs vei 1–7, Voksenkollen](https://bruslettoeiendom.no/prosjekter/thorleif-haugs-vei-1-7/): leiligheter, 55 boliger
+- 2001: [Tennisveien 26, Slemdal](https://bruslettoeiendom.no/prosjekter/tennisveien-26/): leiligheter, 6 boliger
+- 2000: [Ekelyveien 11, Vinderen](https://bruslettoeiendom.no/prosjekter/ekelyveien-11/): leiligheter, 14 boliger
+- 1999: [Bjørnveien 101B, Holmen](https://bruslettoeiendom.no/prosjekter/bjornveien-101b/): terrasseleiligheter, 6 boliger
+- 1996: [Nedre Skøyen vei, Skøyen](https://bruslettoeiendom.no/prosjekter/nedre-skoyen-vei/): boligprosjekt
+- 1995: [Krags vei 10, Holmenkollen](https://bruslettoeiendom.no/prosjekter/krags-vei-10/): leiligheter, 14 boliger
+- 1993: [Halvor Torgersens vei 14–20, Ris](https://bruslettoeiendom.no/prosjekter/halvor-torgersens-vei-14-20/): leiligheter, 20 boliger
+- 1990: [Øvre Ullern Terrasse 5, Ullern](https://bruslettoeiendom.no/prosjekter/ovre-ullern-terrasse-5/): terrasseleiligheter, 21 boliger
 
 ## Sider
 - [Forsiden](https://bruslettoeiendom.no/): hvordan vi bygger, i kapitler

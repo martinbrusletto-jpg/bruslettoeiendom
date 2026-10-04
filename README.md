@@ -31,7 +31,7 @@ til neste. Scroll opp går til starten av seksjonen. Klikk setter på pause.
 
 ## SEO og KI-søk
 
-- `verktoy/lag_seo_sider.py` lager `/prosjekter/`, `/om/` (med spørsmål og svar), `llms.txt` og `sitemap.xml`
+- `verktoy/lag_seo_sider.py` lager `/prosjekter/`, én side per solgt adresse under `/prosjekter/<slug>/`, `/om/` (med spørsmål og svar), `llms.txt` og `sitemap.xml`
   fra én prosjektliste. Kjør `python verktoy/lag_seo_sider.py` etter endringer i prosjekter eller fakta.
 - Strukturerte data (schema.org): Organization + HomeAndConstructionBusiness, WebSite, WebPage, ItemList
   (til salgs og prosjekter), FAQPage og BreadcrumbList.

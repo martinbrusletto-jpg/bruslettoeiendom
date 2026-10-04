@@ -307,6 +307,10 @@ p{margin:0}
 .gruppe-ingress{color:var(--ink-2);max-width:56ch}
 .kort-rad{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,260px),1fr));gap:28px 20px;margin-top:12px}
 .prosjekt{display:flex;flex-direction:column;gap:6px;min-width:0}
+.prosjekt h3 a,.prosjekt-lenke{color:inherit;text-decoration:none}
+.prosjekt-lenke{display:block}
+.prosjekt-hero{margin:0}
+.prosjekt-hero img{width:100%;height:auto;aspect-ratio:4/3;object-fit:cover}
 .prosjekt img,.uten-bilde{width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;background:var(--paper);margin-bottom:6px}
 .uten-bilde{display:flex;align-items:center;justify-content:center;color:var(--ink-3);border:1px solid var(--line)}
 .prosjekt .aar{color:var(--cu-ink)}
