@@ -229,7 +229,7 @@ def lag_prosjektsider():
             b.append(f'<figure class="prosjekt-hero">{img}</figure>\n')
         b.append(f"""<section class="tekst" aria-labelledby="om-prosjektet">
   <h2 id="om-prosjektet">Om prosjektet</h2>
-  <p>{e(besk)} Prosjektet er solgt. <a href="/prosjekter/">Se alle adressene i arkivet</a> eller <a href="/#salg">boliger til salgs nå</a>.</p>
+  <p>{e(besk)} Prosjektet er solgt. <a href="/prosjekter/">Se alle adressene i arkivet</a>, <a href="/om/">om Brusletto Eiendom</a> eller <a href="/#salg">boliger til salgs nå</a> (Heyerdahls vei 8B og Varden 8).</p>
 </section>
 </main>
 """)

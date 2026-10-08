@@ -21,6 +21,14 @@ const HEAD = `
 </script>
 `;
 
+const FOOT = `
+<nav class="be-fotnav" aria-label="Brusletto Eiendom" style="display:flex;flex-wrap:wrap;gap:12px 20px;justify-content:center;padding:20px 16px 28px;font-family:system-ui,sans-serif;font-size:12px;letter-spacing:.06em;text-transform:uppercase;border-top:1px solid #e8e4dc;background:#f3f1ec">
+  <a href="${SITE}/" style="color:#171c20;text-decoration:none">Forsiden</a>
+  <a href="${SITE}/prosjekter/" style="color:#171c20;text-decoration:none">Prosjekter</a>
+  <a href="${SITE}/om/" style="color:#171c20;text-decoration:none">Om oss</a>
+</nav>
+`;
+
 export default async (req: Request) => {
   const url = new URL(req.url);
   let path = url.pathname.replace(/^\/heyerdahlsvei8\/?/, "/");
@@ -40,6 +48,9 @@ export default async (req: Request) => {
   let html = await res.text();
   if (!html.includes('rel="canonical"')) {
     html = html.replace("</head>", `${HEAD}\n</head>`);
+  }
+  if (!html.includes('class="be-fotnav"')) {
+    html = html.replace("</body>", `${FOOT}\n</body>`);
   }
 
   const headers = new Headers(res.headers);
