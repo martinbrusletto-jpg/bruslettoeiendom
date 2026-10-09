@@ -103,8 +103,14 @@
   const Y0 = 1990, Y1 = 2027, pos = y => (y - Y0) / (Y1 - Y0) * 100;
   const frames = ARK.map(r => {
     const d = document.createElement('div');
-    if (r[4]) d.style.backgroundImage = `url(assets/ny/${r[4]}.webp)`;
-    else { d.className = 'none mono'; d.textContent = 'Ingen foto i arkivet'; }
+    if (r[4]) {
+      const im = document.createElement('img');
+      im.src = `/assets/ny/${r[4]}.webp`;
+      im.alt = `${r[1]}, ${r[2]}`;
+      im.loading = 'lazy';
+      im.decoding = 'async';
+      d.appendChild(im);
+    } else { d.className = 'none mono'; d.textContent = 'Ingen foto i arkivet'; }
     arkImg.appendChild(d); return d;
   });
   const arkSc = $('arkivet');
