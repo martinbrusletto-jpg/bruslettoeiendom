@@ -1,7 +1,7 @@
 """Lager de tekstrike SEO-sidene for bruslettoeiendom.no fra én datakilde.
 
 Kjør fra repo-roten:  python verktoy/lag_seo_sider.py
-Skriver: prosjekter/index.html, prosjekter/<slug>/ for solgte adresser, om/index.html, llms.txt, sitemap.xml
+Skriver: prosjekter/index.html, prosjekter/<slug>/ for adresser uten egen salgsside, om/index.html, llms.txt, sitemap.xml
 Oppdater PROSJEKTER under når et prosjekt endrer seg; forsidens arkiv (ARK i be.js) bør holdes likt.
 Bare fakta som står her eller på forsiden. Ingen påstander som ikke kan dokumenteres.
 """
@@ -32,6 +32,8 @@ PROSJEKTER = [
     (1993, "Halvor Torgersens vei 14–20", "Ris", "Oslo", "Leiligheter", 20, "a-halvor-torgersens-vei", None),
     (1990, "Øvre Ullern Terrasse 5", "Ullern", "Oslo", "Terrasseleiligheter", 21, "a-ovre-ullern-terrasse-5", None),
 ]
+# Til salgs uten egen salgsside: arkivsiden blir salgssiden (tekst og lenker under).
+TIL_SALGS_HER = {"Tangenodden 13"}
 GRUPPER = [
     ("vinderen", "Vinderen og Holmendammen", "Leiligheter og boliger på Vinderen og ved Holmendammen i Vestre Aker.", ["Vinderen", "Holmendammen"]),
     ("slemdal", "Slemdal", "Enebolig og leiligheter på Slemdal, mellom Vinderen og Holmenkollen.", ["Slemdal"]),
@@ -52,7 +54,7 @@ FAQ = [
     ("Hvor bygger Brusletto Eiendom?",
      "Hovedsakelig i Oslo vest: Vinderen, Slemdal, Holmendammen, Holmen, Holmenkollen, Voksenkollen, Ris, Ullern og Skøyen. Vi har også bygget på Bekkestua i Bærum, på fjellet på Geilo og Kvitfjell, og ved sjøen i Sandefjord."),
     ("Hvilke boliger har Brusletto Eiendom til salgs nå?",
-     "Heyerdahls vei 8B, en enebolig på Slemdal, og Varden 8, en fjellhytte på Kvitfjell. Resten av prosjektene våre er solgt."),
+     "Heyerdahls vei 8B, en enebolig på Slemdal, Varden 8, en fjellhytte på Kvitfjell, og Tangenodden 13, en strandeiendom i Sandefjord. Resten av prosjektene våre er solgt."),
     ("Kjøper Brusletto Eiendom tomter og eiendommer?",
      "Ja. Vi kjøper tomter og eiendommer i Vestre Aker direkte, uten annonsering. Ta kontakt med en kort beskrivelse av eiendommen, så tar vi kontakt personlig."),
     ("Hvordan kontakter jeg Brusletto Eiendom?",
@@ -60,6 +62,10 @@ FAQ = [
 ]
 
 e = html.escape
+
+
+def til_salgs(p):
+    return bool(p[7]) or p[1] in TIL_SALGS_HER
 
 
 def prosjekt_sti(p):
@@ -181,7 +187,7 @@ def lag_prosjekter():
             img = (f'<img src="/assets/ny/{bilde}.webp" alt="{e(adr)} på {e(sted)}, utviklet av Brusletto Eiendom" loading="lazy" decoding="async" width="720" height="540">'
                    if bilde else '<div class="uten-bilde mono">Ingen foto i arkivet</div>')
             side = prosjekt_sti(p)
-            if salg:
+            if til_salgs(p):
                 status = f'<a class="go" href="{side}">Til salgs: se prosjektet</a>'
             else:
                 status = f'<a class="go" href="{side}">Les om prosjektet</a>'
@@ -227,9 +233,16 @@ def lag_prosjektsider():
 """)
         if img:
             b.append(f'<figure class="prosjekt-hero">{img}</figure>\n')
+        andre = [q[1] for q in PROSJEKTER if til_salgs(q) and q is not p]
+        andre_txt = " og ".join([", ".join(andre[:-1]), andre[-1]]) if len(andre) > 1 else andre[0]
+        if til_salgs(p):
+            status = (f'Eiendommen er til salgs. Ring <a href="tel:{TLF}">{TLF_VIS}</a>, skriv til <a href="mailto:{EPOST}">{EPOST}</a> '
+                      f'eller <a href="/#samtale">send oss en melding</a>, så tar vi kontakt personlig.')
+        else:
+            status = "Prosjektet er solgt."
         b.append(f"""<section class="tekst" aria-labelledby="om-prosjektet">
   <h2 id="om-prosjektet">Om prosjektet</h2>
-  <p>{e(besk)} Prosjektet er solgt. <a href="/prosjekter/">Se alle adressene i arkivet</a>, <a href="/om/">om Brusletto Eiendom</a> eller <a href="/#salg">boliger til salgs nå</a> (Heyerdahls vei 8B og Varden 8).</p>
+  <p>{e(besk)} {status} <a href="/prosjekter/">Se alle adressene i arkivet</a>, <a href="/om/">om Brusletto Eiendom</a> eller <a href="/#salg">boliger til salgs nå</a> ({e(andre_txt)}).</p>
 </section>
 </main>
 """)
@@ -312,7 +325,7 @@ def lag_llms():
         "",
         "## Til salgs nå",
     ]
-    lin += [f"- [{p[1]}, {p[2]}]({p[7]}): {p[4].lower()}, {p[0]}" for p in PROSJEKTER if p[7]]
+    lin += [f"- [{p[1]}, {p[2]}]({URL}{prosjekt_sti(p)}): {p[4].lower()}, {p[0]}" for p in PROSJEKTER if til_salgs(p)]
     lin += ["", "## Prosjekter (år, adresse, sted, type)"]
     lin += [f"- {p[0]}: [{p[1]}, {p[2]}]({URL}{prosjekt_sti(p)}): {p[4].lower()}" + (f", {p[5]} boliger" if p[5] and p[5] > 1 else "") for p in PROSJEKTER]
     lin += ["", "## Sider",
@@ -326,7 +339,7 @@ def lag_sitemap():
     sider = [("/", "1.0"), ("/prosjekter/", "0.8"), ("/om/", "0.8"), ("/varden8/", "0.9"), ("/heyerdahlsvei8/", "0.9")]
     for p in PROSJEKTER:
         if not p[7]:
-            sider.append((prosjekt_sti(p), "0.7"))
+            sider.append((prosjekt_sti(p), "0.9" if til_salgs(p) else "0.7"))
     x = ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
     x += [f"  <url><loc>{URL}{s}</loc><lastmod>{I_DAG}</lastmod><priority>{p}</priority></url>" for s, p in sider]
     x.append("</urlset>")
@@ -335,5 +348,5 @@ def lag_sitemap():
 
 if __name__ == "__main__":
     lag_prosjekter(); lag_prosjektsider(); lag_om(); lag_llms(); lag_sitemap()
-    solgte = sum(1 for p in PROSJEKTER if not p[7])
+    solgte = sum(1 for p in PROSJEKTER if not til_salgs(p))
     print("Skrev prosjekter/, om/, llms.txt, sitemap.xml ·", len(PROSJEKTER), "prosjekter,", solgte, "arkivsider,", ANTALL, "boliger")
